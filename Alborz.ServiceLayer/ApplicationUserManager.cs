@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Threading.Tasks;
-using Sabz.DomainClasses.DTO;
+using System.Threading.Tasks; 
 using Alborz.ServiceLayer.IService;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.DataProtection;
-using Sabz.DataLayer.Context;
+using Microsoft.Owin.Security.DataProtection; 
+using Alborz.DomainLayer.DTO;
+using Alborz.DataLayer.Context;
 
 namespace Alborz.ServiceLayer
 {

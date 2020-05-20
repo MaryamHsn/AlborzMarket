@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Sabz.DomainClasses.DTO;
+using System.Threading.Tasks; 
 using Alborz.ServiceLayer.IService;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Alborz.DomainLayer.DTO;
 
 namespace Alborz.ServiceLayer
 {

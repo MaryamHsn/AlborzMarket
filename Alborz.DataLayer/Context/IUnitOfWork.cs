@@ -17,14 +17,14 @@ namespace Alborz.DataLayer.Context
         IRepository<CategoryTbl, int> CategoryRepository { get; }
         IRepository<CustomerTbl, int> CustomerRepository { get; }
         IRepository<CustomerTypeTbl, int> CustomerTypeRepository { get; }
-        IRepository<DiscountTbl, int> Discounts { get; }
+        IRepository<DiscountTbl, int> DiscountRepository { get; }
         IRepository<ErrorTbl, int> ErrorRepository { get; }
         IRepository<InternetPaymentGetwayTbl, int> InternetPaymentGetwayRepository { get; }
         IRepository<InvoiceProcessHistoryTbl, int> InvoiceProcessHistoryRepository { get; }
         IRepository<InvoiceProcessTbl, int> InvoiceProcessRepository { get; }
         IRepository<InvoiceTbl, int> InvoiceRepository { get; }
         IRepository<IPGHistoryTbl, int> IPGHistoryRepository { get; }
-        IRepository<OrderOperationTbl, int> OrderOperations { get; }
+        IRepository<OrderOperationTbl, int> OrderOperationRepository { get; }
         IRepository<OrderProcessHistoryTbl, int> OrderProcessHistoryRepository { get; }
         IRepository<OrderProcessTbl, int> OrderProcessRepository { get; }
         IRepository<OrderTbl, int> OrderRepository { get; }

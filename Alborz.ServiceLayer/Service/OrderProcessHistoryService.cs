@@ -6,12 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Alborz.ServiceLayer.IService;
 
 namespace Alborz.ServiceLayer.Service
 {
-    class OrderProcessHistoryService
-    {
-    }
     public class OrderProcessHistoryService : IOrderProcessHistoryService
     {
         IUnitOfWork _uow;

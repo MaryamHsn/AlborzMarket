@@ -31,14 +31,14 @@ namespace Alborz.DataLayer.Context
         public virtual DbSet<CategoryTbl> CategoryTbls { get; set; }
         public virtual DbSet<CustomerTbl> CustomerTbls { get; set; }
         public virtual DbSet<CustomerTypeTbl> CustomerTypeTbls { get; set; }
-        public virtual DbSet<DiscountTbl> Discounts { get; set; }
+        public virtual DbSet<DiscountTbl> DiscountTbls { get; set; }
         public virtual DbSet<ErrorTbl> ErrorTbls { get; set; }
         public virtual DbSet<InternetPaymentGetwayTbl> InternetPaymentGetwayTbls { get; set; }
         public virtual DbSet<InvoiceProcessHistoryTbl> InvoiceProcessHistoryTbls { get; set; }
         public virtual DbSet<InvoiceProcessTbl> InvoiceProcessTbls { get; set; }
         public virtual DbSet<InvoiceTbl> InvoiceTbls { get; set; }
         public virtual DbSet<IPGHistoryTbl> IPGHistoryTbls { get; set; }
-        public virtual DbSet<OrderOperationTbl> OrderOperations { get; set; }
+        public virtual DbSet<OrderOperationTbl> OrderOperationTbls { get; set; }
         public virtual DbSet<OrderProcessHistoryTbl> OrderProcessHistoryTbls { get; set; }
         public virtual DbSet<OrderProcessTbl> OrderProcessTbls { get; set; }
         public virtual DbSet<OrderTbl> OrderTbls { get; set; }
@@ -313,7 +313,7 @@ namespace Alborz.DataLayer.Context
             }
         }
         private BaseRepository<InternetPaymentGetwayTbl, int> _internetPaymentGetwayiesRepository;
-        public IRepository<InternetPaymentGetwayTbl, int> InternetPaymentGetwaiesRepository
+        public IRepository<InternetPaymentGetwayTbl, int> InternetPaymentGetwayRepository
         {
             get
             {
@@ -322,7 +322,7 @@ namespace Alborz.DataLayer.Context
             }
         }
         private BaseRepository<InvoiceProcessHistoryTbl, int> _invoiceProcessHistoriesRepository;
-        public IRepository<InvoiceProcessHistoryTbl, int> InvoiceProcessHistoriesRepository
+        public IRepository<InvoiceProcessHistoryTbl, int> InvoiceProcessHistoryRepository
         {
             get
             {
@@ -349,7 +349,7 @@ namespace Alborz.DataLayer.Context
             }
         }
         private BaseRepository<IPGHistoryTbl, int> _iPGHistoriesRepository;
-        public IRepository<IPGHistoryTbl, int> IPGHistoriesRepository
+        public IRepository<IPGHistoryTbl, int> IPGHistoryRepository
         {
             get
             {
@@ -367,7 +367,7 @@ namespace Alborz.DataLayer.Context
             }
         }
         private BaseRepository<OrderProcessHistoryTbl, int> _orderProcessHistoriesRepository;
-        public IRepository<OrderProcessHistoryTbl, int> OrderProcessHistoriesRepository
+        public IRepository<OrderProcessHistoryTbl, int> OrderProcessHistoryRepository
         {
             get
             {

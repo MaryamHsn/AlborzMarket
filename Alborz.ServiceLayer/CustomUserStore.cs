@@ -1,7 +1,7 @@
-﻿using Sabz.DomainClasses.DTO;
+﻿using Alborz.DataLayer.Context;
+using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.IService;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Sabz.DataLayer.Context;
+using Microsoft.AspNet.Identity.EntityFramework; 
 
 namespace Alborz.ServiceLayer
 {

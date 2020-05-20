@@ -1,5 +1,6 @@
 ﻿using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Alborz.ServiceLayer.Service
             _uow.PropertyRepository.Add(Property);
             _uow.SaveAllChanges();
         }
-        public IList<PropertyTbl> GetAllPropertys()
+        public IList<PropertyTbl> GetAllProperties()
         {
             return _uow.PropertyRepository.GetAll().ToList();
         }
@@ -44,7 +45,7 @@ namespace Alborz.ServiceLayer.Service
             await _uow.PropertyRepository.AddAsync(Property, ct);
             _uow.SaveAllChanges();
         }
-        public async Task<IList<PropertyTbl>> GetAllPropertysAsync(CancellationToken ct = new CancellationToken())
+        public async Task<IList<PropertyTbl>> GetAllPropertiesAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PropertyRepository.GetAllAsync(ct);
             //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();

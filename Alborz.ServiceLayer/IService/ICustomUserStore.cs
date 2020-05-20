@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Sabz.DomainClasses.DTO;
+using Alborz.DomainLayer.DTO;
 using Microsoft.AspNet.Identity; 
 
 namespace Alborz.ServiceLayer.IService

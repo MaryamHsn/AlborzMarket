@@ -94,6 +94,7 @@
     <Compile Include="Repository\InvoiceProcessHistoryRepository.cs" />
     <Compile Include="Repository\InvoiceProcessRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
+    <Compile Include="Repository\IPGHistoryRepository.cs" />
     <Compile Include="Repository\OrderOperationRepository.cs" />
     <Compile Include="Repository\OrderProcessHistoryRepository.cs" />
     <Compile Include="Repository\OrderProcessRepository.cs" />

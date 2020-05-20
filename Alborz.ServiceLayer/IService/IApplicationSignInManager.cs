@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Sabz.DomainClasses.DTO;
+using Alborz.DomainLayer.DTO;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
