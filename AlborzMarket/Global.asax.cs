@@ -11,7 +11,7 @@ using AlborzMarket;
 using AlborzMarket.App_Start;
 using StructureMap.Web.Pipeline;
 
-namespace IdentitySample
+namespace AlborzMarket
 {
     // Note: For instructions on enabling IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=301868

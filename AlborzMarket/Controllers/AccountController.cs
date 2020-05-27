@@ -9,7 +9,7 @@ using Alborz.ServiceLayer.IService;
 using AlborzMarket.Helpers;
 using AlborzMarket.Models;
 
-namespace IdentitySample.Controllers
+namespace AlborzMarket.Controllers
 {
     [Authorize]
     public class AccountController : Controller

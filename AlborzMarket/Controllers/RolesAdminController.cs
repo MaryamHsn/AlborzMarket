@@ -1,4 +1,4 @@
-﻿using IdentitySample.Models;
+﻿using AlborzMarket.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -13,7 +13,7 @@ using AlborzMarket.Models;
 using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.IService;
 
-namespace IdentitySample.Controllers
+namespace AlborzMarket.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
