@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 
-namespace SabzGashtTransportation.Models
+namespace AlborzMarket.Models
 {
     public class IndexViewModel
     {

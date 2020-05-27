@@ -1,4 +1,4 @@
-﻿namespace SabzGashtTransportation.Models
+﻿namespace AlborzMarket.Models
 {
     public class FactorViewModel
     {

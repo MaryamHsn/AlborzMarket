@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SabzGashtTransportation.Models
+namespace AlborzMarket.Models
 {
     public class ConfigureTwoFactorViewModel
     {

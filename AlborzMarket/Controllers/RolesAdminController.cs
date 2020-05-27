@@ -8,87 +8,27 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Alborz.ServiceLayer;
+using AlborzMarket.Models;
+using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.IService;
 
 namespace IdentitySample.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
     {
-        public RolesAdminController()
+        private readonly IApplicationRoleManager _roleManager;
+        private readonly IApplicationUserManager _userManager;
+        public RolesAdminController(IApplicationUserManager userManager, IApplicationRoleManager roleManager)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        public RolesAdminController(ApplicationUserManager userManager,
-            ApplicationRoleManager roleManager)
-        {
-            UserManager = userManager;
-            RoleManager = roleManager;
-        }
-
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            set
-            {
-                _userManager = value;
-            }
-        }
-
-        private ApplicationRoleManager _roleManager;
-        public ApplicationRoleManager RoleManager
-        {
-            get
-            {
-                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
-            }
-            private set
-            {
-                _roleManager = value;
-            }
-        }
-
-        //
-        // GET: /Roles/
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View(RoleManager.Roles);
-        }
-
-        //
-        // GET: /Roles/Details/5
-        [HttpGet]
-        public async Task<ActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var role = await RoleManager.FindByIdAsync(id);
-            // Get the list of Users in this Role
-            var users = new List<ApplicationUser>();
-
-            // Get the list of Users in this Role
-            foreach (var user in UserManager.Users.ToList())
-            {
-                if (await UserManager.IsInRoleAsync(user.Id, role.Name))
-                {
-                    users.Add(user);
-                }
-            }
-
-            ViewBag.Users = users;
-            ViewBag.UserCount = users.Count();
-            return View(role);
-        }
 
         //
         // GET: /Roles/Create
-        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -97,13 +37,12 @@ namespace IdentitySample.Controllers
         //
         // POST: /Roles/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RoleViewModel roleViewModel)
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole(roleViewModel.Name);
-                var roleresult = await RoleManager.CreateAsync(role);
+                var role = new CustomRole(roleViewModel.Name);
+                var roleresult = await _roleManager.CreateAsync(role).ConfigureAwait(false);
                 if (!roleresult.Succeeded)
                 {
                     ModelState.AddModelError("", roleresult.Errors.First());
@@ -115,15 +54,93 @@ namespace IdentitySample.Controllers
         }
 
         //
-        // GET: /Roles/Edit/Admin
-        [HttpGet]
-        public async Task<ActionResult> Edit(string id)
+        // GET: /Roles/Delete/5
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var role = await RoleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id.Value).ConfigureAwait(false);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
+        }
+
+        //
+        // POST: /Roles/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int? id, string deleteUser)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var role = await _roleManager.FindByIdAsync(id.Value).ConfigureAwait(false);
+                if (role == null)
+                {
+                    return HttpNotFound();
+                }
+                IdentityResult result;
+                if (deleteUser != null)
+                {
+                    result = await _roleManager.DeleteAsync(role).ConfigureAwait(false);
+                }
+                else
+                {
+                    result = await _roleManager.DeleteAsync(role).ConfigureAwait(false);
+                }
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        //
+        // GET: /Roles/Details/5
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var role = await _roleManager.FindByIdAsync(id.Value).ConfigureAwait(false);
+            // Get the list of Users in this Role
+            var users = new List<ApplicationUser>();
+
+            // Get the list of Users in this Role
+            var allUsers = await _userManager.GetAllUsersAsync().ConfigureAwait(false);
+            foreach (var user in allUsers)
+            {
+                if (await _userManager.IsInRoleAsync(user.Id, role.Name).ConfigureAwait(false))
+                {
+                    users.Add(user);
+                }
+            }
+
+            ViewBag.Users = users;
+            ViewBag.UserCount = users.Count;
+            return View(role);
+        }
+
+        //
+        // GET: /Roles/Edit/Admin
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var role = await _roleManager.FindByIdAsync(id.Value).ConfigureAwait(false);
             if (role == null)
             {
                 return HttpNotFound();
@@ -135,72 +152,24 @@ namespace IdentitySample.Controllers
         //
         // POST: /Roles/Edit/5
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Name,Id")] RoleViewModel roleModel)
         {
             if (ModelState.IsValid)
             {
-                var role = await RoleManager.FindByIdAsync(roleModel.Id);
+                var role = await _roleManager.FindByIdAsync(roleModel.Id).ConfigureAwait(false);
                 role.Name = roleModel.Name;
-                await RoleManager.UpdateAsync(role);
+                await _roleManager.UpdateAsync(role).ConfigureAwait(false);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         //
-        // GET: /Roles/Delete/5
-        [HttpGet]
-        public async Task<ActionResult> Delete(string id)
+        // GET: /Roles/
+        public async Task<ActionResult> Index()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var role = await RoleManager.FindByIdAsync(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
-        }
-
-        //
-        // POST: /Roles/Delete/5
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id, string deleteUser)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var role = await RoleManager.FindByIdAsync(id);
-                if (role == null)
-                {
-                    return HttpNotFound();
-                }
-                IdentityResult result;
-                if (deleteUser != null)
-                {
-                    result = await RoleManager.DeleteAsync(role);
-                }
-                else
-                {
-                    result = await RoleManager.DeleteAsync(role);
-                }
-                if (!result.Succeeded)
-                {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return View();
-                }
-                return RedirectToAction("Index");
-            }
-            return View();
+            return View(await _roleManager.GetAllCustomRolesAsync().ConfigureAwait(false));
         }
     }
 }

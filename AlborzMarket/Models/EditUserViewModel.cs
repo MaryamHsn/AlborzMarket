@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace SabzGashtTransportation.Models
+namespace AlborzMarket.Models
 {
     public class EditUserViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SabzGashtTransportation.Models
+namespace AlborzMarket.Models
 {
     public class RegisterViewModel
     {

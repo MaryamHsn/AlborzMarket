@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace SabzGashtTransportation.Models
+namespace AlborzMarket.Models
 {
     public class ManageLoginsViewModel
     {
