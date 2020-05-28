@@ -610,7 +610,7 @@ textarea:focus:-ms-input-placeholder {
     transition: all 0.2s ease-in-out;
 }
 .btn-theme:hover {
-    background-color: #232323;
+    background-color: mediumvioletred;
     border-color: #232323;
     color: #ffffff;
 }
@@ -631,11 +631,11 @@ textarea:focus:-ms-input-placeholder {
     border-color: #e9e9e9;
     color: #232323;
 }
-.btn-theme-transparent:hover {
-    background-color: #232323;
-    border-color: #232323;
-    color: #ffffff;
-}
+    .btn-theme-transparent:hover {
+        background-color: mediumvioletred;
+        border-color: mediumvioletred;
+        color: #ffffff;
+    }
 .btn-theme-dark,
 .btn-theme-dark:focus,
 .btn-theme-dark:active {
@@ -772,7 +772,7 @@ p.btn-row .text {
     /* ios */
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-color: #232323;
+    border-color: mediumvioletred;
 }
 textarea {
     resize: none;
@@ -2834,10 +2834,11 @@ input[type=checkbox] {
     border: solid 1px #232323;
     color: #232323;
 }
-.social-icons a:hover {
-    background-color: #00180e;
-    color: #ffffff;
-}
+    .social-icons a:hover {
+        background-color: mediumvioletred;
+        color: #ffffff;
+        border: solid 1px mediumvioletred;
+    }
 /* 5.5 */
 /* Rating stars
 /* ========================================================================== */
@@ -5262,8 +5263,8 @@ input[type=checkbox] {
 }
 .widget-tag-cloud ul li a:hover {
     color: #ffffff;
-    background-color: #232323;
-    border-color: #232323;
+    background-color: mediumvioletred;
+    border-color: mediumvioletred;
 }
 /* flickr feed
 /* ========================================================================== */
