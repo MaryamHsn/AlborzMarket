@@ -88,7 +88,7 @@ a:hover .btn-play,
 }
 @media (max-width: 991px) {   
     .sf-menu > li > a:hover {       
-        color: #89c144;
+        /*color: #89c144;*/ 
     }    
 }
 .footer {
