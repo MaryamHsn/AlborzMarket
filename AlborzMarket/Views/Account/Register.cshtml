@@ -1,41 +1,46 @@
 ﻿@model AlborzMarket.Models.RegisterViewModel
+
 @{
     ViewBag.Title = "Register";
-}
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    @Styles.Render("~/assets/css/theme.css");
+    @Styles.Render("~/assets/css/theme-green-1.css");
+    @Styles.Render("~/assets/css/theme-green-2.css");
+} 
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+ @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+    <section class="page-section color">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="block-title"><span>ثبت نام</span></h3>
+                    <form action="#" class="form-login">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "نام کاربری", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.Password, new { @placeholder = "رمز عبور", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @placeholder = "تکرار رمز عبور", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div> 
+                            <div class="col-md-6">
+                                <button type="submit" onclick="location.href='@Url.Action("Register")';return false;" class="btn btn-theme btn-block btn-theme-dark">ثبت نام</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> 
 }
+ 

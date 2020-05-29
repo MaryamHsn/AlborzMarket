@@ -1365,11 +1365,13 @@ a.text-warning:focus {
   color: #66512c;
 }
 .text-danger {
-  color: #a94442;
+    color: #a94442;
+    margin-right: 50px;
 }
 a.text-danger:hover,
 a.text-danger:focus {
-  color: #843534;
+    color: #843534;
+    margin-right: 50px;
 }
 .bg-primary {
   color: #fff;

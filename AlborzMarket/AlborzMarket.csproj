@@ -509,6 +509,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="index-2.html" />
+    <Content Include="login.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.eot" />

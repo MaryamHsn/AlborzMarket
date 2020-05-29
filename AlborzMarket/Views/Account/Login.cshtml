@@ -2,59 +2,168 @@
 
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    @Styles.Render("~/assets/css/theme.css");
+    @Styles.Render("~/assets/css/theme-green-1.css");
+    @Styles.Render("~/assets/css/theme-green-2.css");
 }
-
-<h2>@ViewBag.Title.</h2>
+ <br/>
 <div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    @*<div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use a local account to log in.</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Register a new user?", "Register")
+                    </p>
+                    <p>
+                        @Html.ActionLink("Forget your password?", "ForgotPassword")
+                    </p>
+                }
+            </section>
+        </div> *@
+    <div class="content-area">
+
+        <!-- PAGE -->
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken() 
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <section class="page-section color">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="block-title"><span>ورود</span></h3>
+                            <form action="#" class="form-login">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "پست الکترونیک", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "نام کاربری", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12">
+                                        @Html.PasswordFor(m => m.Password, new { @placeholder = "رمز عبور شما", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox" })
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 text-right-lg">
+                                        @(Html.ActionLink("رمز عبور را فراموش کرده اید؟", "ForgotPassword", new { @class = "forgot-password" }))
+                                    </div>  
+                                    <div class="col-md-12 col-lg-6 text-right-lg">
+                                      @*  @(Html.ActionLink("رمز عبور را فراموش کرده اید؟", "ForgotPassword", new { @class = "forgot-password" }))*@
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" onclick="location.href='@Url.Action("Login")';return false;" class="btn btn-theme btn-block btn-theme-dark">ورود</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" onclick="location.href='@Url.Action("Register")';return false;" class="btn btn-block btn-theme btn-theme-dark btn-create">ایجاد حساب کاربری</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        @*<div class="col-sm-6">
+                            <h3 class="block-title"><span>ساخت حساب کاربری جدید</span></h3>
+                            <form action="#" class="create-account">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="block-title">ثبت نام کنید حالا و شما قادر خواهید بود به</h3>
+                                        <ul class="list-check">
+                                            <li>وضعیت سفارش آنلاین </li>
+                                            <li>مشاهده تخفیف های آماده داغ</li>
+                                            <li>فهرست دلخواه</li>
+                                            <li>ثبت نام برای دریافت اخبار منحصر به فرد و فروش خصوصی</li>
+                                            <li> خرید مواد به سرعت</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" onclick="location.href='@Url.Action("Register")';return false;" class="btn btn-block btn-theme btn-theme-dark btn-create">ایجاد حساب کاربری</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>*@
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </section>
+        }
+        <!-- /PAGE -->
+        <!-- PAGE -->
+        <section class="page-section">
+            <div class="container">
+                <div class="row blocks shop-info-banners">
+                    <div class="col-md-4">
+                        <div class="block">
+                            <div class="media">
+                                <div class="pull-left"><i class="fa fa-gift"></i></div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">۱ فروش ۱ دریافت </h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                    <div class="col-md-4">
+                        <div class="block">
+                            <div class="media">
+                                <div class="pull-left"><i class="fa fa-comments"></i></div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">تماس رایگان</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="block">
+                            <div class="media">
+                                <div class="pull-left"><i class="fa fa-trophy"></i></div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">برگشت پول!</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register a new user?", "Register")
-                </p>
-                <p>
-                    @Html.ActionLink("Forget your password?", "ForgotPassword")
-                </p>
-            }
+            </div>
         </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new AlborzMarket.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        <!-- /PAGE -->
+
     </div>
 </div>
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
