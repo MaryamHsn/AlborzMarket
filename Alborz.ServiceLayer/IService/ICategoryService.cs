@@ -1,4 +1,5 @@
 ﻿using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.ViewModel;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Alborz.ServiceLayer.IService
         bool Delete(int id);
         Task AddNewCategoryAsync(CategoryTbl Category, CancellationToken ct = new CancellationToken());
         Task<IList<CategoryTbl>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken());
-        Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<CategoryViewModel> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken());
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
     }
 }

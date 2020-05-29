@@ -124,6 +124,7 @@
     <Compile Include="IService\ICustomUserStore.cs" />
     <Compile Include="IService\IDiscountService.cs" />
     <Compile Include="IService\IErrorService.cs" />
+    <Compile Include="IService\IImageService.cs" />
     <Compile Include="IService\IInternetPaymentGetwayService.cs" />
     <Compile Include="IService\IInvoiceProcessHistoryService.cs" />
     <Compile Include="IService\IInvoiceProcessService.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="IService\IOrderProcessService.cs" />
     <Compile Include="IService\IOrderService.cs" />
     <Compile Include="IService\IPaymentService.cs" />
+    <Compile Include="IService\IPostService.cs" />
     <Compile Include="IService\IPriceService.cs" />
     <Compile Include="IService\IProductService.cs" />
     <Compile Include="IService\IPropertyService.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Service\CustomerTypeService.cs" />
     <Compile Include="Service\DiscountService.cs" />
     <Compile Include="Service\ErrorService.cs" />
+    <Compile Include="Service\ImageService.cs" />
     <Compile Include="Service\InternetPaymentGetwayService.cs" />
     <Compile Include="Service\InvoiceProcessHistoryService.cs" />
     <Compile Include="Service\InvoiceProcessService.cs" />
@@ -158,6 +161,7 @@
     <Compile Include="Service\OrderProcessService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PaymentService.cs" />
+    <Compile Include="Service\PostService.cs" />
     <Compile Include="Service\PriceService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\PropertyService.cs" />
@@ -165,6 +169,8 @@
     <Compile Include="SmsService.cs" />
     <Compile Include="Utils\ConvertDate.cs" />
     <Compile Include="Utils\JalaliCalendar.cs" />
+    <Compile Include="ViewModel\CategoryFullViewModel.cs" />
+    <Compile Include="ViewModel\CategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

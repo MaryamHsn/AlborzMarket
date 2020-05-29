@@ -147,113 +147,123 @@ namespace Alborz.IocConfig
                     .HybridHttpOrThreadLocalScoped()
                     .Use<AddressRepository>();
 
-           ioc.For<ICartItemRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<CartItemRepository>();
+                ioc.For<ICartItemRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<CartItemRepository>();
 
-           ioc.For<ICartRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<CartRepository>();
+                ioc.For<ICartRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<CartRepository>();
 
-           ioc.For<ICategoryRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<CategoryRepository>();
+                ioc.For<ICategoryRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<CategoryRepository>();
 
-           
-           ioc.For<ICustomerRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<CustomerRepository>();
+                ioc.For<IImageRepository>()
+                   .HybridHttpOrThreadLocalScoped()
+                   .Use<ImageRepository>();
 
-           
-           ioc.For<ICustomerTypeRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<CustomerTypeRepository>();
+                ioc.For<IPostRepository>()
+                   .HybridHttpOrThreadLocalScoped()
+                   .Use<PostRepository>();
 
-           
-           ioc.For<IDiscountRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<DiscountRepository>();
 
-           
-           ioc.For<IErrorRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<ErrorRepository>();
+                ioc.For<ICustomerRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<CustomerRepository>();
 
-           
-           ioc.For<IInternetPaymentGetwayRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<InternetPaymentGetwayRepository>();
 
-           
-           ioc.For<IInvoiceProcessHistoryRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<InvoiceProcessHistoryRepository>();
+                ioc.For<ICustomerTypeRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<CustomerTypeRepository>();
 
-           
-           ioc.For<IInvoiceProcessRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<InvoiceProcessRepository>();
 
-           
-           ioc.For<IInvoiceRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<InvoiceRepository>();
+                ioc.For<IDiscountRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<DiscountRepository>();
 
-           
-           ioc.For<IIPGHistoryRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<IPGHistoryRepository>();
 
-           
-           ioc.For<IOrderOperationRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<OrderOperationRepository>();
+                ioc.For<IErrorRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ErrorRepository>();
 
-           
-           ioc.For<IOrderProcessHistoryRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<OrderProcessHistoryRepository>();
 
-           
-           ioc.For<IOrderProcessRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<OrderProcessRepository>();
+                ioc.For<IInternetPaymentGetwayRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<InternetPaymentGetwayRepository>();
 
-           
-           ioc.For<IOrderRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<OrderRepository>();
 
-           
-           ioc.For<IPaymentRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<PaymentRepository>();
+                ioc.For<IInvoiceProcessHistoryRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<InvoiceProcessHistoryRepository>();
 
-           
-           ioc.For<IPriceRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<PriceRepository>();
 
-           
-           ioc.For<IProductRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<ProductRepository>();
+                ioc.For<IInvoiceProcessRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<InvoiceProcessRepository>();
 
-           
-           ioc.For<IPropertyRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<PropertyRepository>();
 
-           
-           ioc.For<IPropertyValueRepository>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<PropertyValueRepository>();
+                ioc.For<IInvoiceRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<InvoiceRepository>();
 
-                
+
+                ioc.For<IIPGHistoryRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<IPGHistoryRepository>();
+
+
+                ioc.For<IOrderOperationRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<OrderOperationRepository>();
+
+
+                ioc.For<IOrderProcessHistoryRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<OrderProcessHistoryRepository>();
+
+
+                ioc.For<IOrderProcessRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<OrderProcessRepository>();
+
+
+                ioc.For<IOrderRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<OrderRepository>();
+
+
+                ioc.For<IPaymentRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<PaymentRepository>();
+
+
+                ioc.For<IPriceRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<PriceRepository>();
+
+
+                ioc.For<IProductRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ProductRepository>();
+
+
+                ioc.For<IPropertyRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<PropertyRepository>();
+
+
+                ioc.For<IPropertyValueRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<PropertyValueRepository>();
+
+
                 ioc.For(typeof(IAddressRepository)).Use(typeof(AddressRepository));
                 ioc.For(typeof(ICartItemRepository)).Use(typeof(CartItemRepository));
                 ioc.For(typeof(ICartRepository)).Use(typeof(CartRepository));
                 ioc.For(typeof(ICategoryRepository)).Use(typeof(CategoryRepository));
+                ioc.For(typeof(IImageRepository)).Use(typeof(ImageRepository));
+                ioc.For(typeof(IPostRepository)).Use(typeof(PostRepository));
                 ioc.For(typeof(ICustomerRepository)).Use(typeof(CustomerRepository));
                 ioc.For(typeof(ICustomerTypeRepository)).Use(typeof(CustomerTypeRepository));
                 ioc.For(typeof(IPaymentRepository)).Use(typeof(PaymentRepository));
@@ -289,6 +299,14 @@ namespace Alborz.IocConfig
                 ioc.For<ICategoryService>()
                          .HybridHttpOrThreadLocalScoped()
                          .Use<CategoryService>();
+
+                ioc.For<IImageService>()
+                 .HybridHttpOrThreadLocalScoped()
+                 .Use<ImageService>();
+
+                ioc.For<IPostService>()
+                 .HybridHttpOrThreadLocalScoped()
+                 .Use<PostService>();
 
 
                 ioc.For<ICustomerService>()

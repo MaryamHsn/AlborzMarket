@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Alborz.ServiceLayer.IService;
-
+using Alborz.ServiceLayer.ViewModel;
+using Alborz.ServiceLayer.Mapper;
 
 namespace Alborz.ServiceLayer.Service
 { 
@@ -52,10 +53,16 @@ namespace Alborz.ServiceLayer.Service
             //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
             return obj.ToList();
         }
-        public async Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
+        //public async Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
+        //{
+        //    var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
+        //    return obj.FirstOrDefault();
+        //}
+        public async Task<CategoryViewModel> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
         {
-            var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
-            return obj.FirstOrDefault();
+            var category = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
+            var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(category.FirstOrDefault());
+            return obj;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
@@ -64,5 +71,6 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+    
     }
 }

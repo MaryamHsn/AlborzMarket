@@ -52,7 +52,7 @@ namespace AlborzMarket
 
         private static void setDbInitializer()
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Alborz.DataLayer.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Alborz.DataLayer.Migrations.Configuration>());
             SmObjectFactory.Container.GetInstance<IUnitOfWork>().ForceDatabaseInitialize();
         }
 
