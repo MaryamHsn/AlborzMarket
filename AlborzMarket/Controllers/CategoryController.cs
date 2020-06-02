@@ -221,7 +221,7 @@ namespace AlborzMarket.Controllers
                             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                         }
                         CategoryTbl category = _category.GetCategory(id);
-                        if (Category == null)
+                        if (category == null)
                         {
                             return HttpNotFound();
                         }

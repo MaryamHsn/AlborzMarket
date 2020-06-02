@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
+    <Compile Include="DTO\BaseEntity.cs" />
     <Compile Include="DTO\AddressTbl.cs" />
     <Compile Include="DTO\ApplicationUser.cs" />
     <Compile Include="DTO\CartItemTbl.cs" />

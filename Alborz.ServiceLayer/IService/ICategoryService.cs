@@ -1,5 +1,4 @@
 ﻿using Alborz.DomainLayer.DTO;
-using Alborz.ServiceLayer.ViewModel;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
