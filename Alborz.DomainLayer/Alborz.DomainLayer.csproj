@@ -57,9 +57,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AddressDTO.cs" />
+    <Compile Include="DTO\BaseDTO.cs" />
+    <Compile Include="DTO\CartItemDTO.cs" />
+    <Compile Include="DTO\CartDTO.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\CustomerDTO.cs" />
+    <Compile Include="DTO\CustomerTypeDTO.cs" />
+    <Compile Include="DTO\DiscountDTO.cs" />
+    <Compile Include="DTO\ErrorDTO.cs" />
+    <Compile Include="DTO\ImagDTO.cs" />
+    <Compile Include="DTO\InternetPaymentGetwayDTO.cs" />
+    <Compile Include="DTO\InvoiceProcessHistoryDTO.cs" />
+    <Compile Include="DTO\InvoiceProcessDTO.cs" />
+    <Compile Include="DTO\InvoiceDTO.cs" />
+    <Compile Include="DTO\IPGHistoryDTO.cs" />
+    <Compile Include="DTO\OrderOperationDTO.cs" />
+    <Compile Include="DTO\OrderProcessHistoryDTO.cs" />
+    <Compile Include="DTO\OrderProcessDTO.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
+    <Compile Include="DTO\PaymentDTO.cs" />
+    <Compile Include="DTO\PostDTO.cs" />
+    <Compile Include="DTO\PriceDTO.cs" />
+    <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\PropertyDTO.cs" />
+    <Compile Include="DTO\PropertyValueDTO.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\AddressTbl.cs" />
-    <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\CartItemTbl.cs" />
     <Compile Include="Entities\CartTbl.cs" />
     <Compile Include="Entities\CategoryTbl.cs" />
