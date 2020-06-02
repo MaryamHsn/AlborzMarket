@@ -3,11 +3,12 @@ using Alborz.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Mapper;
+using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.Utils;
 
 namespace Alborz.ServiceLayer.Service
 { 
@@ -20,60 +21,54 @@ namespace Alborz.ServiceLayer.Service
             _now = DateTime.Now;
             _uow = uow;
         }
-        public void AddNewCategory(CategoryTbl Category)
+        public async Task<CategoryDTO> AddNewCategoryAsync(CategoryDTO Category, CancellationToken ct = new CancellationToken())
         {
-            _uow.CategoryRepository.Add(Category);
+            if (Category == null)
+                throw new ArgumentNullException();
+            var entity = BaseMapper<CategoryDTO, CategoryTbl>.Map(Category);          
+            var obj= await _uow.CategoryRepository.AddAsync(entity, ct); 
             _uow.SaveAllChanges();
+            var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj);
+            element.StartDateString = ((DateTime)(obj.StartDate)).ToPersianDateString();
+            element.EndDateString = ((DateTime)(obj.EndDate)).ToPersianDateString();
+            return element; 
         }
-        public IList<CategoryTbl> GetAllCategories()
-        {
-            return _uow.CategoryRepository.GetAll().ToList();
-        }
-        public CategoryTbl GetCategory(int? id)
-        {
-            return _uow.CategoryRepository.GetAll(x => x.Id == id).SingleOrDefault();
-        }
-        public CategoryTbl UpdateCategory(CategoryTbl entity)
-        {
-            entity = _uow.CategoryRepository.Update(entity);
-            _uow.SaveAllChanges();
-            return entity;
-        }
-        public bool Delete(int id)
-        {
-            CategoryTbl Category = _uow.CategoryRepository.Get(id);
-            var t = _uow.CategoryRepository.SoftDelete(Category);
-            _uow.SaveAllChanges();
-            return t;
-        }
-        ////Async 
-        public async Task AddNewCategoryAsync(CategoryTbl Category, CancellationToken ct = new CancellationToken())
-        {
-            await _uow.CategoryRepository.AddAsync(Category, ct);
-            _uow.SaveAllChanges();
-        }
-        public async Task<List<CategoryTbl>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<CategoryDTO>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.CategoryRepository.GetAllAsync(ct);
-            //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
-            return obj.ToList();
+            var entity = new List<CategoryDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(item);
+                element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
+                element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
+                entity.Add(element);
+            }
+            return entity; 
         }
-        public async Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
+        public async Task<List<CategoryDTO>> GetCategoriesBySearchItemAsync(string searchItem,CancellationToken ct = new CancellationToken())
+        {
+            var category =await GetAllCategoriesAsync();
+            return category.Where(s => s.Title.Contains(searchItem)|| s.Code.Contains(searchItem)|| s.priority.ToString().Contains(searchItem)).ToList();
+        }
+        public async Task<CategoryDTO> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
-            return obj.FirstOrDefault();
+            var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj.FirstOrDefault());
+            element.StartDateString = ((DateTime)(obj.FirstOrDefault().StartDate)).ToPersianDateString();
+            element.EndDateString = ((DateTime)(obj.FirstOrDefault().EndDate)).ToPersianDateString();
+            return element;
         }
-        //public async Task<CategoryViewModel> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
-        //{
-        //    var category = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
-        //    var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(category.FirstOrDefault());
-        //    return obj;
-        //}
-        public async Task<CategoryTbl> UpdateCategoryAsync(CategoryTbl entity)
+        public async Task<CategoryDTO> UpdateCategoryAsync(CategoryDTO entity)
         {
-            entity = await _uow.CategoryRepository.UpdateAsync(entity);
+            var obj = BaseMapper<CategoryDTO, CategoryTbl>.Map(entity);
+            obj = await _uow.CategoryRepository.UpdateAsync(obj);
+            obj.IsActive = true;
             _uow.SaveAllChanges();
-            return entity;
+            var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj);
+            element.StartDateString = ((DateTime)(obj.StartDate)).ToPersianDateString();
+            element.EndDateString = ((DateTime)(obj.EndDate)).ToPersianDateString();
+            return element; 
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {

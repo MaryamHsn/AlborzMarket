@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alborz.DomainLayer.DTO
 {
-    public partial class CustomerTypeDTO : BaseDTO<int>
+    public  class CustomerTypeDTO : BaseDTO<int>
     { 
         public string CustomerCode { get; set; }
         public string Title { get; set; }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using PagedList;
 using Alborz.ServiceLayer.Utils;
+using Alborz.DomainLayer.DTO;
 
 namespace AlborzMarket.Controllers
 {
@@ -29,7 +30,7 @@ namespace AlborzMarket.Controllers
             _uow = uow;
         }
         [HttpGet]
-        public async Task<ActionResult> Index(CategoryFullViewModel model)
+        public async Task<ActionResult> Index(CategoryDTO model)
         {
             commonList = new List<CategoryViewModel>();
             ViewBag.CurrentSort = model.sortOrder;
@@ -47,17 +48,18 @@ namespace AlborzMarket.Controllers
                 model.searchString = model.currentFilter;
             }
             //ViewBag.CurrentFilter = model.searchString;
-            var category = await _category.GetAllCategoriesAsync();
+            var category = new List<CategoryDTO>();
             if (!String.IsNullOrEmpty(model.searchString))
             {
-                category = category.Where(s => s.Title.Contains(model.searchString)
-                                               || s.Code.Contains(model.searchString)
-                                               || s.priority.ToString().Contains(model.searchString)).ToList();
+                category = await _category.GetCategoriesBySearchItemAsync(model.searchString);
+            }
+            else
+            {
+                category = await _category.GetAllCategoriesAsync();
             }
             switch (model.sortOrder)
             {
-                case "title_desc":
-                    //var driver = _driver.GetAllDrivers().OrderByDescending(s => s.DriverId).ToList();
+                case "title_desc": 
                     category = category.OrderByDescending(s => s.Title).ToList();
                     break;
                 case "code":
@@ -84,14 +86,14 @@ namespace AlborzMarket.Controllers
             }
             int pageSize = 100;
             int pageNumber = (model.page ?? 1);
-            foreach (var item in category)
-            {
-                var element = BaseMapper<CategoryViewModel, CategoryTbl>.Map(item);
-                element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
-                element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
-                commonList.Add(element);
-            }
-            model.CategoryViewModels = commonList.ToPagedList(pageNumber, pageSize);
+            //foreach (var item in category)
+            //{
+            //    var element = BaseMapper<CategoryViewModel, CategoryTbl>.Map(item);
+            //    element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
+            //    element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
+            //    commonList.Add(element);
+            //}
+            model.CategoryList= category.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
 
@@ -106,8 +108,7 @@ namespace AlborzMarket.Controllers
             {
                 return HttpNotFound();
             }
-            var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(await entity);
-            return View(obj);
+            return View(entity);
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -126,7 +127,7 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CategoryTbl rout)
+        public async Task<ActionResult> Create(CategoryDTO rout)
         {
             try
             {
@@ -162,13 +163,12 @@ namespace AlborzMarket.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-                    CategoryTbl Category = await _category.GetCategoryAsync(id);
-                    if (Category == null)
+                    var category = await _category.GetCategoryAsync(id);
+                    if (category == null)
                     {
                         return HttpNotFound();
-                    }
-                    var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(Category);
-                    return View(obj);
+                    } 
+                    return View(category);
                 }
             }
             return RedirectToAction("login", "Account");
@@ -177,7 +177,7 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(CategoryViewModel Category)
+        public async Task<ActionResult> Edit(CategoryDTO category)
         {
             try
             {
@@ -186,11 +186,8 @@ namespace AlborzMarket.Controllers
                     if (User.IsInRole("Admin"))
                     {
                         if (ModelState.IsValid)
-                        {
-                            var obj = BaseMapper<CategoryTbl, CategoryViewModel>.Map(Category);
-                            obj.IsActive = true;
-                            await _category.UpdateCategoryAsync(obj);
-                            _uow.SaveAllChanges();
+                        { 
+                            await _category.UpdateCategoryAsync(category); 
                         }
                         return RedirectToAction("Index");
                     }
@@ -216,15 +213,12 @@ namespace AlborzMarket.Controllers
                         {
                             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                         }
-                        CategoryTbl category = _category.GetCategory(id);
+                        var category = await _category.GetCategoryAsync(id);
                         if (category == null)
                         {
                             return HttpNotFound();
-                        }
-                        var obj = BaseMapper<CategoryTbl, CategoryViewModel>.Map(category);
-                        obj.StartDateString = ((DateTime)(category.StartDate)).ToPersianDateString();
-                        obj.EndDateString = ((DateTime)(category.EndDate)).ToPersianDateString();
-                        return View(obj);
+                        } 
+                        return View(category);
                     }
                 }
                 return RedirectToAction("login", "Account");
@@ -246,8 +240,7 @@ namespace AlborzMarket.Controllers
                 {
                     if (User.IsInRole("Admin"))
                     {
-                        _category.Delete(id);
-                        _uow.SaveAllChanges();
+                        await _category.DeleteAsync(id);
                         return RedirectToAction("Index");
                     }
                 }
@@ -258,8 +251,6 @@ namespace AlborzMarket.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-
 
         protected override void Dispose(bool disposing)
         {
