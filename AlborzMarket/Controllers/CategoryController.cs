@@ -1,5 +1,5 @@
 ﻿using Alborz.DataLayer.Context;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Mapper;
 using AlborzMarket.ViewModel;
@@ -10,10 +10,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-
-
-using System.Diagnostics.Eventing.Reader;
-using System.Security.AccessControl;
 using PagedList;
 using Alborz.ServiceLayer.Utils;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alborz.DomainLayer.DTO
+namespace Alborz.DomainLayer.Entities
 {
     public class BaseEntity<T> where T : struct
     {

@@ -1,5 +1,5 @@
 ﻿using Alborz.DataLayer.Context;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using System;
 using System.Collections.Generic;

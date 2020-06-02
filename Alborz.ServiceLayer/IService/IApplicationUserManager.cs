@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Cookies;
 

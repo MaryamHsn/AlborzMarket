@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 
-    namespace Alborz.DomainLayer.DTO
+    namespace Alborz.DomainLayer.Entities
 {
     [Table("AddressTbl")]
     public partial class AddressTbl : BaseEntity<int>

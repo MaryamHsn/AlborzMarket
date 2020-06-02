@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Alborz.DataLayer.Context;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using Microsoft.AspNet.Identity; 
 

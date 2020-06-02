@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alborz.DomainLayer.DTO
+namespace Alborz.DomainLayer.Entities
 {
     [Table("PostTbl")]
     public partial class PostTbl : BaseEntity<int>

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace Alborz.ServiceLayer.IService

@@ -1,5 +1,5 @@
 ﻿using Alborz.DataLayer.IRepository;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

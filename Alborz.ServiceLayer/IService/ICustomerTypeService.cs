@@ -1,4 +1,4 @@
-﻿using Alborz.DomainLayer.DTO;
+﻿using Alborz.DomainLayer.Entities;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

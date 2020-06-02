@@ -1,6 +1,6 @@
 ﻿using Alborz.DataLayer.IRepository;
 using Alborz.DataLayer.Repository;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

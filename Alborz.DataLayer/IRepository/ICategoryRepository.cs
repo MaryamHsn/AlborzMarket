@@ -1,4 +1,4 @@
-﻿using Alborz.DomainLayer.DTO;
+﻿using Alborz.DomainLayer.Entities;
 
 namespace Alborz.DataLayer.IRepository
 {

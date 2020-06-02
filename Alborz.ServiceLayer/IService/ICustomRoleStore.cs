@@ -1,4 +1,4 @@
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using System;
 using System.Data.Entity;
 using System.Linq;

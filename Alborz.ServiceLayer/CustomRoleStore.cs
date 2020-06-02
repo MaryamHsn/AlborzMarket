@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using Alborz.DataLayer.Context;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using Microsoft.AspNet.Identity.EntityFramework; 
 

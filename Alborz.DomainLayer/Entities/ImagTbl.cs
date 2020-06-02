@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alborz.DomainLayer.DTO
+namespace Alborz.DomainLayer.Entities
 {
     [Table("ImagTbl")]
     public partial class ImageTbl : BaseEntity<int>

@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection; 
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.DataLayer.Context;
 
 namespace Alborz.ServiceLayer

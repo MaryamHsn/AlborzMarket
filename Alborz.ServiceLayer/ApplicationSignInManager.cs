@@ -4,7 +4,7 @@ using Alborz.ServiceLayer.IService;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 
 namespace Alborz.ServiceLayer
 {

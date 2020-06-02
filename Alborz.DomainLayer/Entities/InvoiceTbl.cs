@@ -1,4 +1,4 @@
-namespace Alborz.DomainLayer.DTO
+namespace Alborz.DomainLayer.Entities
 {
     using System;
     using System.Collections.Generic;

@@ -11,7 +11,7 @@ using System;
 using Alborz.DataLayer.Context;
 using Alborz.DataLayer.IRepository;
 using Alborz.DataLayer.Repository;
-using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer;
 using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Service;
