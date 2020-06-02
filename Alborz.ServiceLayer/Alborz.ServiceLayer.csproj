@@ -169,8 +169,6 @@
     <Compile Include="SmsService.cs" />
     <Compile Include="Utils\ConvertDate.cs" />
     <Compile Include="Utils\JalaliCalendar.cs" />
-    <Compile Include="ViewModel\CategoryFullViewModel.cs" />
-    <Compile Include="ViewModel\CategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

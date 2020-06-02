@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Alborz.ServiceLayer.IService;
-using Alborz.ServiceLayer.ViewModel;
 using Alborz.ServiceLayer.Mapper;
 
 namespace Alborz.ServiceLayer.Service
@@ -34,6 +33,12 @@ namespace Alborz.ServiceLayer.Service
         {
             return _uow.CategoryRepository.GetAll(x => x.Id == id).SingleOrDefault();
         }
+        public CategoryTbl UpdateCategory(CategoryTbl entity)
+        {
+            entity = _uow.CategoryRepository.Update(entity);
+            _uow.SaveAllChanges();
+            return entity;
+        }
         public bool Delete(int id)
         {
             CategoryTbl Category = _uow.CategoryRepository.Get(id);
@@ -47,22 +52,28 @@ namespace Alborz.ServiceLayer.Service
             await _uow.CategoryRepository.AddAsync(Category, ct);
             _uow.SaveAllChanges();
         }
-        public async Task<IList<CategoryTbl>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<CategoryTbl>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.CategoryRepository.GetAllAsync(ct);
             //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
             return obj.ToList();
         }
-        //public async Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
-        //{
-        //    var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
-        //    return obj.FirstOrDefault();
-        //}
-        public async Task<CategoryViewModel> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
+        public async Task<CategoryTbl> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
         {
-            var category = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
-            var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(category.FirstOrDefault());
-            return obj;
+            var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
+            return obj.FirstOrDefault();
+        }
+        //public async Task<CategoryViewModel> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
+        //{
+        //    var category = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
+        //    var obj = BaseMapper<CategoryViewModel, CategoryTbl>.Map(category.FirstOrDefault());
+        //    return obj;
+        //}
+        public async Task<CategoryTbl> UpdateCategoryAsync(CategoryTbl entity)
+        {
+            entity = await _uow.CategoryRepository.UpdateAsync(entity);
+            _uow.SaveAllChanges();
+            return entity;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
