@@ -12,6 +12,7 @@ using Alborz.ServiceLayer;
 using AlborzMarket.Models;
 using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.IService;
+using Alborz.DomainLayer.Entities;
 
 namespace AlborzMarket.Controllers
 {

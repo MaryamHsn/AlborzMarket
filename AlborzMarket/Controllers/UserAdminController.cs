@@ -1,4 +1,5 @@
 ﻿using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using AlborzMarket.Models; 
 using System.Linq;

@@ -8,6 +8,7 @@ using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.IService;
 using AlborzMarket.Helpers;
 using AlborzMarket.Models;
+using Alborz.DomainLayer.Entities;
 
 namespace AlborzMarket.Controllers
 {

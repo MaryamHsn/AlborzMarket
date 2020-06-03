@@ -489,5 +489,6 @@ namespace Alborz.DataLayer.Context
             base.Database.Initialize(force: true);
         }
 
+        public System.Data.Entity.DbSet<Alborz.DomainLayer.DTO.CategoryDTO> CategoryDTOes { get; set; }
     }
 }
