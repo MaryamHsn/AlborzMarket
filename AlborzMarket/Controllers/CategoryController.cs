@@ -103,7 +103,7 @@ namespace AlborzMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var entity = _category.GetCategoryAsync(id);
+            var entity = await _category.GetCategoryAsync(id);
             if (entity == null)
             {
                 return HttpNotFound();
@@ -112,7 +112,7 @@ namespace AlborzMarket.Controllers
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
-        public async Task<ActionResult> Create()
+        public  ActionResult Create()
         {
             if (User.Identity.IsAuthenticated)
             {
