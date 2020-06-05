@@ -21,8 +21,8 @@ namespace AlborzMarket.Controllers
 
         readonly ICategoryService _category;
         readonly IUnitOfWork _uow;
-        private CategoryViewModel common;
-        private List<CategoryViewModel> commonList;
+        private CategoryDTO common;
+        private List<CategoryDTO> commonList;
 
         public CategoryController(IUnitOfWork uow, ICategoryService Category)
         {
@@ -32,9 +32,9 @@ namespace AlborzMarket.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(CategoryDTO model)
         {
-            commonList = new List<CategoryViewModel>();
+            commonList = new List<CategoryDTO>();
             ViewBag.CurrentSort = model.sortOrder;
-            ViewBag.Title = String.IsNullOrEmpty(model.sortOrder) ? "title_desc" : "";
+            ViewBag.Title = model.sortOrder == "code" ? "title_desc" : "title";
             ViewBag.Code = model.sortOrder == "code" ? "code_desc" : "code";
             ViewBag.Priority = model.sortOrder == "priority" ? "priority_desc" : "priority";
             ViewBag.ParentCategory = model.sortOrder == "parentCategory" ? "parentCategory_desc" : "parentCategory";
@@ -59,7 +59,7 @@ namespace AlborzMarket.Controllers
             }
             switch (model.sortOrder)
             {
-                case "title_desc": 
+                case "title_desc":
                     category = category.OrderByDescending(s => s.Title).ToList();
                     break;
                 case "code":
@@ -93,7 +93,8 @@ namespace AlborzMarket.Controllers
             //    element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
             //    commonList.Add(element);
             //}
-            model.CategoryList= category.ToPagedList(pageNumber, pageSize);
+            model.Categories = await _category.GetAllCategoriesAsync();
+            model.CategoryPageList = category.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
 
@@ -112,16 +113,20 @@ namespace AlborzMarket.Controllers
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
-        public  ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            if (User.Identity.IsAuthenticated)
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+            common = new CategoryDTO()
             {
-                if (User.IsInRole("Admin"))
-                {
-                    return View(common);
-                }
-            }
-            return RedirectToAction("login", "Account");
+                Categories = await _category.GetAllCategoriesAsync()
+            };
+            return View(common);
+            //    }
+            //}
+            //return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -135,6 +140,7 @@ namespace AlborzMarket.Controllers
                 {
                     if (User.IsInRole("Admin"))
                     {
+                        rout.Categories = await _category.GetAllCategoriesAsync();
                         if (ModelState.IsValid)
                         {
                             await _category.AddNewCategoryAsync(rout);
@@ -146,7 +152,7 @@ namespace AlborzMarket.Controllers
                 }
                 return RedirectToAction("login", "Account");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return RedirectToAction("Index");
             }
@@ -155,23 +161,25 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         public async Task<ActionResult> Edit(int? id)
         {
-            if (User.Identity.IsAuthenticated)
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+            
+            if (id == null)
             {
-                if (User.IsInRole("Admin"))
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    var category = await _category.GetCategoryAsync(id);
-                    if (category == null)
-                    {
-                        return HttpNotFound();
-                    } 
-                    return View(category);
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return RedirectToAction("login", "Account");
+            var category = await _category.GetCategoryAsync(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            category.Categories = await _category.GetAllCategoriesAsync();
+            return View(category);
+            //        }
+            //    }
+            //    return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -181,18 +189,21 @@ namespace AlborzMarket.Controllers
         {
             try
             {
-                if (User.Identity.IsAuthenticated)
-                {
-                    if (User.IsInRole("Admin"))
-                    {
-                        if (ModelState.IsValid)
-                        { 
-                            await _category.UpdateCategoryAsync(category); 
+                //if (User.Identity.IsAuthenticated)
+                //{
+                //    if (User.IsInRole("Admin"))
+                //    {
+
+                category.Categories = await _category.GetAllCategoriesAsync();
+               
+                if (ModelState.IsValid)
+                        {
+                            await _category.UpdateCategoryAsync(category);
                         }
                         return RedirectToAction("Index");
-                    }
-                }
-                return RedirectToAction("login", "Account");
+                   // }
+            //    }
+            //    return RedirectToAction("login", "Account");
             }
             catch (Exception)
             {
@@ -214,10 +225,11 @@ namespace AlborzMarket.Controllers
                             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                         }
                         var category = await _category.GetCategoryAsync(id);
+                        category.Categories = await _category.GetAllCategoriesAsync();
                         if (category == null)
                         {
                             return HttpNotFound();
-                        } 
+                        }
                         return View(category);
                     }
                 }

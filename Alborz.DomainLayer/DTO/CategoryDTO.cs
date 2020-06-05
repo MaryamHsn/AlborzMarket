@@ -22,6 +22,7 @@ namespace Alborz.DomainLayer.DTO
         public string currentFilter { get; set; }
         public string searchString { get; set; }
         public int? page { get; set; }
+        public IEnumerable<CategoryDTO> Categories{ get; set; }
         public PagedList.IPagedList<CategoryDTO> CategoryList { get; set; }
 
     }

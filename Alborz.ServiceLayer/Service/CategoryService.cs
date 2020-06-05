@@ -11,7 +11,7 @@ using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.Utils;
 
 namespace Alborz.ServiceLayer.Service
-{ 
+{
     public class CategoryService : ICategoryService
     {
         IUnitOfWork _uow;
@@ -23,15 +23,29 @@ namespace Alborz.ServiceLayer.Service
         }
         public async Task<CategoryDTO> AddNewCategoryAsync(CategoryDTO Category, CancellationToken ct = new CancellationToken())
         {
-            if (Category == null)
-                throw new ArgumentNullException();
-            var entity = BaseMapper<CategoryDTO, CategoryTbl>.Map(Category);          
-            var obj= await _uow.CategoryRepository.AddAsync(entity, ct); 
-            _uow.SaveAllChanges();
-            var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj);
-            element.StartDateString = ((DateTime)(obj.StartDate)).ToPersianDateString();
-            element.EndDateString = ((DateTime)(obj.EndDate)).ToPersianDateString();
-            return element; 
+            try
+            {
+                if (Category == null)
+                    throw new ArgumentNullException();
+                var entity = BaseMapper<CategoryDTO, CategoryTbl>.Map(Category);
+                if(!string.IsNullOrEmpty(Category.StartDateString))
+                entity.StartDate = Category.StartDateString.ToGeorgianDate();
+                if (!string.IsNullOrEmpty(Category.EndDateString))
+                entity.EndDate= Category.EndDateString.ToGeorgianDate();
+                var obj = await _uow.CategoryRepository.AddAsync(entity, ct);
+                _uow.SaveAllChanges();
+                var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj);
+                if (element.StartDate != null)
+                    element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+                if (element.EndDate != null)
+                    element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
+                return element;
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
         }
         public async Task<List<CategoryDTO>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
         {
@@ -40,35 +54,46 @@ namespace Alborz.ServiceLayer.Service
             foreach (var item in obj)
             {
                 var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(item);
-                element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
-                element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
+                if (item.StartDate != null)
+                    element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
+                if (item.EndDate != null)
+                    element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
                 entity.Add(element);
             }
-            return entity; 
+            return entity;
         }
-        public async Task<List<CategoryDTO>> GetCategoriesBySearchItemAsync(string searchItem,CancellationToken ct = new CancellationToken())
+        public async Task<List<CategoryDTO>> GetCategoriesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
-            var category =await GetAllCategoriesAsync();
-            return category.Where(s => s.Title.Contains(searchItem)|| s.Code.Contains(searchItem)|| s.priority.ToString().Contains(searchItem)).ToList();
+            var category = await GetAllCategoriesAsync();
+            return category.Where(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.priority.ToString().Contains(searchItem)).ToList();
         }
         public async Task<CategoryDTO> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.CategoryRepository.GetAllAsync(x => x.Id == id);
             var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj.FirstOrDefault());
-            element.StartDateString = ((DateTime)(obj.FirstOrDefault().StartDate)).ToPersianDateString();
-            element.EndDateString = ((DateTime)(obj.FirstOrDefault().EndDate)).ToPersianDateString();
+            if (element.StartDate != null)
+                element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+            if (element.EndDate != null)
+                element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
             return element;
         }
         public async Task<CategoryDTO> UpdateCategoryAsync(CategoryDTO entity)
         {
             var obj = BaseMapper<CategoryDTO, CategoryTbl>.Map(entity);
-            obj = await _uow.CategoryRepository.UpdateAsync(obj);
+            if (!string.IsNullOrEmpty(entity.StartDateString))
+                obj.StartDate = entity.StartDateString.ToGeorgianDate();
+            if (!string.IsNullOrEmpty(entity.EndDateString))
+                obj.EndDate = entity.EndDateString.ToGeorgianDate();
             obj.IsActive = true;
+            obj = await _uow.CategoryRepository.UpdateAsync(obj);
             _uow.SaveAllChanges();
             var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(obj);
-            element.StartDateString = ((DateTime)(obj.StartDate)).ToPersianDateString();
-            element.EndDateString = ((DateTime)(obj.EndDate)).ToPersianDateString();
-            return element; 
+            if (element.StartDate != null)
+                element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+            if (element.EndDate != null)
+                element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
+
+            return element;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
@@ -77,6 +102,6 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
-    
+
     }
 }

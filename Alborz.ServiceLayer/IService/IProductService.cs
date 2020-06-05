@@ -1,4 +1,5 @@
-﻿using Alborz.DomainLayer.Entities;
+﻿using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,14 +8,11 @@ namespace Alborz.ServiceLayer.IService
 { 
     public interface IProductService
     {
-        void AddNewProduct(ProductTbl Product);
-        IList<ProductTbl> GetAllProducts();
-        ProductTbl GetProduct(int? id);
-        //  int Delete(int id);
-        bool Delete(int id);
-        Task AddNewProductAsync(ProductTbl Product, CancellationToken ct = new CancellationToken());
-        Task<IList<ProductTbl>> GetAllProductsAsync(CancellationToken ct = new CancellationToken());
-        Task<ProductTbl> GetProductAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<ProductDTO> AddNewProductAsync(ProductDTO Product, CancellationToken ct = new CancellationToken());
+        Task<List<ProductDTO>> GetAllProductsAsync(CancellationToken ct = new CancellationToken());
+        Task<List<ProductDTO>> GetProductsBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken());
+        Task<ProductDTO> GetProductAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<ProductDTO> UpdateProductAsync(ProductDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
     }
 }

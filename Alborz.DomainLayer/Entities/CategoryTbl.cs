@@ -26,8 +26,6 @@ namespace Alborz.DomainLayer.Entities
         public int? priority { get; set; }
         public int? ParentCategoryId { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<CategoryTbl> CategoryTbl1 { get; set; }
-        public virtual CategoryTbl CategoryTbl2 { get; set; }
         public virtual ICollection<ProductTbl> ProductTbls { get; set; }
         public virtual ICollection<PropertyTbl> PropertyTbls { get; set; }
     }

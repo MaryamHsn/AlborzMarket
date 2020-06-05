@@ -1,6 +1,8 @@
 ﻿using Alborz.DataLayer.Context;
+using Alborz.DomainLayer.DTO;
 using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
+using Alborz.ServiceLayer.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,48 +15,52 @@ namespace Alborz.ServiceLayer.Service
     public class PropertyService : IPropertyService
     {
         IUnitOfWork _uow;
-        DateTime _now;
+        DateTime _now; 
         public PropertyService(IUnitOfWork uow)
         {
             _now = DateTime.Now;
             _uow = uow;
         }
-        public void AddNewProperty(PropertyTbl Property)
+        public async Task<PropertyDTO> AddNewPropertyAsync(PropertyDTO Property, CancellationToken ct = new CancellationToken())
         {
-            _uow.PropertyRepository.Add(Property);
+            if (Property == null)
+                throw new ArgumentNullException();
+            var entity = BaseMapper<PropertyDTO, PropertyTbl>.Map(Property);
+            var obj = await _uow.PropertyRepository.AddAsync(entity, ct);
             _uow.SaveAllChanges();
+            var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(obj);
+            return element;
         }
-        public IList<PropertyTbl> GetAllProperties()
-        {
-            return _uow.PropertyRepository.GetAll().ToList();
-        }
-        public PropertyTbl GetProperty(int? id)
-        {
-            return _uow.PropertyRepository.GetAll(x => x.Id == id).SingleOrDefault();
-        }
-        public bool Delete(int id)
-        {
-            PropertyTbl Property = _uow.PropertyRepository.Get(id);
-            var t = _uow.PropertyRepository.SoftDelete(Property);
-            _uow.SaveAllChanges();
-            return t;
-        }
-        ////Async 
-        public async Task AddNewPropertyAsync(PropertyTbl Property, CancellationToken ct = new CancellationToken())
-        {
-            await _uow.PropertyRepository.AddAsync(Property, ct);
-            _uow.SaveAllChanges();
-        }
-        public async Task<IList<PropertyTbl>> GetAllPropertiesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<PropertyDTO>> GetAllPropertysAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PropertyRepository.GetAllAsync(ct);
-            //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
-            return obj.ToList();
+            var entity = new List<PropertyDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(item);
+                entity.Add(element);
+            }
+            return entity;
         }
-        public async Task<PropertyTbl> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken())
+        public async Task<List<PropertyDTO>> GetPropertysBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
+        {
+            var product = await GetAllPropertysAsync();
+            return product.Where(s => s.Title.Contains(searchItem) || s.Title.Contains(searchItem) || s.Categories.Select(x=>x.Title.Contains(searchItem)).FirstOrDefault() || s.Products.Select(x => x.Title.Contains(searchItem)).FirstOrDefault()).ToList();
+        }
+        public async Task<PropertyDTO> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PropertyRepository.GetAllAsync(x => x.Id == id);
-            return obj.FirstOrDefault();
+            var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(obj.FirstOrDefault());
+            return element;
+        }
+        public async Task<PropertyDTO> UpdatePropertyAsync(PropertyDTO entity)
+        {
+            var obj = BaseMapper<PropertyDTO, PropertyTbl>.Map(entity);
+            obj.IsActive = true;
+            obj = await _uow.PropertyRepository.UpdateAsync(obj);
+            _uow.SaveAllChanges();
+            var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(obj);
+            return element;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {

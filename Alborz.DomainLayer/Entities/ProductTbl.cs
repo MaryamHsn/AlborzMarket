@@ -9,12 +9,6 @@ namespace Alborz.DomainLayer.Entities
     [Table("ProductTbl")]
     public partial class ProductTbl : BaseEntity<int>
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public ProductTbl()
-        //{
-        //    ProductTbl1 = new HashSet<ProductTbl>();
-        //    PropertyTbls = new HashSet<PropertyTbl>();
-        //} 
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public int IsBuyable { get; set; }
@@ -25,11 +19,10 @@ namespace Alborz.DomainLayer.Entities
         public int CategoryId { get; set; }
         [StringLength(350)]
         public string Title { get; set; }
+        public int Color { get; set; }
         [StringLength(50)]
         public string Brand { get; set; }
-        public virtual CategoryTbl CategoryTbl { get; set; }
-        public virtual ICollection<ProductTbl> ProductTbl1 { get; set; }
-        public virtual ProductTbl ProductTbl2 { get; set; }
+        public virtual CategoryTbl CategoryTbl { get; set; } 
         public virtual ICollection<PropertyTbl> PropertyTbls { get; set; }
     }
 }

@@ -9,11 +9,6 @@ namespace Alborz.DomainLayer.Entities
     [Table("PropertyTbl")]
     public partial class PropertyTbl : BaseEntity<int>
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public PropertyTbl()
-        //{
-        //    PropertyValueTbls = new HashSet<PropertyValueTbl>();
-        //} 
         [StringLength(150)]
         public string Title { get; set; }
         public int productId { get; set; }

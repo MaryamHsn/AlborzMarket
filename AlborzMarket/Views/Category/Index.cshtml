@@ -1,0 +1,83 @@
+﻿@model Alborz.DomainLayer.DTO.CategoryDTO
+
+
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@*<link href="~/css/css/styles.css" rel="stylesheet" />*@
+@{
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var counter = 1;
+}
+
+<h2 class="style-h2">دسته بندی ها</h2>
+
+<button type="button" onclick="location.href='@Url.Action("create")';return false;" class="btn btn-success">دسته بندی جدید</button>
+
+@using (Html.BeginForm("Index", "Drivers", FormMethod.Get))
+{
+    <p class="search_table">
+        جستجو در جدول: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="جستجو" />
+        <input type="button" value="حذف فیلتر" onclick="location.href='@Url.Action("index")';return false;">
+
+    </p>
+}
+<table id="showList">
+    <tr>
+        <th>
+            ردیف
+        </th>
+        <th>
+            @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.currentFilter})
+        </th>
+        <th class="table-sort-th">
+            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.currentFilter })
+        </th>
+        <th class="table-sort-th">
+            @Html.ActionLink("سر گروه  ", "Index", new { sortOrder = ViewBag.ParentCategory, currentFilter = Model.currentFilter})
+        </th>
+        <th class="table-sort-th">
+            @Html.ActionLink("اولویت", "Index", new { sortOrder = ViewBag.Priority, currentFilter = Model.currentFilter})
+        </th>
+        <th>
+            عملیات
+        </th>
+    </tr>
+
+    @foreach (var item in Model.CategoryList)
+    {
+        <tr>
+            <td>
+                @counter
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Categories.Where(x => x.Id == item.ParentCategoryId).FirstOrDefault().Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.priority)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) 
+                @*@Html.ActionLink("جزئیات", "Details", new { id = item.Id })*@
+                @*@Html.ActionLink("حذف", "Delete", new { id = item.DriverId })*@
+            </td>
+        </tr>
+        counter += 1;
+
+    }
+
+</table>
+<br />
+<p class="showPage">
+    صفحه @(Model.CategoryList.PageCount < Model.CategoryList.PageNumber ? 0 : Model.CategoryList.PageNumber) از @Model.CategoryList.PageCount
+</p>
+
+@Html.PagedListPager(Model.CategoryList, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

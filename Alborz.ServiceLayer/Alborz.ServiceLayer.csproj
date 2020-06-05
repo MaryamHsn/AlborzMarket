@@ -115,6 +115,7 @@
     <Compile Include="CustomUserStore.cs" />
     <Compile Include="CustomUserValidator.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="Enumration\ColorEnum.cs" />
     <Compile Include="Exception\DateTimeFormatException.cs" />
     <Compile Include="Extension\EnumExtension.cs" />
     <Compile Include="IService\IAddressService.cs" />
@@ -192,9 +193,7 @@
       <Name>Alborz.DomainLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enumration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
     <Content Include="Scripts\jquery-3.3.1.intellisense.js" />

@@ -1,4 +1,5 @@
-﻿using Alborz.DomainLayer.Entities;
+﻿using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,14 +8,11 @@ namespace Alborz.ServiceLayer.IService
 { 
     public interface IPropertyService
     {
-        void AddNewProperty(PropertyTbl Property);
-        IList<PropertyTbl> GetAllProperties();
-        PropertyTbl GetProperty(int? id);
-        //  int Delete(int id);
-        bool Delete(int id);
-        Task AddNewPropertyAsync(PropertyTbl Property, CancellationToken ct = new CancellationToken());
-        Task<IList<PropertyTbl>> GetAllPropertiesAsync(CancellationToken ct = new CancellationToken());
-        Task<PropertyTbl> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<PropertyDTO> AddNewPropertyAsync(PropertyDTO Property, CancellationToken ct = new CancellationToken());
+        Task<List<PropertyDTO>> GetAllPropertysAsync(CancellationToken ct = new CancellationToken());
+        Task<List<PropertyDTO>> GetPropertysBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken());
+        Task<PropertyDTO> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<PropertyDTO> UpdatePropertyAsync(PropertyDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
     }
 }

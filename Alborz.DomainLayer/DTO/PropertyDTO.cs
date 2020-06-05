@@ -8,14 +8,10 @@ namespace Alborz.DomainLayer.DTO
 
     public partial class PropertyDTO : BaseDTO<int>
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        //public PropertyTbl()
-        //{
-        //    PropertyValueTbls = new HashSet<PropertyValueTbl>();
-        //} 
-        [StringLength(150)]
         public string Title { get; set; }
         public int productId { get; set; }
-        public int CategoryId { get; set; } 
+        public int CategoryId { get; set; }
+        public IEnumerable<CategoryDTO> Categories{ get; set; }
+        public IEnumerable<ProductDTO> Products{ get; set; }
     }
 }

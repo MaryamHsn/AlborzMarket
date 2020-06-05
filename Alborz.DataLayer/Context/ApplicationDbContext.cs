@@ -112,10 +112,10 @@ namespace Alborz.DataLayer.Context
                 .HasForeignKey(e => e.CartId)
                 .WillCascadeOnDelete(false);
 
-            builder.Entity<CategoryTbl>()
-                .HasMany(e => e.CategoryTbl1)
-                .WithOptional(e => e.CategoryTbl2)
-                .HasForeignKey(e => e.ParentCategoryId);
+            //builder.Entity<CategoryTbl>()
+            //    .HasMany(e => e.CategoryTbl1)
+            //    .WithOptional(e => e.CategoryTbl2)
+            //    .HasForeignKey(e => e.ParentCategoryId);
 
             builder.Entity<CategoryTbl>()
                 .HasMany(e => e.ProductTbls)
@@ -220,11 +220,6 @@ namespace Alborz.DataLayer.Context
             builder.Entity<PaymentTbl>()
                 .Property(e => e.Amount)
                 .HasPrecision(18, 0);
-
-            builder.Entity<ProductTbl>()
-                .HasMany(e => e.ProductTbl1)
-                .WithOptional(e => e.ProductTbl2)
-                .HasForeignKey(e => e.ParentId);
 
             builder.Entity<ProductTbl>()
                 .HasMany(e => e.PropertyTbls)
@@ -488,7 +483,6 @@ namespace Alborz.DataLayer.Context
         {
             base.Database.Initialize(force: true);
         }
-
-        public System.Data.Entity.DbSet<Alborz.DomainLayer.DTO.CategoryDTO> CategoryDTOes { get; set; }
+         
     }
 }
