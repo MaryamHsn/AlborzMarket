@@ -14,14 +14,17 @@
 
 <button type="button" onclick="location.href='@Url.Action("create")';return false;" class="btn btn-success">محصول جدید</button>
 
-@using (Html.BeginForm("Index", "Drivers", FormMethod.Get))
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
-    <p class="search_table">
-        جستجو در جدول: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="جستجو" />
-        <input type="button" value="حذف فیلتر" onclick="location.href='@Url.Action("index")';return false;">
+<p class="search_table">
+    جستجو در جدول:
+    @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)*@
+    @Html.TextBoxFor(model => model.CurrentFilter)
+    @Html.ValidationMessageFor(model => model.CurrentFilter, "", new { @class = "text-danger" })
+    <input type="submit" value="جستجو" />
+    <input type="button" value="حذف فیلتر" onclick="location.href='@Url.Action("index")';return false;">
 
-    </p>
+</p>
 }
 <table id="showList">
     <tr>
@@ -29,22 +32,22 @@
             ردیف
         </th>
         <th>
-            @Html.ActionLink("دسته بندی", "Index", new { sortOrder = ViewBag.Category, currentFilter = Model.currentFilter })
+            @Html.ActionLink("دسته بندی", "Index", new { sortOrder = ViewBag.Category, currentFilter = Model.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.currentFilter })
+            @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.currentFilter })
+            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("برند", "Index", new { sortOrder = ViewBag.Brand, currentFilter = Model.currentFilter })
+            @Html.ActionLink("برند", "Index", new { sortOrder = ViewBag.Brand, currentFilter = Model.CurrentFilter })
         </th> 
         <th class="table-sort-th">
-            @Html.ActionLink("قابل فروش", "Index", new { sortOrder = ViewBag.IsBuyable, currentFilter = Model.currentFilter })
+            @Html.ActionLink("قابل فروش", "Index", new { sortOrder = ViewBag.IsBuyable, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("تعداد", "Index", new { sortOrder = ViewBag.Quantity, currentFilter = Model.currentFilter })
+            @Html.ActionLink("تعداد", "Index", new { sortOrder = ViewBag.Quantity, currentFilter = Model.CurrentFilter })
         </th>
         <th>
             عملیات
@@ -77,7 +80,8 @@
             </td>
             <td>
                 @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("جزئیات", "Details", new { id = item.Id })
+                @Html.ActionLink("جزئیات", "Details", new { id = item.Id }) |
+                @Html.ActionLink("ویژگی ها", "Index","Property",null, new { id = item.Id })
                 @*@Html.ActionLink("حذف", "Delete", new { id = item.DriverId })*@
             </td>
         </tr>

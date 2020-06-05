@@ -14,14 +14,17 @@
 
 <button type="button" onclick="location.href='@Url.Action("create")';return false;" class="btn btn-success">دسته بندی جدید</button>
 
-@using (Html.BeginForm("Index", "Drivers", FormMethod.Get))
+@using (Html.BeginForm("Index", "Category", FormMethod.Get))
 {
-    <p class="search_table">
-        جستجو در جدول: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="جستجو" />
-        <input type="button" value="حذف فیلتر" onclick="location.href='@Url.Action("index")';return false;">
+<p class="search_table">
+    جستجو در جدول: 
+    @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)*@
+    @Html.TextBoxFor(model => model.CurrentFilter)
+    @Html.ValidationMessageFor(model => model.CurrentFilter, "", new { @class = "text-danger" })
+    <input type="submit" value="جستجو" />
+    <input type="button" value="حذف فیلتر" onclick="location.href='@Url.Action("index")';return false;">
 
-    </p>
+</p>
 }
 <table id="showList">
     <tr>
@@ -29,23 +32,23 @@
             ردیف
         </th>
         <th>
-            @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.currentFilter})
+            @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.CurrentFilter})
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.currentFilter })
+            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("سر گروه  ", "Index", new { sortOrder = ViewBag.ParentCategory, currentFilter = Model.currentFilter})
+            @Html.ActionLink("سر گروه  ", "Index", new { sortOrder = ViewBag.ParentCategory, currentFilter = Model.CurrentFilter})
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("اولویت", "Index", new { sortOrder = ViewBag.Priority, currentFilter = Model.currentFilter})
+            @Html.ActionLink("اولویت", "Index", new { sortOrder = ViewBag.Priority, currentFilter = Model.CurrentFilter})
         </th>
         <th>
             عملیات
         </th>
     </tr>
 
-    @foreach (var item in Model.CategoryList)
+    @foreach (var item in Model.CategoryPageList )
     {
         <tr>
             <td>
@@ -76,8 +79,8 @@
 </table>
 <br />
 <p class="showPage">
-    صفحه @(Model.CategoryList.PageCount < Model.CategoryList.PageNumber ? 0 : Model.CategoryList.PageNumber) از @Model.CategoryList.PageCount
+    صفحه @(Model.CategoryPageList .PageCount < Model.CategoryPageList .PageNumber ? 0 : Model.CategoryPageList .PageNumber) از @Model.CategoryPageList .PageCount
 </p>
 
-@Html.PagedListPager(Model.CategoryList, page => Url.Action("Index",
+@Html.PagedListPager(Model.CategoryPageList , page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -19,10 +19,12 @@ namespace Alborz.DomainLayer.Entities
         public int CategoryId { get; set; }
         [StringLength(350)]
         public string Title { get; set; }
-        public int Color { get; set; }
+        public string Color { get; set; }
         [StringLength(50)]
         public string Brand { get; set; }
         public virtual CategoryTbl CategoryTbl { get; set; } 
         public virtual ICollection<PropertyTbl> PropertyTbls { get; set; }
+        public virtual ICollection<ProductDetailTbl> ProductDetailTbls { get; set; }
+
     }
 }

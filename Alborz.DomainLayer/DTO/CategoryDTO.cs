@@ -18,12 +18,12 @@ namespace Alborz.DomainLayer.DTO
         public int? priority { get; set; }
         public int? ParentCategoryId { get; set; }
         public string Description { get; set; }
-        public string sortOrder { get; set; }
-        public string currentFilter { get; set; }
-        public string searchString { get; set; }
-        public int? page { get; set; }
+        public string SortOrder { get; set; }
+        public string CurrentFilter { get; set; }
+        public string SearchString { get; set; }
+        public int? Page { get; set; }
         public IEnumerable<CategoryDTO> Categories{ get; set; }
-        public PagedList.IPagedList<CategoryDTO> CategoryList { get; set; }
+        public PagedList.IPagedList<CategoryDTO> CategoryPageList { get; set; }
 
     }
 }

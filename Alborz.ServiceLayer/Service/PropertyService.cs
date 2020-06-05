@@ -11,11 +11,11 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alborz.ServiceLayer.Service
-{ 
+{
     public class PropertyService : IPropertyService
     {
         IUnitOfWork _uow;
-        DateTime _now; 
+        DateTime _now;
         public PropertyService(IUnitOfWork uow)
         {
             _now = DateTime.Now;
@@ -31,6 +31,17 @@ namespace Alborz.ServiceLayer.Service
             var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(obj);
             return element;
         }
+       public async Task AddAllPropertiesAsync(List<PropertyDTO> Properties, CancellationToken ct = new CancellationToken())
+        {
+            if (Properties == null)
+                throw new ArgumentNullException();
+            foreach (var item in Properties)
+            {
+                var entity = BaseMapper<PropertyDTO, PropertyTbl>.Map(item);
+                await _uow.PropertyRepository.AddAsync(entity, ct);
+            }
+            _uow.SaveAllChanges();  
+        }
         public async Task<List<PropertyDTO>> GetAllPropertysAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PropertyRepository.GetAllAsync(ct);
@@ -42,10 +53,32 @@ namespace Alborz.ServiceLayer.Service
             }
             return entity;
         }
+        public async Task<List<PropertyDTO>> GetAllPropertiesByProductIdAsync(int? productId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PropertyRepository.GetAllAsync(x => x.productId == productId, ct);
+            var entity = new List<PropertyDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(item);
+                entity.Add(element);
+            }
+            return entity;
+        }
+        public async Task<List<PropertyDTO>> GetAllPropertiesByCategoryIdAsync(int categoryId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PropertyRepository.GetAllAsync(x => x.CategoryId == categoryId, ct);
+            var entity = new List<PropertyDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(item);
+                entity.Add(element);
+            }
+            return entity;
+        }
         public async Task<List<PropertyDTO>> GetPropertysBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
             var product = await GetAllPropertysAsync();
-            return product.Where(s => s.Title.Contains(searchItem) || s.Title.Contains(searchItem) || s.Categories.Select(x=>x.Title.Contains(searchItem)).FirstOrDefault() || s.Products.Select(x => x.Title.Contains(searchItem)).FirstOrDefault()).ToList();
+            return product.Where(s => s.Title.Contains(searchItem) || s.Title.Contains(searchItem) || s.Categories.Select(x => x.Title.Contains(searchItem)).FirstOrDefault() || s.Products.Select(x => x.Title.Contains(searchItem)).FirstOrDefault()).ToList();
         }
         public async Task<PropertyDTO> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken())
         {

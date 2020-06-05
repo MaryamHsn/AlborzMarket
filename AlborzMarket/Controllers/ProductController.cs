@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
-using Alborz.ServiceLayer.IService; 
+using Alborz.ServiceLayer.IService;
 using PagedList;
 
 namespace AlborzMarket.Controllers
@@ -36,31 +36,31 @@ namespace AlborzMarket.Controllers
         public async Task<ActionResult> Index(ProductDTO model)
         {
             commonList = new List<ProductDTO>();
-            ViewBag.CurrentSort = model.sortOrder; 
-            ViewBag.Category = model.sortOrder == "category" ? "category_desc" : "category";
-            ViewBag.Title = model.sortOrder == "title" ? "title_desc" : "title";
-            ViewBag.Code = model.sortOrder == "code" ? "code_desc" : "code";
-            ViewBag.Brand = model.sortOrder == "brand" ? "brand_desc" : "brand";
-            ViewBag.IsBuyable = model.sortOrder == "isBuyable" ? "isBuyable_desc" : "isBuyable";
-            ViewBag.Quantity = model.sortOrder == "quantity" ? "quantity_desc" : "quantity";
-            if (model.searchString != null)
+            ViewBag.CurrentSort = model.SortOrder;
+            ViewBag.Category = model.SortOrder == "category" ? "category_desc" : "category";
+            ViewBag.Title = model.SortOrder == "title" ? "title_desc" : "title";
+            ViewBag.Code = model.SortOrder == "code" ? "code_desc" : "code";
+            ViewBag.Brand = model.SortOrder == "brand" ? "brand_desc" : "brand";
+            ViewBag.IsBuyable = model.SortOrder == "isBuyable" ? "isBuyable_desc" : "isBuyable";
+            ViewBag.Quantity = model.SortOrder == "quantity" ? "quantity_desc" : "quantity";
+            if (model.SearchString != null)
             {
-                model.page = 1;
+                model.Page = 1;
             }
             else
             {
-                model.searchString = model.currentFilter;
+                model.SearchString = model.CurrentFilter;
             }
             var product = new List<ProductDTO>();
-            if (!String.IsNullOrEmpty(model.searchString))
+            if (!String.IsNullOrEmpty(model.SearchString))
             {
-                product = await _product.GetProductsBySearchItemAsync(model.searchString);
+                product = await _product.GetProductsBySearchItemAsync(model.SearchString);
             }
             else
             {
                 product = await _product.GetAllProductsAsync();
             }
-            switch (model.sortOrder)
+            switch (model.SortOrder)
             {
                 case "title_desc":
                     product = product.OrderByDescending(s => s.Title).ToList();
@@ -94,178 +94,191 @@ namespace AlborzMarket.Controllers
                     break;
             }
             int pageSize = 10;
-            int pageNumber = (model.page ?? 1); 
+            int pageNumber = (model.Page ?? 1);
             model.Categories = await _category.GetAllCategoriesAsync();
-            model.ProductsPageList= product.ToPagedList(pageNumber, pageSize);
+            model.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
 
-        //public async Task<ActionResult> Details(int? id, CancellationToken ct = default(CancellationToken))
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var entity = await _product.GetProductAsync(id); 
-        //    if (entity == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(entity);
-        //}
+        public async Task<ActionResult> Details(int? id, CancellationToken ct = default(CancellationToken))
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var entity = await _product.GetProductAsync(id);
+            var properties = await _property.GetAllPropertiesByProductIdAsync(id);
+            if (entity == null)
+            {
+                return HttpNotFound();
+            }
+            return View(entity);
+        }
 
         ////[Authorize(Roles = "admin , SuperViser")]
-        //public async Task<ActionResult> Create()
-        //{
-        //    //if (User.Identity.IsAuthenticated)
-        //    //{
-        //    //    if (User.IsInRole("Admin"))
-        //    //    {
-        //    common = new ProductDTO()
-        //    {
-        //        Categories = await _category.GetAllCategoriesAsync()
-        //    };
-        //    return View(common);
-        //    //    }
-        //    //}
-        //    //return RedirectToAction("login", "Account");
-        //}
+        public async Task<ActionResult> Create()
+        {
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+            common = new ProductDTO()
+            {
+                Categories = await _category.GetAllCategoriesAsync()
+            };
+            return View(common);
+            //    }
+            //}
+            //return RedirectToAction("login", "Account");
+        }
 
-        ////[Authorize(Roles = "admin , SuperViser")]
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create(ProductDTO rout)
-        //{
-        //    try
-        //    {
-        //        if (User.Identity.IsAuthenticated)
-        //        {
-        //            if (User.IsInRole("Admin"))
-        //            {
-        //                rout.Categories = await _category.GetAllCategoriesAsync();
-        //                if (ModelState.IsValid)
-        //                {
-        //                    await _product.AddNewProductAsync
-        //                        (rout);
-        //                    _uow.SaveAllChanges();
-        //                    return RedirectToAction("Index");
-        //                }
-        //                return View();
-        //            }
-        //        }
-        //        return RedirectToAction("login", "Account");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //}
+        //[Authorize(Roles = "admin , SuperViser")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(ProductDTO model)
+        {
+            try
+            {
+                //if (User.Identity.IsAuthenticated)
+                //{
+                //    if (User.IsInRole("Admin"))
+                //    {
+                model.Categories = await _category.GetAllCategoriesAsync();
+                if (ModelState.IsValid)
+                {
+                    var product = await _product.AddNewProductAsync(model);
+                    if (model.Properties != null)
+                    {
+                        await _property.AddAllPropertiesAsync(model.Properties.ToList());
+                    }
+                    _uow.SaveAllChanges();
+                    return RedirectToAction("Index");
+                }
+                return View();
+                //    }
+                //}
+                //return RedirectToAction("login", "Account");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
-        ////[Authorize(Roles = "admin , SuperViser")]
-        //public async Task<ActionResult> Edit(int? id)
-        //{
-        //    //if (User.Identity.IsAuthenticated)
-        //    //{
-        //    //    if (User.IsInRole("Admin"))
-        //    //    {
+        //[Authorize(Roles = "admin , SuperViser")]
+        public async Task<ActionResult> Edit(int? id)
+        {
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
 
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var category = await _category.GetCategoryAsync(id);
-        //    if (category == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    category.Categories = await _category.GetAllCategoriesAsync();
-        //    return View(category);
-        //    //        }
-        //    //    }
-        //    //    return RedirectToAction("login", "Account");
-        //}
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = await _product.GetProductAsync(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            product.Categories = await _category.GetAllCategoriesAsync();
+            product.Properties = await _property.GetAllPropertiesByProductIdAsync(id);
+            return View(product);
+            //        }
+            //    }
+            //    return RedirectToAction("login", "Account");
+        }
 
-        ////[Authorize(Roles = "admin , SuperViser")]
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit(ProductDTO category)
-        //{
-        //    try
-        //    {
-        //        //if (User.Identity.IsAuthenticated)
-        //        //{
-        //        //    if (User.IsInRole("Admin"))
-        //        //    {
+        //[Authorize(Roles = "admin , SuperViser")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(ProductDTO product)
+        {
+            try
+            {
+                //if (User.Identity.IsAuthenticated)
+                //{
+                //    if (User.IsInRole("Admin"))
+                //    {
 
-        //        category.Categories = await _product.GetAllCategoriesAsync();
+                product.Categories = await _category.GetAllCategoriesAsync();
+                product.Properties = await _property.GetAllPropertiesByProductIdAsync(product.Id);
 
-        //        if (ModelState.IsValid)
-        //        {
-        //            await _product.UpdateCategoryAsync(category);
-        //        }
-        //        return RedirectToAction("Index");
-        //        // }
-        //        //    }
-        //        //    return RedirectToAction("login", "Account");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return View("Index");
-        //    }
-        //}
+                if (ModelState.IsValid)
+                {
+                    await _product.UpdateProductAsync(product);
+                    if(product.Properties != null)
+                    {
+                        //Add
 
-        ////[Authorize(Roles = "admin , SuperViser")]
-        //public async Task<ActionResult> Delete(int? id)
-        //{
-        //    try
-        //    {
-        //        if (User.Identity.IsAuthenticated)
-        //        {
-        //            if (User.IsInRole("Admin"))
-        //            {
-        //                if (id == null)
-        //                {
-        //                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //                }
-        //                var category = await _product.GetCategoryAsync(id);
-        //                category.Categories = await _product.GetAllCategoriesAsync();
-        //                if (category == null)
-        //                {
-        //                    return HttpNotFound();
-        //                }
-        //                return View(category);
-        //            }
-        //        }
-        //        return RedirectToAction("login", "Account");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return View();
-        //    }
-        //}
+                        //Edit
 
-        ////[Authorize(Roles = "admin , SuperViser")]
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    try
-        //    {
-        //        if (User.Identity.IsAuthenticated)
-        //        {
-        //            if (User.IsInRole("Admin"))
-        //            {
-        //                await _product.DeleteAsync(id);
-        //                return RedirectToAction("Index");
-        //            }
-        //        }
-        //        return RedirectToAction("login", "Account");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //}
+                        //Delete
+                    }
+                }
+                return RedirectToAction("Index");
+                // }
+                //    }
+                //    return RedirectToAction("login", "Account");
+            }
+            catch (Exception)
+            {
+                return View("Index");
+            }
+        }
+
+        //[Authorize(Roles = "admin , SuperViser")]
+        public async Task<ActionResult> Delete(int? id)
+        {
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        if (id == null)
+                        {
+                            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                        }
+                        var product = await _product.GetProductAsync(id); 
+                        if (product == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        return View(product);
+                    }
+                }
+                return RedirectToAction("login", "Account");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        //[Authorize(Roles = "admin , SuperViser")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        await _product.DeleteAsync(id);
+                        return RedirectToAction("Index");
+                    }
+                }
+                return RedirectToAction("login", "Account");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

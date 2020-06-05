@@ -125,6 +125,7 @@
     <Compile Include="IService\ICartItemService.cs" />
     <Compile Include="IService\ICartService.cs" />
     <Compile Include="IService\ICategoryService.cs" />
+    <Compile Include="IService\IColorService.cs" />
     <Compile Include="IService\ICustomerService.cs" />
     <Compile Include="IService\ICustomerTypeService.cs" />
     <Compile Include="IService\ICustomRoleStore.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="IService\IPaymentService.cs" />
     <Compile Include="IService\IPostService.cs" />
     <Compile Include="IService\IPriceService.cs" />
+    <Compile Include="IService\IProductDetailService.cs" />
     <Compile Include="IService\IProductService.cs" />
     <Compile Include="IService\IPropertyService.cs" />
     <Compile Include="IService\IPropertyValueService.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Service\CartItemService.cs" />
     <Compile Include="Service\CartService.cs" />
     <Compile Include="Service\CategoryService.cs" />
+    <Compile Include="Service\ColorService.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\CustomerTypeService.cs" />
     <Compile Include="Service\DiscountService.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\PostService.cs" />
     <Compile Include="Service\PriceService.cs" />
+    <Compile Include="Service\ProductDetailService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\PropertyService.cs" />
     <Compile Include="Service\PropertyValueService.cs" />
@@ -195,7 +199,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Content\PagedList.css" />
     <Content Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

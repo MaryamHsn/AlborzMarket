@@ -22,16 +22,22 @@ namespace Alborz.ServiceLayer.Service
             _now = DateTime.Now;
             _uow = uow;
         }
-        public async Task<ProductDTO> AddNewProductAsync(ProductDTO Product, CancellationToken ct = new CancellationToken())
+        public async Task<ProductDTO> AddNewProductAsync(ProductDTO product, CancellationToken ct = new CancellationToken())
         {
-            if (Product == null)
+            if (product == null)
                 throw new ArgumentNullException();
-            var entity = BaseMapper<ProductDTO, ProductTbl>.Map(Product);
-            if (!string.IsNullOrEmpty(Product.StartDateString))
-                entity.StartDate = Product.StartDateString.ToGeorgianDate();
-            if (!string.IsNullOrEmpty(Product.EndDateString))
-                entity.EndDate = Product.EndDateString.ToGeorgianDate();
-            entity.Color = (int)Product.ColorEnum;
+            var entity = BaseMapper<ProductDTO, ProductTbl>.Map(product);
+            if (!string.IsNullOrEmpty(product.StartDateString))
+                entity.StartDate = product.StartDateString.ToGeorgianDate();
+            if (!string.IsNullOrEmpty(product.EndDateString))
+                entity.EndDate = product.EndDateString.ToGeorgianDate();
+            if (product.ColorEnumList != null)
+            {
+                foreach (var item in product.ColorEnumList)
+                {
+                    entity.Color += Convert.ToString((int)item) + ",";
+                } 
+            } 
             var obj = await _uow.ProductRepository.AddAsync(entity, ct);
             _uow.SaveAllChanges();
             var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj);
@@ -39,7 +45,14 @@ namespace Alborz.ServiceLayer.Service
                 element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
             if (element.EndDate != null)
                 element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            element.ColorEnum = Product.ColorEnum;
+            if (!string.IsNullOrEmpty(element.Color))
+            {
+                foreach (var item in element.Color.Split(new Char[] { ',' }))
+                {
+                    ColorEnum colorEnum = (ColorEnum)Enum.ToObject(typeof(ColorEnum), item);
+                    element.ColorEnumList.Add(colorEnum);
+                }
+            }
             return element;
         }
         public async Task<List<ProductDTO>> GetAllProductsAsync(CancellationToken ct = new CancellationToken())
@@ -53,8 +66,14 @@ namespace Alborz.ServiceLayer.Service
                     element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
                 if (item.EndDate != null)
                     element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
-                element.ColorEnum= (ColorEnum)Enum.ToObject(typeof(ColorEnum), item.Color);
-                entity.Add(element);
+                if (!string.IsNullOrEmpty(element.Color))
+                {
+                    foreach (var clr in element.Color.Split(new Char[] { ',' }))
+                    {
+                        ColorEnum colorEnum = (ColorEnum)Enum.ToObject(typeof(ColorEnum), clr);
+                        element.ColorEnumList.Add(colorEnum);
+                    }
+                }
             }
             return entity;
         }
@@ -71,7 +90,14 @@ namespace Alborz.ServiceLayer.Service
                 element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
             if (element.EndDate != null)
                 element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            element.ColorEnum = (ColorEnum)Enum.ToObject(typeof(ColorEnum), obj.FirstOrDefault().Color);
+            if (!string.IsNullOrEmpty(element.Color))
+            {
+                foreach (var clr in element.Color.Split(new Char[] { ',' }))
+                {
+                    ColorEnum colorEnum = (ColorEnum)Enum.ToObject(typeof(ColorEnum), clr);
+                    element.ColorEnumList.Add(colorEnum);
+                }
+            }
             return element;
         }
         public async Task<ProductDTO> UpdateProductAsync(ProductDTO entity)
@@ -89,7 +115,14 @@ namespace Alborz.ServiceLayer.Service
                 element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
             if (element.EndDate != null)
                 element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            element.ColorEnum = entity.ColorEnum;
+            if (!string.IsNullOrEmpty(element.Color))
+            {
+                foreach (var clr in element.Color.Split(new Char[] { ',' }))
+                {
+                    ColorEnum colorEnum = (ColorEnum)Enum.ToObject(typeof(ColorEnum), clr);
+                    element.ColorEnumList.Add(colorEnum);
+                }
+            }
             return element;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())

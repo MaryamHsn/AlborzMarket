@@ -68,6 +68,7 @@
     <Compile Include="DTO\CartDTO.cs" />
     <Compile Include="DTO\CartItemDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\ColorDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
     <Compile Include="DTO\CustomerTypedto.cs" />
     <Compile Include="DTO\DiscountDTO.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="DTO\PaymentDTO.cs" />
     <Compile Include="DTO\PostDTO.cs" />
     <Compile Include="DTO\PriceDTO.cs" />
+    <Compile Include="DTO\ProductDetailDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\PropertyDTO.cs" />
     <Compile Include="DTO\PropertyValueDTO.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Entities\CartItemTbl.cs" />
     <Compile Include="Entities\CartTbl.cs" />
     <Compile Include="Entities\CategoryTbl.cs" />
+    <Compile Include="Entities\ColorTbl.cs" />
     <Compile Include="Entities\CustomerTbl.cs" />
     <Compile Include="Entities\CustomerTypeTbl.cs" />
     <Compile Include="Entities\CustomRole.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Entities\PaymentTbl.cs" />
     <Compile Include="Entities\PostTbl.cs" />
     <Compile Include="Entities\PriceTbl.cs" />
+    <Compile Include="Entities\ProductDetailTbl.cs" />
     <Compile Include="Entities\ProductTbl.cs" />
     <Compile Include="Entities\PropertyTbl.cs" />
     <Compile Include="Entities\PropertyValueTbl.cs" />
@@ -124,9 +128,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

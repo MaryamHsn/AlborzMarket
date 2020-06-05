@@ -33,31 +33,31 @@ namespace AlborzMarket.Controllers
         public async Task<ActionResult> Index(CategoryDTO model)
         {
             commonList = new List<CategoryDTO>();
-            ViewBag.CurrentSort = model.sortOrder;
-            ViewBag.Title = model.sortOrder == "code" ? "title_desc" : "title";
-            ViewBag.Code = model.sortOrder == "code" ? "code_desc" : "code";
-            ViewBag.Priority = model.sortOrder == "priority" ? "priority_desc" : "priority";
-            ViewBag.ParentCategory = model.sortOrder == "parentCategory" ? "parentCategory_desc" : "parentCategory";
+            ViewBag.CurrentSort = model.SortOrder;
+            ViewBag.Title = model.SortOrder == "code" ? "title_desc" : "title";
+            ViewBag.Code = model.SortOrder == "code" ? "code_desc" : "code";
+            ViewBag.Priority = model.SortOrder == "priority" ? "priority_desc" : "priority";
+            ViewBag.ParentCategory = model.SortOrder == "parentCategory" ? "parentCategory_desc" : "parentCategory";
 
-            if (model.searchString != null)
+            if (model.SearchString != null)
             {
-                model.page = 1;
+                model.Page = 1;
             }
             else
             {
-                model.searchString = model.currentFilter;
+                model.SearchString = model.CurrentFilter;
             }
             //ViewBag.CurrentFilter = model.searchString;
             var category = new List<CategoryDTO>();
-            if (!String.IsNullOrEmpty(model.searchString))
+            if (!String.IsNullOrEmpty(model.SearchString))
             {
-                category = await _category.GetCategoriesBySearchItemAsync(model.searchString);
+                category = await _category.GetCategoriesBySearchItemAsync(model.SearchString);
             }
             else
             {
                 category = await _category.GetAllCategoriesAsync();
             }
-            switch (model.sortOrder)
+            switch (model.SortOrder)
             {
                 case "title_desc":
                     category = category.OrderByDescending(s => s.Title).ToList();
@@ -85,7 +85,7 @@ namespace AlborzMarket.Controllers
                     break;
             }
             int pageSize = 100;
-            int pageNumber = (model.page ?? 1);
+            int pageNumber = (model.Page ?? 1);
             //foreach (var item in category)
             //{
             //    var element = BaseMapper<CategoryViewModel, CategoryTbl>.Map(item);

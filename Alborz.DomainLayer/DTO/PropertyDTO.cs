@@ -9,6 +9,7 @@ namespace Alborz.DomainLayer.DTO
     public partial class PropertyDTO : BaseDTO<int>
     {
         public string Title { get; set; }
+        public string Value { get; set; }
         public int productId { get; set; }
         public int CategoryId { get; set; }
         public IEnumerable<CategoryDTO> Categories{ get; set; }

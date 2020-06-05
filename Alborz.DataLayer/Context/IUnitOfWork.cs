@@ -15,6 +15,7 @@ namespace Alborz.DataLayer.Context
         IRepository<CartItemTbl, int> CartItemRepository { get; }
         IRepository<CartTbl, int> CartRepository { get; }
         IRepository<CategoryTbl, int> CategoryRepository { get; }
+        IRepository<ColorTbl, int> ColorRepository { get; }
         IRepository<ImageTbl, int> ImageRepository { get; }
         IRepository<PostTbl, int> PostRepository { get; }
         IRepository<CustomerTbl, int> CustomerRepository { get; }
@@ -32,6 +33,7 @@ namespace Alborz.DataLayer.Context
         IRepository<OrderTbl, int> OrderRepository { get; }
         IRepository<PaymentTbl, int> PaymentRepository { get; }
         IRepository<PriceTbl, int> PriceRepository { get; }
+        IRepository<ProductDetailTbl, int> ProductDetailRepository { get; }
         IRepository<ProductTbl, int> ProductRepository { get; }
         IRepository<PropertyTbl, int> PropertyRepository { get; }
         IRepository<PropertyValueTbl, int> PropertyValueRepository { get; }

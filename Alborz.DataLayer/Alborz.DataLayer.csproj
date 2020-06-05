@@ -67,6 +67,7 @@
     <Compile Include="IRepository\ICartItemRepository.cs" />
     <Compile Include="IRepository\ICartRepository.cs" />
     <Compile Include="IRepository\ICategoryRepository.cs" />
+    <Compile Include="IRepository\IColorRepository.cs" />
     <Compile Include="IRepository\ICustomerRepository.cs" />
     <Compile Include="IRepository\ICustomerTypeRepository.cs" />
     <Compile Include="IRepository\IDiscountRepository.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="IRepository\IPaymentRepository.cs" />
     <Compile Include="IRepository\IPostRepository.cs" />
     <Compile Include="IRepository\IPriceRepository.cs" />
+    <Compile Include="IRepository\IProductDetailRepository.cs" />
     <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\IPropertyRepository.cs" />
     <Compile Include="IRepository\IPropertyValueRepository.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Repository\CartItemRepository.cs" />
     <Compile Include="Repository\CartRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\ColorRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\CustomerTypeRepository.cs" />
     <Compile Include="Repository\DiscountRepository.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="Repository\PaymentRepository.cs" />
     <Compile Include="Repository\PostRepository.cs" />
     <Compile Include="Repository\PriceRepository.cs" />
+    <Compile Include="Repository\ProductDetailRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\PropertyRepository.cs" />
     <Compile Include="Repository\PropertyValueRepository.cs" />
@@ -162,9 +166,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,7 @@ namespace Alborz.DomainLayer.Entities
     {
         [StringLength(150)]
         public string Title { get; set; }
+        public string Value { get; set; }
         public int productId { get; set; }
         public int CategoryId { get; set; }
         public virtual CategoryTbl CategoryTbl { get; set; }

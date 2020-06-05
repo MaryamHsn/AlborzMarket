@@ -25,6 +25,8 @@ namespace Alborz.DataLayer.Context
         }
 
         #region Dbset
+        public virtual DbSet<ColorTbl> ColorTbls { get; set; }
+        public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
         public virtual DbSet<AddressTbl> AddressTbls { get; set; }
         public virtual DbSet<CartItemTbl> CartItemTbls { get; set; }
         public virtual DbSet<CartTbl> CartTbls { get; set; }
@@ -226,6 +228,11 @@ namespace Alborz.DataLayer.Context
                 .WithRequired(e => e.ProductTbl)
                 .HasForeignKey(e => e.productId)
                 .WillCascadeOnDelete(false);
+
+            builder.Entity<ProductTbl>()
+               .HasMany(e => e.ProductDetailTbls)
+               .WithOptional(e => e.ProductTbl)
+               .HasForeignKey(e => e.ProductId);
 
             builder.Entity<PropertyTbl>()
                 .HasMany(e => e.PropertyValueTbls)
