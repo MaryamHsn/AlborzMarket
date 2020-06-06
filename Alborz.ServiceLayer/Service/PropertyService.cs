@@ -95,6 +95,16 @@ namespace Alborz.ServiceLayer.Service
             var element = BaseMapper<PropertyDTO, PropertyTbl>.Map(obj);
             return element;
         }
+         public async Task UpdateAllPropertiesAsync(List<PropertyDTO> entities)
+        {
+            foreach (var entity in entities)
+            {
+                var obj = BaseMapper<PropertyDTO, PropertyTbl>.Map(entity);
+                obj.IsActive = true;
+                obj = await _uow.PropertyRepository.UpdateAsync(obj);
+            }
+            _uow.SaveAllChanges(); 
+        }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
             var Property = await _uow.PropertyRepository.GetAsync(id, ct);

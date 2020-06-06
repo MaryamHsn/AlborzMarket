@@ -16,6 +16,7 @@ namespace Alborz.ServiceLayer.IService
         Task<List<PropertyDTO>> GetPropertysBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken());
         Task<PropertyDTO> GetPropertyAsync(int? id, CancellationToken ct = new CancellationToken());
         Task<PropertyDTO> UpdatePropertyAsync(PropertyDTO entity);
+        Task UpdateAllPropertiesAsync(List<PropertyDTO> entities);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
         Task DeleteByProductIdAsync(int productId, CancellationToken ct = new CancellationToken());
         Task DeleteByCategoryIdAsync(int categoryId, CancellationToken ct = new CancellationToken());

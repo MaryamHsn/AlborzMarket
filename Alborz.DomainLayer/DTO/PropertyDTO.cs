@@ -10,9 +10,13 @@ namespace Alborz.DomainLayer.DTO
     {
         public string Title { get; set; }
         public string Value { get; set; }
-        public int productId { get; set; }
+        public int ProductId { get; set; }
         public int CategoryId { get; set; }
+        public int? Page { get; set; }
+        public IEnumerable<PropertyDTO> Properties{ get; set; }
         public IEnumerable<CategoryDTO> Categories{ get; set; }
         public IEnumerable<ProductDTO> Products{ get; set; }
+        public PagedList.IPagedList<PropertyDTO> PropertiesList{ get; set; }
+
     }
 }

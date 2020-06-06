@@ -1,63 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Alborz.DataLayer.Context;
+﻿using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
 using Alborz.ServiceLayer.IService;
 using PagedList;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AlborzMarket.Controllers
 {
-    public class ProductDetailController : Controller
+    public class PropertyController : Controller
     {
-        readonly IProductDetailService _productDetail;
-        readonly IProductService _product;
-        readonly ICategoryService _category; 
-        readonly IUnitOfWork _uow;
-        private ProductDetailDTO common;
-        private List<ProductDetailDTO> commonList;
 
-        public ProductDetailController(IUnitOfWork uow, IProductDetailService productDetail, ICategoryService category, IProductService product)
+        readonly IPropertyService _property;
+        readonly IProductService _product;
+        readonly ICategoryService _category;
+        readonly IUnitOfWork _uow;
+        private PropertyDTO common;
+        private List<PropertyDTO> commonList;
+
+        public PropertyController(IUnitOfWork uow, IPropertyService property, ICategoryService category, IProductService product)
         {
             _uow = uow;
             _product = product;
             _category = category;
-            _productDetail = productDetail;
+            _property = property;
         }
         [HttpGet]
-        public async Task<ActionResult> ProductDetailListByProductId(ProductDetailDTO model)
+        public async Task<ActionResult> PropertyListByProductId(PropertyDTO model)
         {
-            var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync((int)model.ProductId);
-            ViewBag.CurrentSort = model.SortOrder; 
-            ViewBag.Quantity = model.SortOrder == "quantity" ? "quantity_desc" : "quantity";
-
-            switch (model.SortOrder)
-            {
-                case "quantity":
-                    productDetail = productDetail.OrderBy(s => s.Quantity).ToList();
-                    break;
-                case "quantity_desc":
-                    productDetail = productDetail.OrderByDescending(s => s.Quantity).ToList();
-                    break;
-                default:
-                    productDetail = productDetail.OrderBy(s => s.Id).ToList();
-                    break;
-            }
+            var properties = await _property.GetAllPropertiesByProductIdAsync(model.ProductId); 
             int pageSize = 30;
-            int pageNumber = (model.Page ?? 1); 
-            model.ProductDetailsPageList = productDetail.ToPagedList(pageNumber, pageSize);
+            int pageNumber = (model.Page ?? 1);
+            model.PropertiesList = properties.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
 
         ////[Authorize(Roles = "admin , SuperViser")]
-        public  ActionResult Create()
+        public ActionResult CreatePropertyForProduct()
         {
             //if (User.Identity.IsAuthenticated)
             //{
@@ -73,7 +56,7 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductDetailDTO model)
+        public async Task<ActionResult> CreatePropertyForProduct(PropertyDTO model)
         {
             try
             {
@@ -83,11 +66,55 @@ namespace AlborzMarket.Controllers
                 //    { 
                 if (ModelState.IsValid)
                 {
-                    if (model.ProductId == null)
+                    if (model.ProductId == 0)
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    } 
-                     await _productDetail.AddAllProductDetailsAsync(model.ProductDetails);
+                    }
+                    await _property.AddAllPropertiesAsync(model.Properties.ToList());
+                    _uow.SaveAllChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(model);
+                //    }
+                //}
+                //return RedirectToAction("login", "Account");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        public ActionResult CreatePropertyForCategory()
+        {
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (User.IsInRole("Admin"))
+            //    {
+
+            return View();
+            //    }
+            //}
+            //return RedirectToAction("login", "Account");
+        }
+
+        //[Authorize(Roles = "admin , SuperViser")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreatePropertyForCategory(PropertyDTO model)
+        {
+            try
+            {
+                //if (User.Identity.IsAuthenticated)
+                //{
+                //    if (User.IsInRole("Admin"))
+                //    { 
+                if (ModelState.IsValid)
+                {
+                    if (model.CategoryId == 0)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    await _property.AddAllPropertiesAsync(model.Properties.ToList());
                     _uow.SaveAllChanges();
                     return RedirectToAction("Index");
                 }
@@ -114,12 +141,12 @@ namespace AlborzMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var productDetail = await _productDetail.GetProductDetailAsync(id);
-            if (productDetail == null)
+            var property = await _property.GetPropertyAsync(id);
+            if (property == null)
             {
                 return HttpNotFound();
-            } 
-            return View(productDetail);
+            }
+            return View(property);
             //        }
             //    }
             //    return RedirectToAction("login", "Account");
@@ -127,7 +154,7 @@ namespace AlborzMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductDetailDTO productDetail)
+        public async Task<ActionResult> Edit(PropertyDTO property)
         {
             try
             {
@@ -137,7 +164,7 @@ namespace AlborzMarket.Controllers
                 //    {
                 if (ModelState.IsValid)
                 {
-                    await _productDetail.UpdateProductDetailAsync(productDetail);
+                    await _property.UpdatePropertyAsync(property);
                 }
                 return RedirectToAction("Index");
                 // }
@@ -161,12 +188,12 @@ namespace AlborzMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync(productId);
-            if (productDetail == null)
+            var property = await _property.GetAllPropertiesByProductIdAsync(productId);
+            if (property == null)
             {
                 return HttpNotFound();
             }
-            return View(productDetail);
+            return View(property);
             //        }
             //    }
             //    return RedirectToAction("login", "Account");
@@ -175,7 +202,7 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAll(List<ProductDetailDTO> productDetails)
+        public async Task<ActionResult> EditAll(List<PropertyDTO> propertys)
         {
             try
             {
@@ -185,7 +212,7 @@ namespace AlborzMarket.Controllers
                 //    {
                 if (ModelState.IsValid)
                 {
-                    await _productDetail.UpdateAllProductDetailAsync(productDetails);
+                    await _property.UpdateAllPropertiesAsync(propertys);
                 }
                 return RedirectToAction("Index");
                 // }
@@ -211,12 +238,12 @@ namespace AlborzMarket.Controllers
                         {
                             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                         }
-                        var productDetail = await _productDetail.GetProductDetailAsync(id);
-                        if (productDetail == null)
+                        var property = await _property.GetPropertyAsync(id);
+                        if (property == null)
                         {
                             return HttpNotFound();
                         }
-                        return View(productDetail);
+                        return View(property);
                     }
                 }
                 return RedirectToAction("login", "Account");
@@ -238,7 +265,7 @@ namespace AlborzMarket.Controllers
                 {
                     if (User.IsInRole("Admin"))
                     {
-                        await _productDetail.DeleteAsync(id);
+                        await _property.DeleteAsync(id);
                         return RedirectToAction("Index");
                     }
                 }
@@ -261,7 +288,7 @@ namespace AlborzMarket.Controllers
                 {
                     if (User.IsInRole("Admin"))
                     {
-                        await _productDetail.DeleteByProductIdAsync(productId);
+                        await _property.DeleteByProductIdAsync(productId);
                         return RedirectToAction("Index");
                     }
                 }
