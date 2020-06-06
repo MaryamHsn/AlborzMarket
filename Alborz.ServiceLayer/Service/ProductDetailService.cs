@@ -39,6 +39,25 @@ namespace Alborz.ServiceLayer.Service
                 throw;
             }
         }
+        public async Task AddAllProductDetailsAsync(IList<ProductDetailDTO> productDetails, CancellationToken ct = new CancellationToken())
+        {
+            try
+            {
+                if (productDetails == null)
+                    throw new ArgumentNullException();
+                foreach (var item in productDetails)
+                {
+                    var entity = BaseMapper<ProductDetailDTO, ProductDetailTbl>.Map(item);
+                    var obj = await _uow.ProductDetailRepository.AddAsync(entity, ct);
+                }
+                _uow.SaveAllChanges(); 
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
+        }
         public async Task<List<ProductDetailDTO>> GetAllProductDetailsAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.ProductDetailRepository.GetAllAsync(ct);
@@ -75,6 +94,17 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             var element = BaseMapper<ProductDetailDTO, ProductDetailTbl>.Map(obj);
             return element;
+        }
+        public async Task UpdateAllProductDetailAsync(List<ProductDetailDTO> entity)
+        {
+            foreach (var item in entity)
+            {
+                var obj = BaseMapper<ProductDetailDTO, ProductDetailTbl>.Map(item);
+                obj.IsActive = true;
+                obj = await _uow.ProductDetailRepository.UpdateAsync(obj);
+            }
+            
+            _uow.SaveAllChanges(); 
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {

@@ -102,5 +102,23 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+        public async Task DeleteByProductIdAsync(int productId, CancellationToken ct = new CancellationToken())
+        {
+            var props = await _uow.PropertyRepository.GetAllAsync(x=>x.productId==productId, ct);
+            foreach (var item in props)
+            {
+                await _uow.PropertyRepository.SoftDeleteAsync(item);
+            }
+            _uow.SaveAllChanges();
+        }
+        public async Task DeleteByCategoryIdAsync(int categoryId, CancellationToken ct = new CancellationToken())
+        {
+            var props = await _uow.PropertyRepository.GetAllAsync(x=>x.CategoryId==categoryId, ct);
+            foreach (var item in props)
+            {
+                await _uow.PropertyRepository.SoftDeleteAsync(item);
+            }
+            _uow.SaveAllChanges();
+        }
     }
 }

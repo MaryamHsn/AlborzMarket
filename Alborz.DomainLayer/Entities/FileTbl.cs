@@ -10,6 +10,7 @@ namespace Alborz.DomainLayer.Entities
     [Table("FileTbl")]
     public partial class FileTbl : BaseEntity<int>
     {
+        public Guid IdFile { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
         public string Subject { get; set; }
@@ -19,5 +20,7 @@ namespace Alborz.DomainLayer.Entities
         public int? CategoryId { get; set; }
         public int? ProductId { get; set; }
         public int? PostId { get; set; }
+        public int? EntityEnumId { get; set; }
+
     }
 }
