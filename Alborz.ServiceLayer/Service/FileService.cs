@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Alborz.ServiceLayer.Service
 {
-    public class ImageService : IImageService
+    public class FileService : IFileService
     {
         IUnitOfWork _uow;
         DateTime _now;
-        public ImageService(IUnitOfWork uow)
+        public FileService(IUnitOfWork uow)
         {
             _now = DateTime.Now;
             _uow = uow;

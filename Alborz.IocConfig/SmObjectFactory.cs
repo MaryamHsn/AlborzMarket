@@ -159,9 +159,9 @@ namespace Alborz.IocConfig
                          .HybridHttpOrThreadLocalScoped()
                          .Use<CategoryRepository>();
 
-                ioc.For<IImageRepository>()
+                ioc.For<IFileRepository>()
                    .HybridHttpOrThreadLocalScoped()
-                   .Use<ImageRepository>();
+                   .Use<FileRepository>();
 
                 ioc.For<IPostRepository>()
                    .HybridHttpOrThreadLocalScoped()
@@ -262,7 +262,7 @@ namespace Alborz.IocConfig
                 ioc.For(typeof(ICartItemRepository)).Use(typeof(CartItemRepository));
                 ioc.For(typeof(ICartRepository)).Use(typeof(CartRepository));
                 ioc.For(typeof(ICategoryRepository)).Use(typeof(CategoryRepository));
-                ioc.For(typeof(IImageRepository)).Use(typeof(ImageRepository));
+                ioc.For(typeof(IFileRepository)).Use(typeof(FileRepository));
                 ioc.For(typeof(IPostRepository)).Use(typeof(PostRepository));
                 ioc.For(typeof(ICustomerRepository)).Use(typeof(CustomerRepository));
                 ioc.For(typeof(ICustomerTypeRepository)).Use(typeof(CustomerTypeRepository));
@@ -300,9 +300,9 @@ namespace Alborz.IocConfig
                          .HybridHttpOrThreadLocalScoped()
                          .Use<CategoryService>();
 
-                ioc.For<IImageService>()
+                ioc.For<IFileService>()
                  .HybridHttpOrThreadLocalScoped()
-                 .Use<ImageService>();
+                 .Use<FileService>();
 
                 ioc.For<IPostService>()
                  .HybridHttpOrThreadLocalScoped()

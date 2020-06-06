@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Alborz.DomainLayer.DTO
 {
-    public partial class ImageDTO: BaseDTO<int>
+    public partial class FileDTO: BaseDTO<int>
     {
         public string Title { get; set; }
         public string Url { get; set; }

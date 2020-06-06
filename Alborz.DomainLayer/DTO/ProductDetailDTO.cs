@@ -10,6 +10,10 @@ namespace Alborz.DomainLayer.DTO
     {
         public int? ColorId { get; set; }
         public int? ProductId { get; set; }
-        public int? Quantity { get; set; } 
+        public int? Quantity { get; set; }
+        public string ProductTitle { get; set; }
+        public string ProductBrand { get; set; }
+        public IEnumerable<ColorDTO> Colors{ get; set; }
+
     }
 }

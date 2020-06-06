@@ -31,7 +31,7 @@ namespace Alborz.DataLayer.Context
         public virtual DbSet<CartItemTbl> CartItemTbls { get; set; }
         public virtual DbSet<CartTbl> CartTbls { get; set; }
         public virtual DbSet<CategoryTbl> CategoryTbls { get; set; }
-        public virtual DbSet<ImageTbl> ImageTbls { get; set; }
+        public virtual DbSet<FileTbl> FileTbls { get; set; }
         public virtual DbSet<PostTbl> PostTbls{ get; set; }
         public virtual DbSet<CustomerTbl> CustomerTbls { get; set; }
         public virtual DbSet<CustomerTypeTbl> CustomerTypeTbls { get; set; }
@@ -280,13 +280,13 @@ namespace Alborz.DataLayer.Context
                     (_categorysRepository = new BaseRepository<CategoryTbl, int>(this));
             }
         }
-        private BaseRepository<ImageTbl, int> _imageRepository;
-        public IRepository<ImageTbl, int> ImageRepository
+        private BaseRepository<FileTbl, int> _fileRepository;
+        public IRepository<FileTbl, int> FileRepository
         {
             get
             {
-                return _imageRepository ??
-                    (_imageRepository = new BaseRepository<ImageTbl, int>(this));
+                return _fileRepository ??
+                    (_fileRepository = new BaseRepository<FileTbl, int>(this));
             }
         }
         private BaseRepository<PostTbl, int> _postsRepository;

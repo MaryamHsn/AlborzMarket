@@ -16,7 +16,7 @@ namespace Alborz.DataLayer.Context
         IRepository<CartTbl, int> CartRepository { get; }
         IRepository<CategoryTbl, int> CategoryRepository { get; }
         IRepository<ColorTbl, int> ColorRepository { get; }
-        IRepository<ImageTbl, int> ImageRepository { get; }
+        IRepository<FileTbl, int> FileRepository { get; }
         IRepository<PostTbl, int> PostRepository { get; }
         IRepository<CustomerTbl, int> CustomerRepository { get; }
         IRepository<CustomerTypeTbl, int> CustomerTypeRepository { get; }

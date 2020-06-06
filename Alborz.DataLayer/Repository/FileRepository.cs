@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Alborz.DataLayer.Repository
 {
-    public class ImageRepository : BaseRepository<ImageTbl, int>, IImageRepository
+    public class FileRepository : BaseRepository<FileTbl, int>, IFileRepository
     {
-        public ImageRepository(ApplicationDbContext contextFactory) : base(contextFactory)
+        public FileRepository(ApplicationDbContext contextFactory) : base(contextFactory)
         {
         }
     } 

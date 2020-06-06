@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Alborz.DomainLayer.Entities
 {
-    [Table("ImagTbl")]
-    public partial class ImageTbl : BaseEntity<int>
+    [Table("FileTbl")]
+    public partial class FileTbl : BaseEntity<int>
     {
         public string Title { get; set; }
         public string Url { get; set; }

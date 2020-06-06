@@ -72,7 +72,7 @@
     <Compile Include="IRepository\ICustomerTypeRepository.cs" />
     <Compile Include="IRepository\IDiscountRepository.cs" />
     <Compile Include="IRepository\IErrorRepository.cs" />
-    <Compile Include="IRepository\IImageRepository.cs" />
+    <Compile Include="IRepository\IFileRepository.cs" />
     <Compile Include="IRepository\IInternetPaymentGetwayRepository.cs" />
     <Compile Include="IRepository\IInvoiceProcessHistoryRepository.cs" />
     <Compile Include="IRepository\IInvoiceProcessRepository.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="Repository\CustomerTypeRepository.cs" />
     <Compile Include="Repository\DiscountRepository.cs" />
     <Compile Include="Repository\ErrorRepository.cs" />
-    <Compile Include="Repository\ImageRepository.cs" />
+    <Compile Include="Repository\FileRepository.cs" />
     <Compile Include="Repository\InternetPaymentGetwayRepository.cs" />
     <Compile Include="Repository\InvoiceProcessHistoryRepository.cs" />
     <Compile Include="Repository\InvoiceProcessRepository.cs" />

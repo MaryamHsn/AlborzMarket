@@ -73,7 +73,7 @@
     <Compile Include="DTO\CustomerTypedto.cs" />
     <Compile Include="DTO\DiscountDTO.cs" />
     <Compile Include="DTO\ErrorDTO.cs" />
-    <Compile Include="DTO\ImagDTO.cs" />
+    <Compile Include="DTO\FileDTO.cs" />
     <Compile Include="DTO\InternetPaymentGetwayDTO.cs" />
     <Compile Include="DTO\InvoiceDTO.cs" />
     <Compile Include="DTO\InvoiceProcessDTO.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Entities\CustomUserRole.cs" />
     <Compile Include="Entities\DiscountTbl.cs" />
     <Compile Include="Entities\ErrorTbl.cs" />
-    <Compile Include="Entities\ImagTbl.cs" />
+    <Compile Include="Entities\FileTbl.cs" />
     <Compile Include="Entities\InternetPaymentGetwayTbl.cs" />
     <Compile Include="Entities\InvoiceProcessHistoryTbl.cs" />
     <Compile Include="Entities\InvoiceProcessTbl.cs" />

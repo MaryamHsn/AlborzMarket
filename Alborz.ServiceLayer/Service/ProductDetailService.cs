@@ -1,6 +1,7 @@
 ﻿using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
 using Alborz.DomainLayer.Entities;
+using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Mapper;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,6 @@ using System.Threading.Tasks;
 
 namespace Alborz.ServiceLayer.Service
 {
-    class ProductDetailService
-    {
-    }
     public class ProductDetailService : IProductDetailService
     {
         IUnitOfWork _uow;

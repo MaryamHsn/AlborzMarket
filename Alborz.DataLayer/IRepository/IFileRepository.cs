@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alborz.DataLayer.IRepository
 {
-    public interface IImageRepository : IRepository<ImageTbl, int>
+    public interface IFileRepository : IRepository<FileTbl, int>
     {
     } 
 }

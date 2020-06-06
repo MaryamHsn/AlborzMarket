@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Alborz.ServiceLayer.IService
 {
-    public interface IImageService
+    public interface IFileService
     {
         void AddNewImage(ImageTbl Image);
         IList<ImageTbl> GetAllImages();
