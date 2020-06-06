@@ -18,9 +18,7 @@
         public int IsBuyable { get; set; }
         public int Quantity { get; set; }
         public string Code { get; set; }
-        public string Color { get; set; }
-        //public List<ColorEnum> ColorEnumList{ get; set; }
-        public int? ParentId { get; set; }
+        //public string Color { get; set; }
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Brand { get; set; }
@@ -28,7 +26,8 @@
         public string CurrentFilter { get; set; }
         public string SearchString { get; set; }
         public int? Page { get; set; }
-        public IEnumerable<ProductDetailDTO> ProductDetails{ get; set; }
+        public IList<ProductDetailDTO> ProductDetails{ get; set; }
+        public IEnumerable<ColorDTO> Colors{ get; set; }
         public IEnumerable<PropertyDTO> Properties{ get; set; }
         public IEnumerable<CategoryDTO> Categories { get; set; }
         public PagedList.IPagedList<ProductDTO> ProductsPageList { get; set; }

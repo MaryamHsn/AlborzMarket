@@ -1,4 +1,5 @@
-﻿using Alborz.DomainLayer.Entities;
+﻿using Alborz.DomainLayer.DTO;
+using Alborz.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,11 @@ namespace Alborz.ServiceLayer.IService
 {
     public interface IFileService
     {
-        void AddNewImage(ImageTbl Image);
-        IList<ImageTbl> GetAllImages();
-        ImageTbl GetImage(int? id);
-        //  int Delete(int id);
-        bool Delete(int id);
-        Task AddNewImageAsync(ImageTbl Image, CancellationToken ct = new CancellationToken());
-        Task<IList<ImageTbl>> GetAllImagesAsync(CancellationToken ct = new CancellationToken());
-        Task<ImageTbl> GetImageAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<FileDTO> AddNewFileAsync(FileDTO file, CancellationToken ct = new CancellationToken());
+        Task<List<FileDTO>> GetAllFilesAsync(CancellationToken ct = new CancellationToken());
+        Task<List<FileDTO>> GetFilesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken());
+        Task<FileDTO> GetFileAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<FileDTO> UpdateFileAsync(FileDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
     }
 }

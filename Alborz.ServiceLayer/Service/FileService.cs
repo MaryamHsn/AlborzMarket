@@ -1,6 +1,8 @@
 ﻿using Alborz.DataLayer.Context;
+using Alborz.DomainLayer.DTO;
 using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
+using Alborz.ServiceLayer.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,47 +21,50 @@ namespace Alborz.ServiceLayer.Service
             _now = DateTime.Now;
             _uow = uow;
         }
-        public void AddNewImage(ImageTbl Image)
+        public async Task<FileDTO> AddNewFileAsync(FileDTO file, CancellationToken ct = new CancellationToken())
         {
-            _uow.ImageRepository.Add(Image);
+            if (file == null)
+                throw new ArgumentNullException();
+            var entity = BaseMapper<FileDTO, FileTbl>.Map(file);
+            var obj = await _uow.FileRepository.AddAsync(entity, ct);
             _uow.SaveAllChanges();
+            var element = BaseMapper<FileDTO, FileTbl>.Map(obj);
+            return element;
         }
-        public IList<ImageTbl> GetAllImages()
+        public async Task<List<FileDTO>> GetAllFilesAsync(CancellationToken ct = new CancellationToken())
         {
-            return _uow.ImageRepository.GetAll().ToList();
+            var obj = await _uow.FileRepository.GetAllAsync(ct);
+            var entity = new List<FileDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<FileDTO, FileTbl>.Map(item);
+            }
+            return entity;
         }
-        public ImageTbl GetImage(int? id)
+        public async Task<List<FileDTO>> GetFilesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
-            return _uow.ImageRepository.GetAll(x => x.Id == id).SingleOrDefault();
+            var file = await GetAllFilesAsync();
+            return file.Where(s => s.Title.Contains(searchItem)).ToList();
         }
-        public bool Delete(int id)
+        public async Task<FileDTO> GetFileAsync(int? id, CancellationToken ct = new CancellationToken())
         {
-            ImageTbl Image = _uow.ImageRepository.Get(id);
-            var t = _uow.ImageRepository.SoftDelete(Image);
+            var obj = await _uow.FileRepository.GetAllAsync(x => x.Id == id);
+            var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
+            return element;
+        }
+        public async Task<FileDTO> UpdateFileAsync(FileDTO entity)
+        {
+            var obj = BaseMapper<FileDTO, FileTbl>.Map(entity);
+            obj.IsActive = true;
+            obj = await _uow.FileRepository.UpdateAsync(obj);
             _uow.SaveAllChanges();
-            return t;
-        }
-        ////Async 
-        public async Task AddNewImageAsync(ImageTbl Image, CancellationToken ct = new CancellationToken())
-        {
-            await _uow.ImageRepository.AddAsync(Image, ct);
-            _uow.SaveAllChanges();
-        }
-        public async Task<IList<ImageTbl>> GetAllImagesAsync(CancellationToken ct = new CancellationToken())
-        {
-            var obj = await _uow.ImageRepository.GetAllAsync(ct);
-            //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
-            return obj.ToList();
-        }
-        public async Task<ImageTbl> GetImageAsync(int? id, CancellationToken ct = new CancellationToken())
-        {
-            var obj = await _uow.ImageRepository.GetAllAsync(x => x.Id == id);
-            return obj.FirstOrDefault();
+            var element = BaseMapper<FileDTO, FileTbl>.Map(obj);
+            return element;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
-            var Image = await _uow.ImageRepository.GetAsync(id, ct);
-            var obj = await _uow.ImageRepository.SoftDeleteAsync(Image);
+            var File = await _uow.FileRepository.GetAsync(id, ct);
+            var obj = await _uow.FileRepository.SoftDeleteAsync(File);
             _uow.SaveAllChanges();
             return obj;
         }

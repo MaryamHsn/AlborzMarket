@@ -39,7 +39,7 @@ namespace Alborz.ServiceLayer.Service
                 throw;
             }
         }
-        public async Task<List<ProductDetailDTO>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<ProductDetailDTO>> GetAllProductDetailsAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.ProductDetailRepository.GetAllAsync(ct);
             var entity = new List<ProductDetailDTO>();
@@ -50,12 +50,18 @@ namespace Alborz.ServiceLayer.Service
             }
             return entity;
         }
-        //public async Task<List<ProductDetailDTO>> GetCategoriesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
-        //{
-        //    var productDetail = await GetAllCategoriesAsync();
-        //    return productDetail.Where(s => s..Contains(searchItem)).ToList();
-        //}
-        public async Task<ProductDetailDTO> GetProductDetailAsync(int? id, CancellationToken ct = new CancellationToken())
+         public async Task<List<ProductDetailDTO>> GetAllProductDetailByProductIdAsync(int productId,CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.ProductDetailRepository.GetAllAsync(x => x.ProductId== productId,ct);
+            var entity = new List<ProductDetailDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<ProductDetailDTO, ProductDetailTbl>.Map(item);
+                entity.Add(element);
+            }
+            return entity;
+        }
+         public async Task<ProductDetailDTO> GetProductDetailAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.ProductDetailRepository.GetAllAsync(x => x.Id == id);
             var element = BaseMapper<ProductDetailDTO, ProductDetailTbl>.Map(obj.FirstOrDefault());
@@ -76,6 +82,15 @@ namespace Alborz.ServiceLayer.Service
             var obj = await _uow.ProductDetailRepository.SoftDeleteAsync(ProductDetail);
             _uow.SaveAllChanges();
             return obj;
+        }
+        public async Task DeleteByProductIdAsync(int productId, CancellationToken ct = new CancellationToken())
+        {
+            var productDetail = await _uow.ProductDetailRepository.GetAllAsync(x=>x.ProductId==productId, ct);
+            foreach (var item in productDetail)
+            {
+                var obj = await _uow.ProductDetailRepository.SoftDeleteAsync(item);
+            }
+            _uow.SaveAllChanges();
         }
     }
 }
