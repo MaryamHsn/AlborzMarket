@@ -55,6 +55,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -123,6 +124,7 @@
     <Compile Include="Entities\PropertyTbl.cs" />
     <Compile Include="Entities\PropertyValueTbl.cs" />
     <Compile Include="Enumration\ColorEnum.cs" />
+    <Compile Include="Enumration\FileTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

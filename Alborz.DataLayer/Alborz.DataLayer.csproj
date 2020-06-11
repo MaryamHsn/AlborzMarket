@@ -110,6 +110,10 @@
     <Compile Include="Migrations\202006041748457_producttbl.Designer.cs">
       <DependentUpon>202006041748457_producttbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006061544452_changeFileTbl.cs" />
+    <Compile Include="Migrations\202006061544452_changeFileTbl.Designer.cs">
+      <DependentUpon>202006061544452_changeFileTbl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
@@ -161,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006041748457_producttbl.resx">
       <DependentUpon>202006041748457_producttbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006061544452_changeFileTbl.resx">
+      <DependentUpon>202006061544452_changeFileTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

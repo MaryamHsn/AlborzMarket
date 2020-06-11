@@ -14,13 +14,12 @@ namespace Alborz.DomainLayer.Entities
         public string Title { get; set; }
         public string Url { get; set; }
         public string Subject { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
         public int Size { get; set; }
-        public int? CategoryId { get; set; }
-        public int? ProductId { get; set; }
-        public int? PostId { get; set; }
-        public int? EntityEnumId { get; set; }
+        public string ContentType { get; set; }
+        public byte[] Content { get; set; }
+        public int FileTypeEnum { get; set; }
+        public int EntityEnumId { get; set; }
+        public int EntityKeyId { get; set; }
 
     }
 }

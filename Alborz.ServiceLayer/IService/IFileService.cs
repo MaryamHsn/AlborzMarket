@@ -15,6 +15,8 @@ namespace Alborz.ServiceLayer.IService
         Task<List<FileDTO>> GetAllFilesAsync(CancellationToken ct = new CancellationToken());
         Task<List<FileDTO>> GetFilesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken());
         Task<FileDTO> GetFileAsync(int? id, CancellationToken ct = new CancellationToken());
+        Task<FileDTO> GetFileByGuidAsync(Guid id, CancellationToken ct = new CancellationToken());
+        Task<List<FileDTO>> GetFilesByEntityEnumKeysAsync(int entityEnumId, int entityKeyId, CancellationToken ct = new CancellationToken());
         Task<FileDTO> UpdateFileAsync(FileDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
     }

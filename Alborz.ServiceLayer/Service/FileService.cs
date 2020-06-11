@@ -5,6 +5,7 @@ using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Mapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -52,6 +53,20 @@ namespace Alborz.ServiceLayer.Service
             var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
             return element;
         }
+        public async Task<FileDTO> GetFileByGuidAsync(Guid id, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.FileRepository.GetAllAsync(x => x.IdFile == id);
+            var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
+            return element;
+        }
+        public async Task<List<FileDTO>> GetFilesByEntityEnumKeysAsync(int entityEnumId,int entityKeyId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId== entityEnumId && x.EntityKeyId==entityKeyId);
+            //var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
+            var element = obj.Select(BaseMapper<FileDTO, FileTbl>.Map).Where(x => x.IsActive == true).ToList();
+            return element;
+        }
+
         public async Task<FileDTO> UpdateFileAsync(FileDTO entity)
         {
             var obj = BaseMapper<FileDTO, FileTbl>.Map(entity);

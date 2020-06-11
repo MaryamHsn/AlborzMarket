@@ -158,6 +158,10 @@ namespace Alborz.IocConfig
                 ioc.For<ICategoryRepository>()
                          .HybridHttpOrThreadLocalScoped()
                          .Use<CategoryRepository>();
+                
+                ioc.For<IColorRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ColorRepository>();
 
                 ioc.For<IFileRepository>()
                    .HybridHttpOrThreadLocalScoped()
@@ -243,6 +247,10 @@ namespace Alborz.IocConfig
                          .Use<PriceRepository>();
 
 
+                ioc.For<IProductDetailRepository>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ProductDetailRepository>();
+
                 ioc.For<IProductRepository>()
                          .HybridHttpOrThreadLocalScoped()
                          .Use<ProductRepository>();
@@ -262,6 +270,7 @@ namespace Alborz.IocConfig
                 ioc.For(typeof(ICartItemRepository)).Use(typeof(CartItemRepository));
                 ioc.For(typeof(ICartRepository)).Use(typeof(CartRepository));
                 ioc.For(typeof(ICategoryRepository)).Use(typeof(CategoryRepository));
+                ioc.For(typeof(IColorRepository)).Use(typeof(ColorRepository));
                 ioc.For(typeof(IFileRepository)).Use(typeof(FileRepository));
                 ioc.For(typeof(IPostRepository)).Use(typeof(PostRepository));
                 ioc.For(typeof(ICustomerRepository)).Use(typeof(CustomerRepository));
@@ -278,6 +287,7 @@ namespace Alborz.IocConfig
                 ioc.For(typeof(IOrderProcessHistoryRepository)).Use(typeof(OrderProcessHistoryRepository));
                 ioc.For(typeof(IOrderProcessRepository)).Use(typeof(OrderProcessRepository));
                 ioc.For(typeof(IOrderRepository)).Use(typeof(OrderRepository));
+                ioc.For(typeof(IProductDetailRepository)).Use(typeof(ProductDetailRepository));
                 ioc.For(typeof(IProductRepository)).Use(typeof(ProductRepository));
                 ioc.For(typeof(IPriceRepository)).Use(typeof(PriceRepository));
                 ioc.For(typeof(IPropertyRepository)).Use(typeof(PropertyRepository));
@@ -383,6 +393,10 @@ namespace Alborz.IocConfig
                          .HybridHttpOrThreadLocalScoped()
                          .Use<PriceService>();
 
+
+                ioc.For<IProductDetailService>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ProductDetailService>();
 
                 ioc.For<IProductService>()
                          .HybridHttpOrThreadLocalScoped()

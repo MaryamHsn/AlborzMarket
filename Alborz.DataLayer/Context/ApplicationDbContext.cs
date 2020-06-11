@@ -25,12 +25,12 @@ namespace Alborz.DataLayer.Context
         }
 
         #region Dbset
-        public virtual DbSet<ColorTbl> ColorTbls { get; set; }
         public virtual DbSet<ProductDetailTbl> ProductDetailTbls { get; set; }
         public virtual DbSet<AddressTbl> AddressTbls { get; set; }
         public virtual DbSet<CartItemTbl> CartItemTbls { get; set; }
         public virtual DbSet<CartTbl> CartTbls { get; set; }
         public virtual DbSet<CategoryTbl> CategoryTbls { get; set; }
+        public virtual DbSet<ColorTbl> ColorTbls { get; set; }
         public virtual DbSet<FileTbl> FileTbls { get; set; }
         public virtual DbSet<PostTbl> PostTbls{ get; set; }
         public virtual DbSet<CustomerTbl> CustomerTbls { get; set; }
@@ -280,6 +280,15 @@ namespace Alborz.DataLayer.Context
                     (_categorysRepository = new BaseRepository<CategoryTbl, int>(this));
             }
         }
+        private BaseRepository<ColorTbl, int> _colorsRepository;
+        public IRepository<ColorTbl, int> ColorRepository
+        {
+            get
+            {
+                return _colorsRepository ??
+                    (_colorsRepository = new BaseRepository<ColorTbl, int>(this));
+            }
+        }
         private BaseRepository<FileTbl, int> _fileRepository;
         public IRepository<FileTbl, int> FileRepository
         {
@@ -431,6 +440,15 @@ namespace Alborz.DataLayer.Context
             {
                 return _pricesRepository ??
                     (_pricesRepository = new BaseRepository<PriceTbl, int>(this));
+            }
+        }
+        private BaseRepository<ProductDetailTbl, int> _productDetailRepository;
+        public IRepository<ProductDetailTbl, int> ProductDetailRepository
+        {
+            get
+            {
+                return _productDetailRepository ??
+                    (_productDetailRepository = new BaseRepository<ProductDetailTbl, int>(this));
             }
         }
         private BaseRepository<ProductTbl, int> _productsRepository;
