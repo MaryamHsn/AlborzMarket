@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Alborz.ServiceLayer.Service
 {
@@ -83,5 +84,26 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+        public byte[] ConvertHttpPostedFileBaseToByte(HttpPostedFileBase file)
+        { 
+                if (file.ContentLength > 0)
+                {
+                    byte[] data;
+                    using (Stream inputStream = file.InputStream)
+                    {
+                        MemoryStream memoryStream = inputStream as MemoryStream;
+                        if (memoryStream == null)
+                        {
+                            memoryStream = new MemoryStream();
+                            inputStream.CopyTo(memoryStream);
+                        }
+
+                        data = memoryStream.ToArray();
+                        return data;
+                    }
+                }
+                return null; 
+        }
+
     }
 }

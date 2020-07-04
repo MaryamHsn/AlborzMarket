@@ -45,25 +45,37 @@ namespace Alborz.ServiceLayer.Service
         }
         public async Task<List<ProductDTO>> GetAllProductsAsync(CancellationToken ct = new CancellationToken())
         {
-            var obj = await _uow.ProductRepository.GetAllAsync(ct);
-            var entity = new List<ProductDTO>();
+            //var obj = await _uow.ProductRepository.GetAllAsync(ct);
+            //var entity = new List<ProductDTO>();
+            //foreach (var item in obj)
+            //{
+            //    var productDetail =await _productDetail.GetAllProductDetailByProductIdAsync(item.Id);
+            //    var element = BaseMapper<ProductDTO, ProductTbl>.Map(item);
+            //    if (item.StartDate != null)
+            //        element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
+            //    if (item.EndDate != null)
+            //        element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
+            //    if (productDetail!=null)
+            //    {
+            //        foreach (var det in productDetail.ToList())
+            //        {
+            //            element.ProductDetails.Add(det);
+            //        }
+            //    }
+            //}
+            //return entity;
+            var obj = await _uow.ProductRepository.GetAllAsync();
+            var list = new List<ProductDTO>();
             foreach (var item in obj)
             {
-                var productDetail =await _productDetail.GetAllProductDetailByProductIdAsync(item.Id);
                 var element = BaseMapper<ProductDTO, ProductTbl>.Map(item);
-                if (item.StartDate != null)
-                    element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
-                if (item.EndDate != null)
-                    element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
-                if (productDetail!=null)
-                {
-                    foreach (var det in productDetail.ToList())
-                    {
-                        element.ProductDetails.Add(det);
-                    }
-                }
+                if (element.StartDate != null)
+                    element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+                if (element.EndDate != null)
+                    element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
+                list.Add(element);
             }
-            return entity;
+            return list;
         }
         public async Task<List<ProductDTO>> GetProductsBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
@@ -79,13 +91,13 @@ namespace Alborz.ServiceLayer.Service
                 element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
             if (element.EndDate != null)
                 element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            if (productDetail != null)
-            {
-                foreach (var det in productDetail.ToList())
-                {
-                    element.ProductDetails.Add(det);
-                }
-            }
+            //if (productDetail != null)
+            //{
+            //    foreach (var det in productDetail.ToList())
+            //    {
+            //        element.ProductDetails.Add(det);
+            //    }
+            //}
             return element;
         }
         public async Task<ProductDTO> UpdateProductAsync(ProductDTO entity)

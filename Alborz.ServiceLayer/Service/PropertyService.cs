@@ -37,10 +37,10 @@ namespace Alborz.ServiceLayer.Service
                 throw new ArgumentNullException();
             foreach (var item in Properties)
             {
-                var entity = BaseMapper<PropertyDTO, PropertyTbl>.Map(item);
+                var entity = BaseMapper<PropertyDTO, PropertyTbl>.Map(item); 
                 await _uow.PropertyRepository.AddAsync(entity, ct);
             }
-            _uow.SaveAllChanges();  
+
         }
         public async Task<List<PropertyDTO>> GetAllPropertysAsync(CancellationToken ct = new CancellationToken())
         {

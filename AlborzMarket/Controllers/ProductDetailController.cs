@@ -19,23 +19,25 @@ namespace AlborzMarket.Controllers
     {
         readonly IProductDetailService _productDetail;
         readonly IProductService _product;
-        readonly ICategoryService _category; 
+        readonly ICategoryService _category;
+        readonly IColorService _color;
         readonly IUnitOfWork _uow;
         private ProductDetailDTO common;
         private List<ProductDetailDTO> commonList;
 
-        public ProductDetailController(IUnitOfWork uow, IProductDetailService productDetail, ICategoryService category, IProductService product)
+        public ProductDetailController(IUnitOfWork uow, IProductDetailService productDetail, ICategoryService category, IProductService product, IColorService color)
         {
             _uow = uow;
             _product = product;
             _category = category;
             _productDetail = productDetail;
+            _color = color;
         }
         [HttpGet]
         public async Task<ActionResult> ProductDetailListByProductId(ProductDetailDTO model)
         {
             var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync((int)model.ProductId);
-            ViewBag.CurrentSort = model.SortOrder; 
+            ViewBag.CurrentSort = model.SortOrder;
             ViewBag.Quantity = model.SortOrder == "quantity" ? "quantity_desc" : "quantity";
 
             switch (model.SortOrder)
@@ -51,23 +53,29 @@ namespace AlborzMarket.Controllers
                     break;
             }
             int pageSize = 30;
-            int pageNumber = (model.Page ?? 1); 
+            int pageNumber = (model.Page ?? 1);
             model.ProductDetailsPageList = productDetail.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
 
         ////[Authorize(Roles = "admin , SuperViser")]
-        public  ActionResult Create()
+        [HttpGet]
+        public async Task<ActionResult> Create(int id)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-
-            return View();
-            //    }
-            //}
-            //return RedirectToAction("login", "Account");
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    common = new ProductDetailDTO()
+                    {
+                        Colors = await _color.GetAllColorsAsync(),
+                        ProductDetails = new List<ProductDetailDTO>(),
+                        ProductId=id
+                    };
+                    return View(common);
+                }
+            }
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -86,10 +94,16 @@ namespace AlborzMarket.Controllers
                     if (model.ProductId == null)
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    } 
-                     await _productDetail.AddAllProductDetailsAsync(model.ProductDetails);
+
+                    }
+                    foreach (var item in model.ProductDetails)
+                    {
+                        item.ProductId = model.ProductId;
+                    }
+                    await _productDetail.AddAllProductDetailsAsync(model.ProductDetails);
+
                     _uow.SaveAllChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("CreatePropertyForProduct", "Property", new { id= model.ProductId });
                 }
                 return View(model);
                 //    }
@@ -118,7 +132,7 @@ namespace AlborzMarket.Controllers
             if (productDetail == null)
             {
                 return HttpNotFound();
-            } 
+            }
             return View(productDetail);
             //        }
             //    }
@@ -273,6 +287,10 @@ namespace AlborzMarket.Controllers
             }
         }
 
+        public ActionResult ProductDetailsEntry()
+        {
+            return PartialView("ProductDetailsEntry");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

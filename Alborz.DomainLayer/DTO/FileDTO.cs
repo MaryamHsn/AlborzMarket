@@ -22,6 +22,8 @@ namespace Alborz.DomainLayer.DTO
         public FileTypeEnum FileTypeEnum { get; set; }
         public int EntityEnumId { get; set; }
         public int EntityKeyId { get; set; }
+        public int ProductId { get; set; }
         public HttpPostedFileBase File { get; set; }
+        public List<HttpPostedFileBase> Files { get; set; }
     }
 }

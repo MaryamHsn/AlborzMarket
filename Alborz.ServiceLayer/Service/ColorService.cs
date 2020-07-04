@@ -39,7 +39,7 @@ namespace Alborz.ServiceLayer.Service
                 throw;
             }
         }
-        public async Task<List<ColorDTO>> GetAllCategoriesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<ColorDTO>> GetAllColorsAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.ColorRepository.GetAllAsync(ct);
             var entity = new List<ColorDTO>();
@@ -50,9 +50,9 @@ namespace Alborz.ServiceLayer.Service
             }
             return entity;
         }
-        public async Task<List<ColorDTO>> GetCategoriesBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
+        public async Task<List<ColorDTO>> GetColorsBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
-            var color = await GetAllCategoriesAsync();
+            var color = await GetAllColorsAsync();
             return color.Where(s => s.Title.Contains(searchItem)).ToList();
         }
         public async Task<ColorDTO> GetColorAsync(int? id, CancellationToken ct = new CancellationToken())

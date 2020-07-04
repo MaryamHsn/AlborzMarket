@@ -1,5 +1,6 @@
 ﻿using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.Enumration;
 using Alborz.ServiceLayer.IService;
 using PagedList;
 using System;
@@ -40,17 +41,21 @@ namespace AlborzMarket.Controllers
         }
 
         ////[Authorize(Roles = "admin , SuperViser")]
-        public ActionResult CreatePropertyForProduct()
+        public ActionResult CreatePropertyForProduct(int id)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-
-            return View();
-            //    }
-            //}
-            //return RedirectToAction("login", "Account");
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    common = new PropertyDTO()
+                    {
+                        ProductId = id,
+                        Properties = new List<PropertyDTO>()
+                    };
+                    return View(common);
+                }
+            }
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -70,9 +75,18 @@ namespace AlborzMarket.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+                    foreach (var item in model.Properties)
+                    {
+                        item.ProductId = model.ProductId;
+                        var productInfo= await _product.GetProductAsync(model.ProductId);
+                        item.CategoryId = productInfo.CategoryId;
+                    }
                     await _property.AddAllPropertiesAsync(model.Properties.ToList());
                     _uow.SaveAllChanges();
-                    return RedirectToAction("Index");
+
+                    var t = (int)FileEntityEnum.Product;
+                    return RedirectToAction("Create", "File", new { entityEnumId=(int)FileEntityEnum.Product, entityKeyId = model.ProductId });
+
                 }
                 return View(model);
                 //    }
@@ -299,7 +313,10 @@ namespace AlborzMarket.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        public ActionResult PropertyEntry()
+        {
+            return PartialView("PropertyEntry");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

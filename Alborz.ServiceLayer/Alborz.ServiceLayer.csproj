@@ -116,6 +116,7 @@
     <Compile Include="CustomUserValidator.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Enumration\ColorEnum.cs" />
+    <Compile Include="Enumration\FileEntityEnum.cs" />
     <Compile Include="Exception\DateTimeFormatException.cs" />
     <Compile Include="Extension\EnumExtension.cs" />
     <Compile Include="IService\IAddressService.cs" />

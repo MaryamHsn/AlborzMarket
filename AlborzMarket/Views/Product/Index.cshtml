@@ -46,12 +46,12 @@
         <th class="table-sort-th">
             @Html.ActionLink("قابل فروش", "Index", new { sortOrder = ViewBag.IsBuyable, currentFilter = Model.CurrentFilter })
         </th>
-        <th class="table-sort-th">
+        @*<th class="table-sort-th">
             @Html.ActionLink("رنگ", "Index", new { sortOrder = ViewBag.Quantity, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
             @Html.ActionLink("تعداد", "Index", new { sortOrder = ViewBag.Quantity, currentFilter = Model.CurrentFilter })
-        </th>
+        </th>*@
         <th>
             عملیات
         </th>
@@ -78,7 +78,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsBuyable)
             </td>
-            @foreach (var detail in item.ProductDetails)
+            @*@foreach (var detail in item.ProductDetails)
             {
                 <td>
                     @Html.DisplayFor(modelItem => detail.Colors.Where(x=>x.Id==detail.ColorId).FirstOrDefault().Title)
@@ -86,7 +86,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => detail.Quantity)
                 </td>
-            }
+            }*@
             <td>
                 @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("جزئیات", "Details", new { id = item.Id }) |

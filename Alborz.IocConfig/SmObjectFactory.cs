@@ -328,6 +328,10 @@ namespace Alborz.IocConfig
                          .HybridHttpOrThreadLocalScoped()
                          .Use<CustomerTypeService>();
 
+                ioc.For<IColorService>()
+                         .HybridHttpOrThreadLocalScoped()
+                         .Use<ColorService>();
+
 
                 ioc.For<IDiscountService>()
                          .HybridHttpOrThreadLocalScoped()

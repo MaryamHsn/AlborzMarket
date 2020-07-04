@@ -16,7 +16,8 @@ namespace Alborz.DomainLayer.DTO
         public string SortOrder { get; set; }
         public string CurrentFilter { get; set; } 
         public int? Page { get; set; }
-        public IList<ProductDetailDTO> ProductDetails { get; set; }
+        public ProductDTO Product{ get; set; }
+        public List<ProductDetailDTO> ProductDetails { get; set; }
         public IEnumerable<ColorDTO> Colors { get; set; }
         public IEnumerable<PropertyDTO> Properties { get; set; }
         public IEnumerable<CategoryDTO> Categories { get; set; }

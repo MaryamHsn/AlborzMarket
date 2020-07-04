@@ -39,7 +39,7 @@ namespace Alborz.ServiceLayer.Service
                 throw;
             }
         }
-        public async Task AddAllProductDetailsAsync(IList<ProductDetailDTO> productDetails, CancellationToken ct = new CancellationToken())
+        public async Task AddAllProductDetailsAsync(List<ProductDetailDTO> productDetails, CancellationToken ct = new CancellationToken())
         {
             try
             {

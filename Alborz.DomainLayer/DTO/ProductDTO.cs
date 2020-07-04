@@ -20,6 +20,8 @@
         public string Code { get; set; }
         //public string Color { get; set; }
         public int CategoryId { get; set; }
+        public int ParentCategoryId { get; set; }
+        public int ColorId { get; set; }
         public string Title { get; set; }
         public string Brand { get; set; }
         public string SortOrder { get; set; }

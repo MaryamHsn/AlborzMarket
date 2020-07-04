@@ -912,7 +912,7 @@ th {
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
-    text-align: left;
+    /*text-align: left;*/
   }
 }
 .form-horizontal .has-feedback .form-control-feedback {

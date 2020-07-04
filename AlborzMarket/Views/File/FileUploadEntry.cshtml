@@ -1,0 +1,23 @@
+﻿
+@using HtmlHelpers.BeginCollectionItem
+@model Alborz.DomainLayer.DTO.FileDTO
+
+
+<td>
+    @using (Html.BeginCollectionItem("ProductDetails"))
+    {
+
+        <p class="control-label col-md-5">تصویر :</p>
+        <div class="col-md-7">
+            <input type="file" name="someFile" />
+            <input type="submit" value="Upload" name="UploadButton" id="UploadButton" />
+
+            @Html.TextBoxFor(m => m.File, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            @*<input type="submit" value="Upload" name="UploadButton" id="UploadButton" />*@
+            @*@Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })*@
+        </div>
+         
+    }
+</td>

@@ -2,9 +2,11 @@
 @model Alborz.DomainLayer.DTO.ProductDTO
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "ثبت محصول";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
+    @Styles.Render("~/css/stylesheets/main.css"); 
+
+} 
 
 @using (Html.BeginForm())
 {
@@ -17,12 +19,39 @@
                 <h1 class="page-header"> محصولات</h1>
             </div>
         </div>
-        <button type="button" onclick="location.href='@Url.Action("create","Property")';return false;" class="btn btn-success">ثبت ویژگی</button>
 
+        @*<button type="button" onclick="location.href='@Url.Action("create","Property")';return false;" class="btn btn-success">ثبت ویژگی</button>*@
+        <!--  ==========  -->
+        <!--  = Steps =  -->
+        <!--  ==========  -->
+        <div class="checkout-steps">
+            <div class="clearfix">
+                <div class="step active">
+                    <div class="step-badge"><i class="icon-ok"></i></div>
+                    <a href="checkout-step-1.html">ثبت محصول</a>
+                </div>
+                <div class="step ">
+                    <div class="step-badge">2</div>
+                    ثبت رنگ و تعداد
+                </div>
+                <div class="step">
+                    <div class="step-badge">3</div>
+                    ثبت ویژگی
+                </div>
+                <div class="step">
+                    <div class="step-badge">4</div>
+                    ثبت تصویر
+                </div>
+            </div>
+        </div>
+        <!-- /steps -->
+        <!--  ==========  -->
+        <!--  = Shipping addr form =  -->
+        <!--  ==========  -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">محصول جدید</div>
+                    <div class="panel-heading">ثبت محصول</div>
                     <div class="panel-body">
                         <div class="col-md-6">
                             <form role="form">
@@ -55,21 +84,23 @@
                                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                @*<div class="form-group">
+                                        <p class="control-label col-md-5">رنگ :</p>
+                                        <div class="col-md-7">
+                                            @Html.DropDownListFor(x => Model.CategoryId, new SelectList(Model.Categories, "Id", "Title"), "انتخاب کنید", htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
 
-                                <div class="form-group">
-                                    <p class="control-label col-md-5">تعداد :</p>
-                                    <div class="col-md-7">
-                                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <p class="control-label col-md-5">رنگ :</p>
-                                    <div class="col-md-7">
+                                    <div class="form-group">
+                                        <p class="control-label col-md-5">تعداد :</p>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>*@
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <p class="control-label col-md-5">تاریخ شروع اعتبار :</p>
                                     <div class="col-md-7">
                                         @Html.EditorFor(model => model.StartDateString, new { htmlAttributes = new { @class = "form-control" } })
@@ -82,7 +113,7 @@
                                         @Html.EditorFor(model => model.EndDateString, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.EndDateString, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
+                                </div>*@
 
                             </form>
                         </div>

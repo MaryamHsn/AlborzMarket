@@ -51,15 +51,15 @@ namespace AlborzMarket.Controllers
             {
                 model.SearchString = model.CurrentFilter;
             }
-            var product = new List<ProductDTO>();
-            if (!String.IsNullOrEmpty(model.SearchString))
-            {
-                product = await _product.GetProductsBySearchItemAsync(model.SearchString);
-            }
-            else
-            {
-                product = await _product.GetAllProductsAsync();
-            }
+            var product = await _product.GetAllProductsAsync();
+            //if (!String.IsNullOrEmpty(model.SearchString))
+            //{
+            //    product = await _product.GetProductsBySearchItemAsync(model.SearchString);
+            //}
+            //else
+            //{
+            //    product = await _product.GetAllProductsAsync();
+            //}
             switch (model.SortOrder)
             {
                 case "title_desc":
@@ -144,17 +144,20 @@ namespace AlborzMarket.Controllers
                 //    if (User.IsInRole("Admin"))
                 //    {
                 model.Categories = await _category.GetAllCategoriesAsync();
-                if (ModelState.IsValid)
-                {
+                model.StartDate = DateTime.Now;
+                model.EndDate= DateTime.Now;
+                //if (ModelState.IsValid)
+                //{
                     var product = await _product.AddNewProductAsync(model);
                     if (model.Properties != null)
                     {
                         await _property.AddAllPropertiesAsync(model.Properties.ToList());
                     }
                     _uow.SaveAllChanges();
-                    return RedirectToAction("Index");
-                }
-                return View();
+                   // return RedirectToAction("Index");
+                    return RedirectToAction("create","ProductDetail",new { id = product.Id });
+               // }
+                //return View();
                 //    }
                 //}
                 //return RedirectToAction("login", "Account");
@@ -183,7 +186,7 @@ namespace AlborzMarket.Controllers
                 return HttpNotFound();
             }
             product.Categories = await _category.GetAllCategoriesAsync();
-            product.Properties = await _property.GetAllPropertiesByProductIdAsync(id);
+            //product.Properties = await _property.GetAllPropertiesByProductIdAsync(id);
             return View(product);
             //        }
             //    }
