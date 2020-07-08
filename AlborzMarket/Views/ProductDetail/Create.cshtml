@@ -31,7 +31,7 @@
                     <div class="step done ">
                         <div class="step-badge"><i class="icon-ok"></i></div>
                         @*<a href="checkout-step-1.html">ثبت محصول </a>*@
-                        <a onclick="location.href='@Url.Action("Edit","Product", new { id = Model.ProductId})';return false;">ثبت محصول </a>
+                        <a onclick="location.href='@Url.Action("Edit","Product", new { id = Model.ProductId,returnController="ProductDetail",returnAction="create"})';return false;">ثبت محصول </a>
 
                     </div>
                     <div class="step active">

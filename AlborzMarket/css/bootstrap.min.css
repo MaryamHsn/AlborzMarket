@@ -3087,7 +3087,7 @@ textarea.input-lg, select[multiple].input-lg {
     }
 
     .btn:hover, .btn:focus {
-        color: #333;
+        color: #F39C12;
         text-decoration: none;
     }
 
@@ -3135,14 +3135,14 @@ textarea.input-lg, select[multiple].input-lg {
 
 .btn-primary {
     color: #fff;
-    background-color: #428bca;
-    border-color: #357ebd;
+    background-color: #17bbb0;
+    border-color: #17bbb0;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
         color: #fff;
-        background-color: #3071a9;
-        border-color: #285e8e;
+        background-color: #F39C12;
+        border-color: #F39C12;
     }
 
     .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
@@ -3907,7 +3907,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
             }
 
         .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-            color: #555;
+            color: red;
             cursor: default;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -4522,7 +4522,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
 .navbar-inverse {
-    background-color: #222;
+    background-color: #17BBB0;
     border-color: #080808;
 }
 

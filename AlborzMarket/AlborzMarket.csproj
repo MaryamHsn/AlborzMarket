@@ -1180,10 +1180,12 @@
     <Content Include="Views\ProductDetail\ProductDetailsEntry.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Property\CreatePropertyForCategory.cshtml" />
-    <Content Include="Views\File\Create.cshtml" />
+    <Content Include="Views\File\CreateForProduct.cshtml" />
     <Content Include="Views\File\FileUploadEntry.cshtml" />
     <Content Include="Views\Property\CreatePropertyForProduct.cshtml" />
     <Content Include="Views\Property\PropertyEntry.cshtml" />
+    <Content Include="Views\ProductDetail\EditAll.cshtml" />
+    <Content Include="Views\Property\EditAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

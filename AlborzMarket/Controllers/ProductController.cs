@@ -118,18 +118,18 @@ namespace AlborzMarket.Controllers
         ////[Authorize(Roles = "admin , SuperViser")]
         public async Task<ActionResult> Create()
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-            common = new ProductDTO()
+            if (User.Identity.IsAuthenticated)
             {
-                Categories = await _category.GetAllCategoriesAsync()
-            };
-            return View(common);
-            //    }
-            //}
-            //return RedirectToAction("login", "Account");
+                if (User.IsInRole("Admin"))
+                {
+                    common = new ProductDTO()
+                    {
+                        Categories = await _category.GetAllCategoriesAsync()
+                    };
+                    return View(common);
+                }
+            }
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
@@ -139,28 +139,23 @@ namespace AlborzMarket.Controllers
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    {
-                model.Categories = await _category.GetAllCategoriesAsync();
-                model.StartDate = DateTime.Now;
-                model.EndDate= DateTime.Now;
-                //if (ModelState.IsValid)
-                //{
-                    var product = await _product.AddNewProductAsync(model);
-                    if (model.Properties != null)
+                if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
                     {
-                        await _property.AddAllPropertiesAsync(model.Properties.ToList());
+                        model.Categories = await _category.GetAllCategoriesAsync();
+                        model.StartDate = DateTime.Now;
+                        model.EndDate = DateTime.Now;
+                        if (ModelState.IsValid)
+                        {
+                            var product = await _product.AddNewProductAsync(model);
+                            _uow.SaveAllChanges();
+                            return RedirectToAction("create", "ProductDetail", new { id = product.Id });
+                        }
+                        return View(model);
                     }
-                    _uow.SaveAllChanges();
-                   // return RedirectToAction("Index");
-                    return RedirectToAction("create","ProductDetail",new { id = product.Id });
-               // }
-                //return View();
-                //    }
-                //}
-                //return RedirectToAction("login", "Account");
+                }
+                return RedirectToAction("login", "Account");
             }
             catch (Exception e)
             {
@@ -169,61 +164,55 @@ namespace AlborzMarket.Controllers
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? id,string returnController,string returnAction)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (User.IsInRole("Admin"))
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var product = await _product.GetProductAsync(id);
+                    if (product == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.ReturnController = returnController;
+                    ViewBag.ReturnAction = returnAction;
+                    product.Categories = await _category.GetAllCategoriesAsync();
+                    product.CategoryName = product.Categories.Where(x => x.Id == product.CategoryId).FirstOrDefault().Title;
+                    return View(product);
+                }
             }
-            var product = await _product.GetProductAsync(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            product.Categories = await _category.GetAllCategoriesAsync();
-            //product.Properties = await _property.GetAllPropertiesByProductIdAsync(id);
-            return View(product);
-            //        }
-            //    }
-            //    return RedirectToAction("login", "Account");
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductDTO product)
+        public async Task<ActionResult> Edit(ProductDTO product, string returnController, string returnAction)
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    {
-
-                product.Categories = await _category.GetAllCategoriesAsync();
-                product.Properties = await _property.GetAllPropertiesByProductIdAsync(product.Id);
-
-                if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
                 {
-                    await _product.UpdateProductAsync(product);
-                    if(product.Properties != null)
+                    if (User.IsInRole("Admin"))
                     {
-                        //Add
-
-                        //Edit
-
-                        //Delete
+                        product.Categories = await _category.GetAllCategoriesAsync();
+                        await _product.UpdateProductAsync(product);
+                    }
+                    if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
+                    {
+                        return RedirectToAction(returnAction, returnController,new { id=product.Id});
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
                     }
                 }
-                return RedirectToAction("Index");
-                // }
-                //    }
-                //    return RedirectToAction("login", "Account");
+                return RedirectToAction("login", "Account");
             }
             catch (Exception)
             {
@@ -244,7 +233,7 @@ namespace AlborzMarket.Controllers
                         {
                             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                         }
-                        var product = await _product.GetProductAsync(id); 
+                        var product = await _product.GetProductAsync(id);
                         if (product == null)
                         {
                             return HttpNotFound();

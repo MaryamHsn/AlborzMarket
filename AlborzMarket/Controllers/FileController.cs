@@ -1,5 +1,6 @@
 ﻿using Alborz.DataLayer.Context;
 using Alborz.DomainLayer.DTO;
+using Alborz.ServiceLayer.Enumration;
 using Alborz.ServiceLayer.IService;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace AlborzMarket.Controllers
             return View(entity);
         }
 
-        public ActionResult Create(int entityEnumId, int entityKeyId)
+        public ActionResult CreateForProduct(int id)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -60,8 +61,9 @@ namespace AlborzMarket.Controllers
                 {
                     common = new FileDTO()
                     {
-                        EntityEnumId = entityEnumId,
-                        EntityKeyId = entityKeyId,
+                        EntityEnumId = (int)FileEntityEnum.Product,
+                        EntityKeyId = id,
+                        ProductId =id,
                         Files = new List<HttpPostedFileBase>()
                     };
                     return View(common);
@@ -70,7 +72,7 @@ namespace AlborzMarket.Controllers
             return RedirectToAction("login", "Account");
         }
         [HttpPost]
-        public ActionResult Create(FileDTO model)
+        public ActionResult CreateForProduct(FileDTO model)
         {
             if (ModelState.IsValid)
             {

@@ -102,7 +102,7 @@
 }
 
     .spinner > div {
-        background-color: #89c144;
+        background-color: #17BBB0;
         height: 100%;
         width: 20px;
         display: inline-block;
@@ -281,7 +281,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .image h1,
@@ -355,7 +355,7 @@ a:focus {
 }
 
 a {
-    color: #89c144;
+    color: #17BBB0;
 }
 
     a:hover,
@@ -371,7 +371,7 @@ a {
     .footer a:hover,
     .footer a:active,
     .footer a:focus {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 p {
@@ -474,7 +474,7 @@ ol {
     font-weight: 900;
     line-height: 20px;
     text-transform: uppercase;
-    color: mediumvioletred;
+    color: #CA2C68;
     overflow: hidden;
 }
 
@@ -528,7 +528,7 @@ ol {
         }
 
             .block-title.alt .fa.color {
-                background-color: #89c144;
+                background-color: #17BBB0;
             }
 
 .text-lg {
@@ -555,7 +555,7 @@ ol {
 }
 
 .text-color {
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .drop-cap {
@@ -564,12 +564,12 @@ ol {
     font-size: 44px;
     line-height: 37px;
     margin: 0 0 0 10px;
-    color: #89c144;
+    color: #17BBB0;
 }
 /* Blockquote
 /* -------------------------------------------------------------------------- */
 blockquote {
-    background-color: #89c144;
+    background-color: #17BBB0;
     border: none;
     color: #ffffff;
 }
@@ -683,8 +683,8 @@ textarea:focus:-ms-input-placeholder {
 .btn-theme {
     color: #ffffff;
     border-width: 3px;
-    background-color: #89c144;
-    border-color: #89c144;
+    background-color: #17BBB0;
+    border-color: #17BBB0;
     padding: 12px 20px;
     font-size: 14px;
     font-weight: 600;
@@ -695,7 +695,7 @@ textarea:focus:-ms-input-placeholder {
 }
 
     .btn-theme:hover {
-        background-color: mediumvioletred;
+        background-color: #CA2C68;
         border-color: #232323;
         color: #ffffff;
     }
@@ -722,8 +722,8 @@ textarea:focus:-ms-input-placeholder {
 }
 
     .btn-theme-transparent:hover {
-        background-color: mediumvioletred;
-        border-color: mediumvioletred;
+        background-color: #CA2C68;
+        border-color: #CA2C68;
         color: #ffffff;
     }
 
@@ -737,8 +737,8 @@ textarea:focus:-ms-input-placeholder {
 }
 
     .btn-theme-dark:hover {
-        background-color: #89c144;
-        border-color: #89c144;
+        background-color: #17BBB0;
+        border-color: #17BBB0;
         color: #ffffff;
     }
 
@@ -804,7 +804,7 @@ textarea:focus:-ms-input-placeholder {
     a:hover .btn-play,
     .btn-play:hover {
         background-color: #ffffff;
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .btn-title-more {
@@ -882,7 +882,7 @@ p.btn-row {
         /* ios */
         -webkit-box-shadow: none;
         box-shadow: none;
-        border-color: mediumvioletred;
+        border-color: #CA2C68;
     }
 
 textarea {
@@ -1115,7 +1115,7 @@ input[type=checkbox] {
 .top-bar {
     padding: 5px 0;
     font-size: 13px;
-    background-color: mediumvioletred;
+    background-color: #17BBB0;
     color: #ffffff;
 }
 
@@ -1144,11 +1144,11 @@ input[type=checkbox] {
     }
 
     .top-bar ul a:hover .fa {
-        color: #89c144;
+        color: #17BBB0;
     }
 
     .top-bar ul a span.colored {
-        color: #89c144;
+        color: #17BBB0;
         margin-right: 5px;
     }
 
@@ -1244,7 +1244,7 @@ input[type=checkbox] {
 }
 
 .header {
-    border-bottom: solid 3px #89c144;
+    border-bottom: solid 3px #17BBB0;
 }
 
 .wide .sticky-wrapper .header {
@@ -1607,13 +1607,13 @@ input[type=checkbox] {
 .sf-menu li.sfHover,
 .sf-menu li.sfHover > a,
 .sf-menu li.active {
-    /*background-color: mediumvioletred;*/
+    /*background-color: #CA2C68;*/
     color: #ffffff;
 }
 
         .sf-menu li.active > a {
         color: #ffffff;
-        background-color: yellowgreen;
+        background-color: 17BBB0;
     }
 
 .sf-menu ul {
@@ -1666,7 +1666,7 @@ input[type=checkbox] {
 .sf-arrows > li > .sf-with-ul:focus:after,
 .sf-arrows > li:hover > .sf-with-ul:after,
 .sf-arrows > .sfHover > .sf-with-ul:after {
-    border-top-color: #89c144;
+    border-top-color: #17BBB0;
 }
 /* ARROW RIGHT */
 .sf-arrows ul .sf-with-ul:after {
@@ -1679,7 +1679,7 @@ input[type=checkbox] {
 .sf-arrows ul li > .sf-with-ul:focus:after,
 .sf-arrows ul li:hover > .sf-with-ul:after,
 .sf-arrows ul .sfHover > .sf-with-ul:after {
-    border-left-color: #89c144;
+    border-left-color: #17BBB0;
 }
 
 .sf-menu li li:hover,
@@ -1739,7 +1739,7 @@ input[type=checkbox] {
         }
 
             .sf-menu li.megamenu ul a:hover {
-                color: #89c144;
+                color: #17BBB0;
             }
 
     .sf-menu li.megamenu p {
@@ -1755,7 +1755,7 @@ input[type=checkbox] {
     }
 
 .sf-menu li.sale a {
-    background-color: #89c144;
+    background-color: #17BBB0;
     color: #ffffff;
 }
 
@@ -1841,10 +1841,10 @@ input[type=checkbox] {
 
                 .sf-menu > li > a:hover {
                     /*background-color: #ffffff !important;
-                    color: #89c144;
+                    color: #17BBB0;
 
         */
-                    background-color: yellowgreen !important;
+                    background-color: 17BBB0 !important;
                 }
 
         .sf-menu li.megamenu {
@@ -1894,7 +1894,7 @@ input[type=checkbox] {
             }
 
                 .sf-menu ul li :hover {
-                    background-color: mediumvioletred;
+                    background-color: #CA2C68;
                     color: #ffffff;
                 }
 
@@ -1946,7 +1946,7 @@ input[type=checkbox] {
 /* Footer
 /* ========================================================================== */
 .footer {
-    border-top: solid 10px #89c144;
+    border-top: solid 10px #17BBB0;
     color: #232323;
     background-color: #f9fafb;
 }
@@ -1967,7 +1967,7 @@ input[type=checkbox] {
         margin-top: 0;
         font-weight: 900;
         text-transform: uppercase;
-        color: mediumvioletred;
+        color: #CA2C68;
         padding-bottom: 20px;
         margin-bottom: 20px;
         position: relative;
@@ -2184,7 +2184,7 @@ input[type=checkbox] {
     font-weight: 900;
     line-height: 1;
     text-transform: uppercase;
-    color: #89c144;
+    color: #17BBB0;
     margin: 0 0 10px 0;
 }
 
@@ -2235,8 +2235,8 @@ input[type=checkbox] {
 }
 
     .main-slider .btn-theme:hover {
-        border-color: #89c144;
-        background-color: #89c144;
+        border-color: #17BBB0;
+        background-color: #17BBB0;
         color: #ffffff;
     }
 
@@ -2516,8 +2516,8 @@ input[type=checkbox] {
 }
 
     .main-slider .dark .caption-text .btn-theme:hover {
-        background-color: #89c144;
-        border-color: #89c144;
+        background-color: #17BBB0;
+        border-color: #17BBB0;
     }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -2819,7 +2819,7 @@ input[type=checkbox] {
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .coming-soon .main-slider .page .countdown-period {
@@ -3198,8 +3198,8 @@ input[type=checkbox] {
         .pagination > li > span:hover,
         .pagination > li > a:focus,
         .pagination > li > span:focus {
-            border-color: #89c144;
-            background-color: #89c144;
+            border-color: #17BBB0;
+            background-color: #17BBB0;
             color: #ffffff;
         }
 
@@ -3230,7 +3230,7 @@ input[type=checkbox] {
     padding: 15px;
     position: relative;
     text-align: center;
-    background-color: #89c144;
+    background-color: #17BBB0;
     color: #ffffff;
 }
 
@@ -3337,9 +3337,9 @@ input[type=checkbox] {
     }
 
         .social-icons a:hover {
-            background-color: mediumvioletred;
+            background-color: #CA2C68;
             color: #ffffff;
-            border: solid 1px mediumvioletred;
+            border: solid 1px #CA2C68;
         }
 /* 5.5 */
 /* Rating stars
@@ -3436,7 +3436,7 @@ input[type=checkbox] {
     background-color: #ffffff;
     border-color: #e9e9e9 #e9e9e9 transparent;
     border-top: solid 1px #232323;
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .content-tabs .tab-content {
@@ -3626,7 +3626,7 @@ input[type=checkbox] {
     }
 
         .post-title a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .post-meta {
@@ -3641,7 +3641,7 @@ input[type=checkbox] {
     }
 
         .post-meta a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .post-read-more {
@@ -3670,7 +3670,7 @@ input[type=checkbox] {
         }
 
             .about-the-author .media-heading a:hover {
-                color: #89c144;
+                color: #17BBB0;
             }
 
     .about-the-author .media-object {
@@ -3747,7 +3747,7 @@ input[type=checkbox] {
 
 .post-wrap blockquote {
     padding: 20px 20px 50px 20px;
-    border-top: solid 6px #89c144;
+    border-top: solid 6px #17BBB0;
     background-color: #232323;
     position: relative;
 }
@@ -3789,7 +3789,7 @@ input[type=checkbox] {
     font-weight: 900;
     line-height: 18px;
     margin-bottom: 7px;
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .recent-post .media-heading {
@@ -3803,7 +3803,7 @@ input[type=checkbox] {
     }
 
         .recent-post .media-heading a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .recent-post .media-meta {
@@ -3925,7 +3925,7 @@ input[type=checkbox] {
     }
 
         .widget .recent-post .media-meta a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .widget .recent-post .media-heading {
@@ -4000,7 +4000,7 @@ input[type=checkbox] {
     }
 
         .comment-author a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .comment-date {
@@ -4012,7 +4012,7 @@ input[type=checkbox] {
 }
 
     .comment-date .fa {
-        color: #89c144;
+        color: #17BBB0;
         margin-right: 10px;
     }
 
@@ -4207,7 +4207,7 @@ input[type=checkbox] {
 
 .thumbnail.hover,
 .thumbnail:hover {
-    border: solid 1px #89c144;
+    border: solid 1px #17BBB0;
 }
 
 .thumbnail.no-border,
@@ -4310,7 +4310,7 @@ input[type=checkbox] {
     }
 
         .caption-title a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
 .icon-view {
@@ -4530,8 +4530,8 @@ input[type=checkbox] {
 }
 
     .thumbnail.thumbnail-banner .btn-theme:hover {
-        background-color: #89c144;
-        border-color: #89c144;
+        background-color: #17BBB0;
+        border-color: #17BBB0;
     }
 
 .thumbnail.thumbnail-banner.size-1x1 {
@@ -4721,7 +4721,7 @@ input[type=checkbox] {
     .thumbnail .price ins {
         padding-left: 5px;
         text-decoration: none;
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .thumbnail .buttons .btn {
@@ -5114,7 +5114,7 @@ input[type=checkbox] {
 
     .product-single .reviews:hover,
     .product-single .add-review:hover {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .product-single .product-availability {
@@ -5122,7 +5122,7 @@ input[type=checkbox] {
 }
 
     .product-single .product-availability strong {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .product-single .product-text {
@@ -5276,7 +5276,7 @@ input[type=checkbox] {
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-    background-color: #89c144;
+    background-color: #17BBB0;
 }
 /* Products list view
 /* ========================================================================== */
@@ -5298,7 +5298,7 @@ input[type=checkbox] {
 }
 
     .products.list .thumbnail .reviews:hover {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .products.list .thumbnail .overflowed {
@@ -5310,7 +5310,7 @@ input[type=checkbox] {
 }
 
     .products.list .thumbnail .availability strong {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .products.list .thumbnail .price {
@@ -5919,7 +5919,7 @@ input[type=checkbox] {
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .widget.widget-shop-deals .countdown-period {
@@ -5953,8 +5953,8 @@ input[type=checkbox] {
         .widget.widget-tabs .nav-justified > li.active > a,
         .widget.widget-tabs .nav-justified > li > a:hover,
         .widget.widget-tabs .nav-justified > li > a:focus {
-            border-color: #89c144;
-            background-color: #89c144;
+            border-color: #17BBB0;
+            background-color: #17BBB0;
             color: #ffffff;
         }
 
@@ -6009,7 +6009,7 @@ input[type=checkbox] {
             right: 0;
             width: 100%;
             height: 5px;
-            border-top: solid 5px #89c144;
+            border-top: solid 5px #17BBB0;
         }
 }
 
@@ -6125,7 +6125,7 @@ input[type=checkbox] {
         }
 
             .widget.shop-categories ul a:hover {
-                color: #89c144;
+                color: #17BBB0;
             }
 
             .widget.shop-categories ul a .count {
@@ -6196,8 +6196,8 @@ input[type=checkbox] {
 
             .widget-tag-cloud ul li a:hover {
                 color: #ffffff;
-                background-color: mediumvioletred;
-                border-color: mediumvioletred;
+                background-color: #CA2C68;
+                border-color: #CA2C68;
             }
 /* flickr feed
 /* ========================================================================== */
@@ -6249,7 +6249,7 @@ input[type=checkbox] {
         }
 
         .widget-flickr-feed ul a:hover {
-            border-color: #89c144;
+            border-color: #17BBB0;
         }
 
             .widget-flickr-feed ul a:hover:before {
@@ -6288,7 +6288,7 @@ input[type=checkbox] {
 /* ========================================================================== */
 /* ========================================================================== */
 .recent-tweets .media .fa {
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .recent-tweets .media p {
@@ -6525,7 +6525,7 @@ input[type=checkbox] {
         .product-list .price ins {
             padding-left: 5px;
             text-decoration: none;
-            color: #89c144;
+            color: #17BBB0;
         }
 
     .product-list .rating {
@@ -6651,7 +6651,7 @@ input[type=checkbox] {
     }
 
         .shop-sorting .col-sm-4 .btn-theme:hover {
-            background-color: #89c144;
+            background-color: #17BBB0;
         }
 /* Shopping cart form, sign in ...
 /* ========================================================================== */
@@ -6820,7 +6820,7 @@ input[type=checkbox] {
             }
 
                 .orders td.description h4 a:hover {
-                    color: #89c144;
+                    color: #17BBB0;
                 }
 
     .orders td.add {
@@ -6841,7 +6841,7 @@ input[type=checkbox] {
         }
 
             .orders td.total a:hover {
-                color: #89c144;
+                color: #17BBB0;
             }
 
     .orders .media-link {
@@ -6980,7 +6980,7 @@ input[type=checkbox] {
         }
 
             .wishlist td.description h4 a:hover {
-                color: #89c144;
+                color: #17BBB0;
             }
 
 .wishlist td.add {
@@ -7012,7 +7012,7 @@ input[type=checkbox] {
     }
 
         .wishlist td.total a:hover {
-            color: #89c144;
+            color: #17BBB0;
         }
 
         .wishlist td.total a .fa-close:before {
@@ -7370,7 +7370,7 @@ input[type=checkbox] {
 
     .compare-products .product h4:hover,
     .compare-products .product h4 a:hover {
-        color: #89c144;
+        color: #17BBB0;
     }
 
 .compare-products .rating {
@@ -7548,8 +7548,8 @@ input[type=checkbox] {
     margin-right: 15px;
     margin-left: 15px;
     padding: 10px 15px;
-    border-color: #89c144;
-    background-color: #89c144;
+    border-color: #17BBB0;
+    background-color: #17BBB0;
     color: #ffffff;
 }
 
@@ -7633,14 +7633,14 @@ input[type=checkbox] {
     transition: all 0.4s ease-in-out;
     background-color: transparent;
     background-color: rgba(137, 193, 68, 0.5);
-    border: solid 2px #89c144;
+    border: solid 2px #17BBB0;
     color: #ffffff;
 }
 
     .to-top:hover {
         background-color: #ffffff;
-        border-color: #89c144;
-        color: #89c144;
+        border-color: #17BBB0;
+        color: #17BBB0;
     }
 /* 6.0 */
 /* 6.1 */
@@ -7648,7 +7648,7 @@ input[type=checkbox] {
 /* ========================================================================== */
 .sf-menu.nav > li > a:hover,
 .sf-menu.nav > li > a:focus {
-    background-color: mediumvioletred;
+    background-color: #CA2C68;
 }
 
 .sf-menu li.megamenu > ul li ul li {
@@ -8106,7 +8106,7 @@ input[type=checkbox] {
 .header-nav-1 .sf-arrows > li:hover > .sf-with-ul::after,
 .header-nav-1 .sf-arrows > li.active > .sf-with-ul::after,
 .header-nav-1 .sf-arrows > .sfHover > .sf-with-ul::after {
-    border-top-color: #89c144;
+    border-top-color: #17BBB0;
 }
 
 .header-nav-5 .sf-menu > li:hover,
@@ -8118,7 +8118,7 @@ input[type=checkbox] {
 .sf-menu li:hover,
 .header-nav-5 .sf-menu li.sfHover,
 .header-nav-5 .sf-menu li.sfHover > a {
-    color: #89c144;
+    color: #17BBB0;
 }
 
 .header-nav-2 .sf-menu > li:hover,
@@ -8126,11 +8126,11 @@ input[type=checkbox] {
 .header-nav-2 .sf-menu li.active,
 .header-nav-2 .sf-menu > li.sfHover,
 .header-nav-2 .sf-menu > li.sfHover > a {
-    background-color: #89c144;
+    background-color: #17BBB0;
 }
 
 .header-nav-2 .sf-menu ul a:hover {
-    background-color: #89c144;
+    background-color: #17BBB0;
 }
 
 .header-nav-3 .sf-menu > li:hover,
@@ -8138,18 +8138,18 @@ input[type=checkbox] {
 .header-nav-3 .sf-menu li.active,
 .header-nav-3 .sf-menu > li.sfHover,
 .header-nav-3 .sf-menu > li.sfHover > a {
-    background-color: #89c144;
+    background-color: #17BBB0;
 }
 
 .header-nav-3 .sf-menu ul a:hover {
-    background-color: #89c144;
+    background-color: #17BBB0;
 }
 /* ================HEADER MULTICOLOR CSS END==================== */
 /* 6.2 */
 /* My Account
 /* ========================================================================== */
 .information-title {
-    border-bottom: 3px solid #89c144;
+    border-bottom: 3px solid #17BBB0;
     background-color: #f5f6f7;
     padding: 10px 20px;
     text-align: center;
@@ -8268,7 +8268,7 @@ input[type=checkbox] {
 
 .widget.account-details .widget-title {
     padding: 10px 15px;
-    border-bottom: 3px solid #89c144;
+    border-bottom: 3px solid #17BBB0;
     background-color: #f5f6f7;
     font-size: 18px;
     font-weight: 400;
@@ -8288,14 +8288,14 @@ input[type=checkbox] {
     }
 
     .widget.account-details li.active a {
-        color: #89c144;
+        color: #17BBB0;
     }
 
     .widget.account-details li a:hover,
     .widget.account-details li a:focus,
     .details-box > ul li a:hover,
     .details-box > ul li a:focus {
-        color: #89c144;
+        color: #17BBB0;
     }
 /* Helper classes
 /* ========================================================================== */

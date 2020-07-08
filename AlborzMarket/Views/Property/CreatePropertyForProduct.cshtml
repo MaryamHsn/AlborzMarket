@@ -30,14 +30,12 @@
             <div class="checkout-steps">
                 <div class="clearfix">
                     <div class="step done ">
-                        <div class="step-badge"><i class="icon-ok"></i></div>
-                        <a onclick="location.href='@Url.Action("Edit","Product", new { id = Model.ProductId})';return false;">ثبت محصول </a>
-
+                        <div class="step-badge"><i class="icon-ok"></i></div> 
+                        <a onclick="location.href='@Url.Action("Edit","Product", new { id = Model.ProductId,returnController="Property",returnAction="CreatePropertyForProduct"})';return false;">ثبت محصول </a>
                     </div>
                     <div class="step done">
-                        <div class="step-badge"><i class="icon-ok"></i></div>
-                        <a onclick="location.href='@Url.Action("Edit","ProductDetail", new { id = Model.ProductId})';return false;"> ثبت رنگ و تعداد </a>
-
+                        <div class="step-badge"><i class="icon-ok"></i></div> 
+                        <a onclick="location.href='@Url.Action("EditAll","ProductDetail", new { id = Model.ProductId,returnController="Property",returnAction="CreatePropertyForProduct"})';return false;">ثبت  رنگ و تعداد </a>
                     </div>
                     <div class="step active">
                         <div class="step-badge">3</div>

@@ -22,6 +22,7 @@ namespace Alborz.DomainLayer.Entities
         public string Color { get; set; }
         [StringLength(50)]
         public string Brand { get; set; }
+        public string Description { get; set; }
         public virtual CategoryTbl CategoryTbl { get; set; } 
         public virtual ICollection<PropertyTbl> PropertyTbls { get; set; }
         public virtual ICollection<ProductDetailTbl> ProductDetailTbls { get; set; }

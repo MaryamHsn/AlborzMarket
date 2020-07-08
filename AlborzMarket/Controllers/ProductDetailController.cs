@@ -69,9 +69,9 @@ namespace AlborzMarket.Controllers
                     common = new ProductDetailDTO()
                     {
                         Colors = await _color.GetAllColorsAsync(),
-                        ProductDetails = new List<ProductDetailDTO>(),
+                        ProductDetails = new List<ProductDetailDTO>(), 
                         ProductId=id
-                    };
+                    }; 
                     return View(common);
                 }
             }
@@ -85,30 +85,35 @@ namespace AlborzMarket.Controllers
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    { 
-                if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
                 {
-                    if (model.ProductId == null)
+                    if (User.IsInRole("Admin"))
                     {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                        if (ModelState.IsValid)
+                        {
+                            if (model.ProductId == null)
+                            {
+                                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+                            }
+                            var colors = await _color.GetAllColorsAsync();
+                            foreach (var item in model.ProductDetails)
+                            {
+                                if (item.ColorId != null)
+                                {
+                                    item.ProductId = model.ProductId;
+                                    item.Colors = colors;
+                                    await _productDetail.AddNewProductDetailAsync(item);
+                                }
+                            }
+                            //await _productDetail.AddAllProductDetailsAsync(model.ProductDetails);
+                            _uow.SaveAllChanges();
+                            return RedirectToAction("CreatePropertyForProduct", "Property", new { id = model.ProductId });
+                        }
+                        return View(model);
                     }
-                    foreach (var item in model.ProductDetails)
-                    {
-                        item.ProductId = model.ProductId;
-                    }
-                    await _productDetail.AddAllProductDetailsAsync(model.ProductDetails);
-
-                    _uow.SaveAllChanges();
-                    return RedirectToAction("CreatePropertyForProduct", "Property", new { id= model.ProductId });
                 }
-                return View(model);
-                //    }
-                //}
-                //return RedirectToAction("login", "Account");
+                return RedirectToAction("login", "Account");
             }
             catch (Exception e)
             {
@@ -117,46 +122,51 @@ namespace AlborzMarket.Controllers
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? id,string returnController,string returnAction)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (User.IsInRole("Admin"))
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var productDetail = await _productDetail.GetProductDetailAsync(id);
+                    if (productDetail == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.ReturnController = returnController;
+                    ViewBag.ReturnAction = returnAction;
+                    return View(productDetail);
+                }
             }
-            var productDetail = await _productDetail.GetProductDetailAsync(id);
-            if (productDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productDetail);
-            //        }
-            //    }
-            //    return RedirectToAction("login", "Account");
+            return RedirectToAction("login", "Account");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductDetailDTO productDetail)
+        public async Task<ActionResult> Edit(ProductDetailDTO productDetail, string returnController, string returnAction)
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    {
-                if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
                 {
-                    await _productDetail.UpdateProductDetailAsync(productDetail);
+                    if (User.IsInRole("Admin"))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            await _productDetail.UpdateProductDetailAsync(productDetail);
+                            if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
+                            {
+                                return RedirectToAction(returnAction, returnController, new { id = productDetail.ProductId});
+                            } 
+                        }
+                        return RedirectToAction("Index");
+                    }
                 }
-                return RedirectToAction("Index");
-                // }
-                //    }
-                //    return RedirectToAction("login", "Account");
+                return RedirectToAction("login", "Account");
             }
             catch (Exception)
             {
@@ -164,49 +174,66 @@ namespace AlborzMarket.Controllers
             }
         }
 
-        public async Task<ActionResult> EditAll(int productId)
+        public async Task<ActionResult> EditAll(int? id, string returnController, string returnAction)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
 
-            if (productId == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    if (id == 0)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync((int)id);
+                    var colors = await _color.GetAllColorsAsync();
+
+                    foreach (var item in productDetail)
+                    {
+                        item.Colors = colors;
+                        item.ColorName = colors.Where(x => x.Id == item.ColorId).FirstOrDefault().Title;
+                    }
+                    ViewBag.ReturnController = returnController;
+                    ViewBag.ReturnAction = returnAction;
+                    if (productDetail == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(productDetail);
+                }
             }
-            var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync(productId);
-            if (productDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productDetail);
-            //        }
-            //    }
-            //    return RedirectToAction("login", "Account");
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAll(List<ProductDetailDTO> productDetails)
-        {
+        public async Task<ActionResult> EditAll(List<ProductDetailDTO> productDetails, string returnController, string returnAction)
+         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    {
-                if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
                 {
-                    await _productDetail.UpdateAllProductDetailAsync(productDetails);
+                    if (User.IsInRole("Admin"))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            if (productDetails!=null)
+                            {
+                                await _productDetail.UpdateAllProductDetailAsync(productDetails);
+                             
+                            }
+                            if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
+                            {
+                                return RedirectToAction(returnAction, returnController, new { id = productDetails.FirstOrDefault().ProductId });
+                            }
+                        }
+                        return RedirectToAction("Index");
+                    }
                 }
-                return RedirectToAction("Index");
-                // }
-                //    }
-                //    return RedirectToAction("login", "Account");
+                return RedirectToAction("login", "Account");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return View("Index");
             }
@@ -287,9 +314,15 @@ namespace AlborzMarket.Controllers
             }
         }
 
-        public ActionResult ProductDetailsEntry()
+        public async Task<ActionResult> ProductDetailsEntry()
         {
-            return PartialView("ProductDetailsEntry");
+            common = new ProductDetailDTO()
+            {
+                Colors = await _color.GetAllColorsAsync(),
+                ProductDetails = new List<ProductDetailDTO>(),
+            }; 
+
+            return PartialView("ProductDetailsEntry",common);
         }
         protected override void Dispose(bool disposing)
         {

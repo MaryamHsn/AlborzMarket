@@ -82,11 +82,8 @@ namespace AlborzMarket.Controllers
                         item.CategoryId = productInfo.CategoryId;
                     }
                     await _property.AddAllPropertiesAsync(model.Properties.ToList());
-                    _uow.SaveAllChanges();
-
-                    var t = (int)FileEntityEnum.Product;
-                    return RedirectToAction("Create", "File", new { entityEnumId=(int)FileEntityEnum.Product, entityKeyId = model.ProductId });
-
+                    _uow.SaveAllChanges(); 
+                    return RedirectToAction("CreateForProduct", "File", new { id= model.ProductId });
                 }
                 return View(model);
                 //    }
@@ -191,47 +188,52 @@ namespace AlborzMarket.Controllers
             }
         }
 
-        public async Task<ActionResult> EditAll(int productId)
+        public async Task<ActionResult> EditAll(int? id, string returnController, string returnAction)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (User.IsInRole("Admin"))
-            //    {
-
-            if (productId == 0)
+            if (User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (User.IsInRole("Admin"))
+                {
+                    if (id == 0)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var property = await _property.GetAllPropertiesByProductIdAsync(id);
+                    if (property == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.ReturnController = returnController;
+                    ViewBag.ReturnAction = returnAction;
+                    return View(property);
+                }
             }
-            var property = await _property.GetAllPropertiesByProductIdAsync(productId);
-            if (property == null)
-            {
-                return HttpNotFound();
-            }
-            return View(property);
-            //        }
-            //    }
-            //    return RedirectToAction("login", "Account");
+            return RedirectToAction("login", "Account");
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAll(List<PropertyDTO> propertys)
+        public async Task<ActionResult> EditAll(List<PropertyDTO> propertys, string returnController, string returnAction)
         {
             try
             {
-                //if (User.Identity.IsAuthenticated)
-                //{
-                //    if (User.IsInRole("Admin"))
-                //    {
-                if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
                 {
-                    await _property.UpdateAllPropertiesAsync(propertys);
+                    if (User.IsInRole("Admin"))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            await _property.UpdateAllPropertiesAsync(propertys);
+                            if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
+                            {
+                                return RedirectToAction(returnAction, returnController, new { id = propertys.FirstOrDefault().ProductId });
+                            }
+                        }
+                        return RedirectToAction("Index");
+                    }
                 }
-                return RedirectToAction("Index");
-                // }
-                //    }
-                //    return RedirectToAction("login", "Account");
+                return RedirectToAction("login", "Account");
             }
             catch (Exception)
             {

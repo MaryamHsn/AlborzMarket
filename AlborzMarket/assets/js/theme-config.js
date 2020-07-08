@@ -37,7 +37,7 @@ var themeConfig = {
             'colorName': 'green-1'
         },
         {
-            'Hex': '#89c144',
+            'Hex': '#17BBB0',
             'colorName': 'green-2'
         },
         {

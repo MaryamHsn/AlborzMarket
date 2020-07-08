@@ -87,10 +87,10 @@ namespace Alborz.ServiceLayer.Service
             var obj = await _uow.ProductRepository.GetAllAsync(x => x.Id == id);
             var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync((int)id);
             var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj.FirstOrDefault());
-            if (element.StartDate != null)
-                element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
-            if (element.EndDate != null)
-                element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
+            //if (element.StartDate != null)
+            //    element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+            //if (element.EndDate != null)
+            //    element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
             //if (productDetail != null)
             //{
             //    foreach (var det in productDetail.ToList())
@@ -112,17 +112,6 @@ namespace Alborz.ServiceLayer.Service
             obj = await _uow.ProductRepository.UpdateAsync(obj);
             _uow.SaveAllChanges();
             var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj);
-            if (element.StartDate != null)
-                element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
-            if (element.EndDate != null)
-                element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            if (productDetail != null)
-            {
-                foreach (var det in productDetail.ToList())
-                {
-                    element.ProductDetails.Add(det);
-                }
-            }
             return element;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
