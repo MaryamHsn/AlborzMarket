@@ -3,6 +3,7 @@ using Alborz.DomainLayer.DTO;
 using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
 using Alborz.ServiceLayer.Mapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,14 +61,25 @@ namespace Alborz.ServiceLayer.Service
             var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
             return element;
         }
-        public async Task<List<FileDTO>> GetFilesByEntityEnumKeysAsync(int entityEnumId,int entityKeyId, CancellationToken ct = new CancellationToken())
+        public async Task<List<FileDTO>> GetFilesByEntityEnumKeysAsync(int entityEnumId, int entityKeyId, CancellationToken ct = new CancellationToken())
         {
-            var obj = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId== entityEnumId && x.EntityKeyId==entityKeyId);
+            var obj = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId == entityEnumId && x.EntityKeyId == entityKeyId);
             //var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
             var element = obj.Select(BaseMapper<FileDTO, FileTbl>.Map).Where(x => x.IsActive == true).ToList();
             return element;
         }
+        //public async Task<List<FileDTO>> ShowDocumentFileData( int entityId,int keyId)
+        //{
+        //    var content = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId == entityId && x.EntityKeyId == keyId);
+        //    var remoteResponse = JsonConvert.DeserializeObject<List<FileDTO>>(content.);
+        //}
+        //public FileContentResult ShowDocument(int id)
+        //{
+        //    var document = DocumentFileDataService.Instance().ShowDocumentFileData((int)DocumentEntityEnum.Agent, id).FirstOrDefault();
+        //    var imagedata = document.FileBytes;
 
+        //    return File(imagedata, "image/jpg");
+        //}
         public async Task<FileDTO> UpdateFileAsync(FileDTO entity)
         {
             var obj = BaseMapper<FileDTO, FileTbl>.Map(entity);
@@ -85,24 +97,24 @@ namespace Alborz.ServiceLayer.Service
             return obj;
         }
         public byte[] ConvertHttpPostedFileBaseToByte(HttpPostedFileBase file)
-        { 
-                if (file.ContentLength > 0)
+        {
+            if (file.ContentLength > 0)
+            {
+                byte[] data;
+                using (Stream inputStream = file.InputStream)
                 {
-                    byte[] data;
-                    using (Stream inputStream = file.InputStream)
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
                     {
-                        MemoryStream memoryStream = inputStream as MemoryStream;
-                        if (memoryStream == null)
-                        {
-                            memoryStream = new MemoryStream();
-                            inputStream.CopyTo(memoryStream);
-                        }
-
-                        data = memoryStream.ToArray();
-                        return data;
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
                     }
+
+                    data = memoryStream.ToArray();
+                    return data;
                 }
-                return null; 
+            }
+            return null;
         }
 
     }

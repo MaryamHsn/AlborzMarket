@@ -1,0 +1,890 @@
+﻿@model Alborz.DomainLayer.DTO.ProductDTO
+
+@{
+    ViewBag.Title = "ProductsByCategory";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+<div class="wrapper">
+
+    <!-- /HEADER -->
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+
+        <!-- BREADCRUMBS -->
+        <section class="page-section breadcrumbs">
+            <div class="container">
+                <div class="page-header">
+                    <h1>صفحه دسته بندی</h1>
+                </div>
+                <ul class="breadcrumb">
+                    <li><a href="#">خانه</a></li>
+                    <li><a href="#">فروشگاه</a></li>
+                    <li class="active">صفحه نمایش دسته بندی شبکه ای با نوار کناری چپ</li>
+                </ul>
+            </div>
+        </section>
+        <!-- /BREADCRUMBS -->
+        <!-- PAGE WITH SIDEBAR -->
+        <section class="page-section with-sidebar">
+            <div class="container">
+                <div class="row">
+                    <!-- SIDEBAR -->
+                    <aside class="col-md-3 sidebar" id="sidebar">
+                        <!-- widget search -->
+                        <div class="widget">
+                            <div class="widget-search">
+                                <input class="form-control" type="text" placeholder="جستجو">
+                                <button><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <!-- /widget search -->
+                        <!-- widget shop categories -->
+                        <div class="widget shop-categories">
+                            <h4 class="widget-title">دسته بندی</h4>
+                            <div class="widget-content">
+                                <ul>
+                                    <li>
+                                        <span class="arrow"><i class="fa fa-angle-down"></i></span>
+                                        <a href="#">زنانه</a>
+                                        <ul class="children">
+                                            <li>
+                                                <a href="#">
+                                                    ژاکت های بافتنی و کشباف
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    کت و پالتو
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    جین
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شلوار
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شورت
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="arrow"><i class="fa fa-angle-down"></i></span>
+                                        <a href="#">مردانه</a>
+                                        <ul class="children">
+                                            <li>
+                                                <a href="#">
+                                                    ژاکت های بافتنی و کشباف
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    کت و پالتو
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    جین
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شلوار
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شورت
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="arrow"><i class="fa fa-angle-down"></i></span>
+                                        <a href="#">لباس</a>
+                                        <ul class="children">
+                                            <li>
+                                                <a href="#">
+                                                    ژاکت های بافتنی و کشباف
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    کت و پالتو
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    جین
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شلوار
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شورت
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="arrow"><i class="fa fa-angle-down"></i></span>
+                                        <a href="#">فروشندگان برتر</a>
+                                        <ul class="children">
+                                            <li>
+                                                <a href="#">
+                                                    ژاکت های بافتنی و کشباف
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    کت و پالتو
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    جین
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شلوار
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شورت
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span class="arrow"><i class="fa fa-angle-up"></i></span>
+                                        <a href="#">تجهیزات جانبی</a>
+                                        <ul class="children active">
+                                            <li>
+                                                <a href="#">
+                                                    ژاکت های بافتنی و کشباف
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    کت و پالتو
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    جین
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شلوار
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    شورت
+                                                    <span class="count">۱۲</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">حراج</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /widget shop categories -->
+                        <!-- widget product color -->
+                        <div class="widget widget-colors">
+                            <h4 class="widget-title">رنگ ها</h4>
+                            <div class="widget-content">
+                                <ul>
+                                    <li><a href="#"><span style="background-color: #ffffff"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #161618"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #e74c3c"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #783ce7"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #3498db"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #00a847"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #3ce7d9"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #fa17bc"></span></a></li>
+                                    <li><a href="#"><span style="background-color: #a87e00"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                       
+                    </aside>
+                    <!-- /SIDEBAR -->
+                    <!-- CONTENT -->
+                    <div class="col-md-9 content" id="content">
+
+                        <!-- Products grid -->
+                        <div class="row products grid">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-1c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-2c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-3c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-4c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-5c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-6c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-7c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-8c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-9c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-10c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-11c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-12c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-13c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-14c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="thumbnail no-border no-padding">
+                                    <div class="media">
+                                        <a class="media-link" href="#">
+                                            <img src="~/assets/img/preview/shop/product-15c.jpg" alt="" />
+                                            <span class="icon-view">
+                                                <strong><i class="fa fa-eye"></i></strong>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="caption text-center">
+                                        <h4 class="caption-title">سربرگ محصولات الکترونیکی</h4>
+                                        <div class="rating">
+                                            <span class="star"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                            <!--
+                                            -->
+                                            <span class="star active"></span>
+                                        </div>
+                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="buttons">
+                                            <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
+                                            <!--
+                                            -->
+                                            <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Products grid -->
+                        <!-- Pagination -->
+                        <div class="pagination-wrapper">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#"><i class="fa fa-angle-double-right"></i> قبلی</a></li>
+                                <li class="active"><a href="#">۱ <span class="sr-only">(جاری)</span></a></li>
+                                <li><a href="#">۲</a></li>
+                                <li><a href="#">۳</a></li>
+                                <li><a href="#">۴</a></li>
+                                <li><a href="#">بعدی <i class="fa fa-angle-double-left"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- /Pagination -->
+
+                    </div>
+                    <!-- /CONTENT -->
+
+                </div>
+            </div>
+        </section>
+        <!-- /PAGE WITH SIDEBAR -->
+        <!-- PAGE -->
+    
+        <!-- /PAGE -->
+
+    </div>
+    <!-- /CONTENT AREA -->
+ 
+
+    <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+
+</div>

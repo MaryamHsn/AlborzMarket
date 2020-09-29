@@ -365,6 +365,7 @@
     <Content Include="assets\css\theme.css" />
     <Content Include="assets\ico\apple-touch-icon-144-precomposed.png" />
     <Content Include="assets\ico\favicon.ico" />
+    <Content Include="assets\img\alborzLogo.jpg" />
     <Content Include="assets\img\flag.gif" />
     <Content Include="assets\img\icon-1.png" />
     <Content Include="assets\img\icon-2.png" />
@@ -598,9 +599,9 @@
     <Content Include="assets\plugins\prettyphoto\js\jquery.prettyPhoto.js" />
     <Content Include="assets\plugins\smooth-scrollbar.min.js" />
     <Content Include="assets\plugins\superfish\js\superfish.min.js" />
-    <Content Include="checkout-step-1.html" />
-    <Content Include="checkout-step-2.html" />
-    <Content Include="checkout-step-3.html" />
+    <Content Include="category-list.html" />
+    <Content Include="category.html" />
+    <Content Include="compare-products.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -636,6 +637,7 @@
     <Content Include="forms.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="index-2.html" />
     <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\bootstrap-table.js" />
     <Content Include="js\bootstrap.js" />
@@ -899,6 +901,7 @@
     <Content Include="js\lumino.glyphs.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="index.html" />
+    <Content Include="product-details.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fonts\glyphicons-halflings-regular.eot" />
@@ -1186,6 +1189,7 @@
     <Content Include="Views\Property\PropertyEntry.cshtml" />
     <Content Include="Views\ProductDetail\EditAll.cshtml" />
     <Content Include="Views\Property\EditAll.cshtml" />
+    <Content Include="Views\Product\ProductsByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

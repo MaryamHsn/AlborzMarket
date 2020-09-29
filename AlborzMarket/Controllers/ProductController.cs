@@ -99,6 +99,16 @@ namespace AlborzMarket.Controllers
             model.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
+        public async Task<ActionResult> ProductsByCategory(int? categoryId)
+        {
+            commonList = new List<ProductDTO>();
+            if (categoryId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = await _product.GetProductsByCategoryIdAsync(categoryId);
+            return View();
+        }
 
         public async Task<ActionResult> Details(int? id, CancellationToken ct = default(CancellationToken))
         {
@@ -164,7 +174,7 @@ namespace AlborzMarket.Controllers
         }
 
         //[Authorize(Roles = "admin , SuperViser")]
-        public async Task<ActionResult> Edit(int? id,string returnController,string returnAction)
+        public async Task<ActionResult> Edit(int? id, string returnController, string returnAction)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -205,7 +215,7 @@ namespace AlborzMarket.Controllers
                     }
                     if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
                     {
-                        return RedirectToAction(returnAction, returnController,new { id=product.Id});
+                        return RedirectToAction(returnAction, returnController, new { id = product.Id });
                     }
                     else
                     {

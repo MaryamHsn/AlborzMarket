@@ -82,22 +82,16 @@ namespace Alborz.ServiceLayer.Service
             var product = await GetAllProductsAsync();
             return product.Where(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.Brand.ToString().Contains(searchItem)|| s.Categories.Select(x=>x.Title.Contains(searchItem)).FirstOrDefault()).ToList();
         }
+        public async Task<List<ProductDTO>> GetProductsByCategoryIdAsync(int? categoryId, CancellationToken ct = new CancellationToken())
+        {
+            var product = await _uow.ProductRepository.GetAllAsync(x=>x.CategoryId==categoryId);
+            return product.Select(BaseMapper<ProductDTO, ProductTbl>.Map).ToList();
+        }
         public async Task<ProductDTO> GetProductAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.ProductRepository.GetAllAsync(x => x.Id == id);
             var productDetail = await _productDetail.GetAllProductDetailByProductIdAsync((int)id);
             var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj.FirstOrDefault());
-            //if (element.StartDate != null)
-            //    element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
-            //if (element.EndDate != null)
-            //    element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
-            //if (productDetail != null)
-            //{
-            //    foreach (var det in productDetail.ToList())
-            //    {
-            //        element.ProductDetails.Add(det);
-            //    }
-            //}
             return element;
         }
         public async Task<ProductDTO> UpdateProductAsync(ProductDTO entity)

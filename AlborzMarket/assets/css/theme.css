@@ -4103,6 +4103,10 @@ input[type=checkbox] {
     text-align: center;
     overflow: hidden;
     position: relative;
+    border-bottom: groove #17bbb0;
+    font-style: italic;
+    font-size: 32px;
+    padding-bottom: 25px;
 }
 
     .tabs ul {
@@ -6582,8 +6586,8 @@ input[type=checkbox] {
 /* ========================================================================== */
 .shop-info-banners .block {
     max-width: 450px;
-    margin: 0 auto;
-    padding: 15px 17px;
+    margin:12px auto;
+    padding: 45px 17px;
     border: solid 4px #3c3c3c;
     background-color: transparent;
     color: #3c3c3c;
