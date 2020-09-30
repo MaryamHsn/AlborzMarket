@@ -1,10 +1,11 @@
-﻿@model Alborz.DomainLayer.DTO.ProductDTO
+﻿@*@model Alborz.DomainLayer.DTO.ProductDTO*@
+@*@model PagedList.IPagedList<Alborz.DomainLayer.DTO.ProductDTO>*@
+@model  List<Alborz.DomainLayer.DTO.ProductDTO>
 
 @{
     ViewBag.Title = "ProductsByCategory";
     //Layout = "~/Views/Shared/_AdminLayout.cshtml";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
-
 }
 <div class="wrapper">
 
@@ -247,7 +248,7 @@
                                 </ul>
                             </div>
                         </div>
-                       
+
                     </aside>
                     <!-- /SIDEBAR -->
                     <!-- CONTENT -->
@@ -878,12 +879,11 @@
         </section>
         <!-- /PAGE WITH SIDEBAR -->
         <!-- PAGE -->
-    
         <!-- /PAGE -->
 
     </div>
     <!-- /CONTENT AREA -->
- 
+
 
     <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
 

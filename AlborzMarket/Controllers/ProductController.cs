@@ -107,7 +107,7 @@ namespace AlborzMarket.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var product = await _product.GetProductsByCategoryIdAsync(categoryId);
-            return View();
+            return View(product);
         }
 
         public async Task<ActionResult> Details(int? id, CancellationToken ct = default(CancellationToken))
