@@ -1,0 +1,16 @@
+﻿@model Alborz.DomainLayer.DTO.CategoryDTO
+@{
+    if (Model.Categories != null)
+    {
+
+        foreach (var item in Model.Categories)
+        {
+            <li><a onclick="location.href='@Url.Action( "ProductsByCategory", "Product", new { categoryId=item.Id})';return false;"> @item.Title  </a></li>
+
+        }
+    }
+
+}
+ 
+ 
+

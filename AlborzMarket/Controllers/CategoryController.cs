@@ -264,6 +264,14 @@ namespace AlborzMarket.Controllers
             }
         }
 
+        public async Task<ActionResult> GetCategories()
+        {
+            common = new CategoryDTO();
+            common.Categories=  _category.GetAllCategories();
+
+            return PartialView("_CategoryPartial", common);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

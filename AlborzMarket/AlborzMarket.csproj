@@ -510,6 +510,9 @@
     <Content Include="assets\img\preview\shop\top-sellers-7.jpg" />
     <Content Include="assets\img\preview\shop\top-sellers-8.jpg" />
     <Content Include="assets\img\preview\shop\top-sellers-9.jpg" />
+    <Content Include="assets\img\preview\slider\slide1.jpg" />
+    <Content Include="assets\img\preview\slider\slide13.jpg" />
+    <Content Include="assets\img\preview\slider\slide3.jpg" />
     <Content Include="assets\img\preview\slider\slide-1-sub.jpg" />
     <Content Include="assets\img\preview\slider\slide-1.jpg" />
     <Content Include="assets\img\preview\slider\slide-2-sub.jpg" />
@@ -637,7 +640,6 @@
     <Content Include="forms.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="index-2.html" />
     <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\bootstrap-table.js" />
     <Content Include="js\bootstrap.js" />
@@ -900,7 +902,6 @@
     <Content Include="js\js\underscore\underscore.js" />
     <Content Include="js\lumino.glyphs.js" />
     <Content Include="js\respond.min.js" />
-    <Content Include="index.html" />
     <Content Include="product-details.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1105,6 +1106,7 @@
     <Content Include="js\js\underscore\Rakefile" />
     <Content Include="js\js\underscore\README.md" />
     <Content Include="js\js\underscore\underscore-min.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1190,6 +1192,8 @@
     <Content Include="Views\ProductDetail\EditAll.cshtml" />
     <Content Include="Views\Property\EditAll.cshtml" />
     <Content Include="Views\Product\ProductsByCategory.cshtml" />
+    <Content Include="Views\File\ShowById.cshtml" />
+    <Content Include="Views\Shared\_CategoryPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

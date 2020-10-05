@@ -100,14 +100,29 @@ namespace AlborzMarket.Controllers
             return View(model);
         }
         public async Task<ActionResult> ProductsByCategory(int? categoryId)
-        {
+        { 
             commonList = new List<ProductDTO>();
+            common = new ProductDTO();
             if (categoryId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+          
             var product = await _product.GetProductsByCategoryIdAsync(categoryId);
-            return View(product);
+            if (common.SearchString != null)
+            {
+                common.Page = 1;
+            }
+            else
+            {
+                common.SearchString = common.CurrentFilter;
+            }
+            int pageSize = 10;
+            int pageNumber = (common.Page ?? 1);
+            common.Categories = await _category.GetAllCategoriesAsync();
+            common.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
+            return View(common);
+            //return View(product);
         }
 
         public async Task<ActionResult> Details(int? id, CancellationToken ct = default(CancellationToken))

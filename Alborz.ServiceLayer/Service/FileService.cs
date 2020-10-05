@@ -66,8 +66,10 @@ namespace Alborz.ServiceLayer.Service
             var obj = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId == entityEnumId && x.EntityKeyId == entityKeyId);
             //var element = BaseMapper<FileDTO, FileTbl>.Map(obj.FirstOrDefault());
             var element = obj.Select(BaseMapper<FileDTO, FileTbl>.Map).Where(x => x.IsActive == true).ToList();
+            //var remoteResponse = JsonConvert.DeserializeObject<ICollection<FileDTO>>(element.FirstOrDefault().ContentType);
+
             return element;
-        }
+        } 
         //public async Task<List<FileDTO>> ShowDocumentFileData( int entityId,int keyId)
         //{
         //    var content = await _uow.FileRepository.GetAllAsync(x => x.EntityEnumId == entityId && x.EntityKeyId == keyId);

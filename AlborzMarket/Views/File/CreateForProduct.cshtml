@@ -30,7 +30,7 @@
                 <div class="clearfix">
                     <div class="step done ">
                         <div class="step-badge"><i class="icon-ok"></i></div>
-                        <a onclick="location.href='@Url.Action("Edit","Product", new {id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت محصول </a> 
+                        <a onclick="location.href='@Url.Action("Edit","Product", new {id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت محصول </a>
 
                     </div>
                     <div class="step done">
@@ -104,6 +104,8 @@
 <div>
     @Html.ActionLink("بازگشت به لیست", "Index")
 </div>
+
+
 <script type="text/javascript">
     function call() {
         $.get('/File/FileUploadEntry', function (template) {

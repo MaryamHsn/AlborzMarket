@@ -15,5 +15,6 @@ namespace Alborz.ServiceLayer.IService
         Task<CategoryDTO> GetCategoryAsync(int? id, CancellationToken ct = new CancellationToken());
         Task<CategoryDTO> UpdateCategoryAsync(CategoryDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
+        List<CategoryDTO> GetAllCategories();
     }
 }

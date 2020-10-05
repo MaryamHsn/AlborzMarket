@@ -1,0 +1,44 @@
+﻿
+@model  Alborz.DomainLayer.DTO.FileDTO
+
+@{
+    /**/
+
+    ViewBag.Title = "ShowById";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>ShowById</h2>
+
+<div class="input-line">
+    <div class="input">
+        <label>
+            تصویر
+        </label>
+        <label>
+            @*<img src='@Url.Action( "show", "image", new { id = ViewData["imageID"] })' />*@
+            <img src='<%= @Url.Action( "ShowById", "File", new { id = 2} ) %>' width="15" height="30" />
+
+
+            <img src='@Url.Action( "ShowById", "File", new { id = 2})' width="85" height="80" />
+            <img src='@Url.Action( "ShowById", "File", new { id = 2})' />
+        </label>
+        <label >
+            <input name="file" type="file" id="file-upload" />
+        </label>
+        <label for="file-upload" id="file-upload-filename"></label>
+    </div>
+</div>
+@*
+    <script>
+
+        var input = document.getElementById('file-upload');
+        var infoArea = document.getElementById('file-upload-filename');
+        input.addEventListener('change', showFileName);
+
+        function showFileName(event) {
+            var input = event.srcElement;
+            var fileName = input.files[0].name;
+            infoArea.textContent = 'نام فایل: ' + fileName;
+        }
+    </script>*@

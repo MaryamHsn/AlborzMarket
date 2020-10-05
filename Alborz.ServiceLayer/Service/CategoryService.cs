@@ -102,6 +102,21 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+        public  List<CategoryDTO> GetAllCategories()
+        {
+            var obj =  _uow.CategoryRepository.GetAll().Where(x=>x.priority==1);
+            var entity = new List<CategoryDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<CategoryDTO, CategoryTbl>.Map(item);
+                if (item.StartDate != null)
+                    element.StartDateString = ((DateTime)(item.StartDate)).ToPersianDateString();
+                if (item.EndDate != null)
+                    element.EndDateString = ((DateTime)(item.EndDate)).ToPersianDateString();
+                entity.Add(element);
+            }
+            return entity;
+        }
 
     }
 }

@@ -115,5 +115,28 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+        public  List<ProductDTO> GetAllProducts()
+        {
+             
+            var obj =  _uow.ProductRepository.GetAll();
+            var list = new List<ProductDTO>();
+            foreach (var item in obj)
+            {
+                var element = BaseMapper<ProductDTO, ProductTbl>.Map(item);
+                if (element.StartDate != null)
+                    element.StartDateString = ((DateTime)(element.StartDate)).ToPersianDateString();
+                if (element.EndDate != null)
+                    element.EndDateString = ((DateTime)(element.EndDate)).ToPersianDateString();
+                list.Add(element);
+            }
+            return list.OrderByDescending(x=>x.Id).ToList();
+        }
+        public ProductDTO GetProduct(int? id)
+        {
+            var obj = _uow.ProductRepository.GetAll(x => x.Id == id);
+            var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj.FirstOrDefault());
+            return element;
+        }
+
     }
 }

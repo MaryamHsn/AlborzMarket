@@ -26,8 +26,9 @@ namespace AlborzMarket.Controllers
             _file = file;
             _uow = uow;
         }
-        public async Task<ActionResult> ShowById(int? id, CancellationToken ct = default(CancellationToken))
+        public async Task<ActionResult> ShowById(int id, CancellationToken ct = default(CancellationToken))
         {
+            id = 2;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,20 +38,24 @@ namespace AlborzMarket.Controllers
             {
                 return HttpNotFound();
             }
-            return View(entity);
+            //return View(entity);
+            return File(entity.Content, "image/jpg");
         }
         public async Task<ActionResult> ShowByEntityEnumKeyId(FileDTO model, CancellationToken ct = default(CancellationToken))
-        {
+        { 
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var entity = await _file.GetFilesByEntityEnumKeysAsync(model.EntityEnumId, model.EntityKeyId);
+            //model.EntityEnumId
+            var entity = await _file.GetFilesByEntityEnumKeysAsync(1, model.EntityKeyId);
             if (entity == null)
             {
                 return HttpNotFound();
             }
-            return View(entity);
+            return File(entity.FirstOrDefault().Content, "image/jpg");
+
+            //return View(entity);
         }
 
         public ActionResult CreateForProduct(int id)
@@ -100,6 +105,7 @@ namespace AlborzMarket.Controllers
 
             return View();
         }
+
         public async Task<ActionResult> Delete(int? id)
         {
             try
