@@ -5,15 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alborz.ServiceLayer.IService
-{ 
+{
     public interface IPriceService
     {
-        void AddNewPrice(PriceTbl Price);
-        IList<PriceTbl> GetAllPrices();
-        PriceTbl GetPrice(int? id);
-        //  int Delete(int id);
+        List<PriceDTO> GetAllPrices();
+        PriceDTO GetPrice(int? id);
         bool Delete(int id);
-        Task AddNewPriceAsync(PriceDTO Price, CancellationToken ct = new CancellationToken());
+        ////Async 
+        Task AddNewPriceAsync(PriceDTO price, CancellationToken ct = new CancellationToken());
         Task<List<PriceDTO>> GetAllPricesAsync(CancellationToken ct = new CancellationToken());
         Task<PriceDTO> GetPriceAsync(int? id, CancellationToken ct = new CancellationToken());
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());

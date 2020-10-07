@@ -93,16 +93,17 @@
         <div class="top-bar">
             <div class="container">
                 <div class="top-bar-left">
-                    @*<ul class="list-inline">
-                            <li class="icon-user"><a href="login.html"><img src="~/assets/img/icon-1.png" alt="" /> <span>ورود</span></a></li>
+                    <ul class="list-inline">
+                        @Html.Partial("_LoginPartial")
+
+                        @*<li class="icon-user"><a href="login.html"><img src="~/assets/img/icon-1.png" alt="" /> <span>ورود</span></a></li>
                             <li class="icon-form"><a href="login.html"><img src="~/assets/img/icon-2.png" alt="" /> <span>یک عضو نیستید؟ <span class="colored">ثبت نام</span></span></a></li>
-                            <li><a href="mailto:tahlildadehins@gmail.com"><i class="fa fa-envelope"></i> <span>tahlildadehins@gmail.com</span></a></li>
-                        </ul>*@
-                    @Html.Partial("_LoginPartial")
+                            <li><a href="mailto:tahlildadehins@gmail.com"><i class="fa fa-envelope"></i> <span>tahlildadehins@gmail.com</span></a></li>*@
+                    </ul> 
                 </div>
                 <div class="top-bar-right">
                     <ul class="list-inline">
-                       <li>شماره پشتیبانی : 09352425190</li>
+                        <li>شماره پشتیبانی : 09352425190</li>
                     </ul>
                 </div>
             </div>
@@ -125,14 +126,14 @@
                     </div>
                     <!-- /Header search -->
                     <!-- Header shopping cart -->
-                    @*<div class="header-cart">
+                    <div class="header-cart">
                         <div class="cart-wrapper">
-                            <a href="#" class="btn btn-theme-transparent" data-toggle="modal" data-target="#popup-cart"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"> ۰ آیتم - $۰.۰۰ </span> <i class="fa fa-angle-down"></i></a>
+                            @*<a href="#" class="btn btn-theme-transparent" data-toggle="modal" data-target="#popup-cart"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"> ۰ آیتم - $۰.۰۰ </span> <i class="fa fa-angle-down"></i></a>*@
                             <!-- Mobile menu toggle button -->
                             <a href="#" class="menu-toggle btn btn-theme-transparent"><i class="fa fa-bars"></i></a>
                             <!-- /Mobile menu toggle button -->
                         </div>
-                    </div>*@
+                    </div>
                     <!-- Header shopping cart -->
 
                 </div>
@@ -145,14 +146,14 @@
                         <ul class="nav sf-menu">
                             <li>
                                 @*<a href="index-2.html">صفحه اصلی</a>*@
-                            <a onclick="location.href='@Url.Action("Index","Home")';return false;"> صفحه اصلی</a>
+                                <a onclick="location.href='@Url.Action("Index","Home")';return false;"> صفحه اصلی</a>
 
                             </li>
                             <li>
-                                <a href="category.html">محصولات</a>
-                                <ul> 
-                                    @Html.Action("GetCategories", "Category") 
-                                </ul> 
+                                <a @*href="category.html"*@>محصولات</a>
+                                <ul>
+                                    @Html.Action("GetCategories", "Category")
+                                </ul>
                             </li>
                             <li>
                                 <a onclick="location.href='@Url.Action("Index","Home")';return false;">آموزش اوریگامی</a>
@@ -177,7 +178,7 @@
                         <div class="col-md-3">
                             <div class="widget">
                                 <h4 class="widget-title">راهنمای خرید</h4>
-                               <p>کالای مورد نظر خود را انتخاب کنید و با ما تماس بگیرید. خرید در تعداد بالا تخفیف دارد.همچنین می توانید ما را در شبکه های اجتماعی دنبال کنید</p>
+                                <p>کالای مورد نظر خود را انتخاب کنید و با ما تماس بگیرید. خرید در تعداد بالا تخفیف دارد.همچنین می توانید ما را در شبکه های اجتماعی دنبال کنید</p>
                                 <ul class="social-icons">
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
@@ -185,7 +186,7 @@
                                     <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
                                 </ul>
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-md-3">
                             <div class="widget widget-categories">
                                 <h4 class="widget-title">خدمات مشتریان</h4>
@@ -197,7 +198,7 @@
                                     <li><a href="#">حریم خصوصی</a></li>
                                 </ul>
                             </div>
-                        </div> 
+                        </div>
 
                     </div>
                 </div>
@@ -208,7 +209,7 @@
 
                         <div class="col-sm-6">
                             <div class="copyright">   همه حقوق محفوظ است |   طراحی شده توسط شرکت رویش</div>
-                        </div> 
+                        </div>
 
                     </div>
                 </div>

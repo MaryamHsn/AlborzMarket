@@ -640,6 +640,7 @@
     <Content Include="forms.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="index.html" />
     <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\bootstrap-table.js" />
     <Content Include="js\bootstrap.js" />

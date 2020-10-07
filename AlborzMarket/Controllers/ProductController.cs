@@ -17,7 +17,7 @@ namespace AlborzMarket.Controllers
 {
     public class ProductController : Controller
     {
-
+        readonly IPriceService _price;
         readonly IProductService _product;
         readonly ICategoryService _category;
         readonly IPropertyService _property;
@@ -25,12 +25,13 @@ namespace AlborzMarket.Controllers
         private ProductDTO common;
         private List<ProductDTO> commonList;
 
-        public ProductController(IUnitOfWork uow, IProductService product, ICategoryService category, IPropertyService property)
+        public ProductController(IUnitOfWork uow, IProductService product, ICategoryService category, IPropertyService property, IPriceService price)
         {
             _uow = uow;
             _product = product;
             _category = category;
             _product = product;
+            _price = price;
         }
         [HttpGet]
         public async Task<ActionResult> Index(ProductDTO model)
@@ -99,16 +100,23 @@ namespace AlborzMarket.Controllers
             model.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
-        public async Task<ActionResult> ProductsByCategory(int? categoryId)
-        { 
+        public async Task<ActionResult> ProductsByCategory(ProductDTO model)
+        {
             commonList = new List<ProductDTO>();
             common = new ProductDTO();
-            if (categoryId == null)
+            if (model.CategoryId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-          
-            var product = await _product.GetProductsByCategoryIdAsync(categoryId);
+            var product = await _product.GetProductsByCategoryIdAsync(model.CategoryId);
+            var prices = _price.GetAllPrices();
+            if (prices.Count > 0)
+            {
+                foreach (var item in product)
+                {
+                    item.Price = prices.Where(x => x.ProductId == item.Id).Any() ? prices.Where(x => x.ProductId == item.Id).OrderByDescending(x => x.Id).FirstOrDefault().Price : 0;
+                }
+            }
             if (common.SearchString != null)
             {
                 common.Page = 1;
@@ -116,6 +124,14 @@ namespace AlborzMarket.Controllers
             else
             {
                 common.SearchString = common.CurrentFilter;
+            }
+            if (!String.IsNullOrEmpty(model.SearchString))
+            {
+                product = await _product.GetProductsBySearchItemAsync(model.SearchString);
+            }
+            else
+            {
+                product = await _product.GetAllProductsAsync();
             }
             int pageSize = 10;
             int pageNumber = (common.Page ?? 1);

@@ -73,23 +73,17 @@
                         @{
                             foreach (var item in Model.Newest)
                             {
-                                
-
                             <div class="col-md-3 col-sm-6">
-
-
                                 <div class="thumbnail no-border no-padding">
                                     <div class="media">
                                         <a class="media-link" data-gal="prettyPhoto" href="~/assets/img/preview/shop/product-1-big.jpg">
-                                            @*<img src="~/assets/img/preview/shop/product-3.jpg" alt="" />*@
                                             <img src='@Url.Action( "ShowByEntityEnumKeyId", "File", new { EntityEnumId=EntityEnum.Product , EntityKeyId =item.Id})'  />
-
                                             <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
                                         </a>
                                     </div>
                                     <div class="caption text-center">
                                         <h4 class="caption-title"><a href="product-details.html">@item.Title</a></h4>
-                                        <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
+                                        <div class="price">@item.Price</div>
                                         @*<div class="buttons">
                                                 <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
                                                 <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
@@ -102,11 +96,8 @@
                                             </div>*@
                                     </div>
                                 </div>
-
-                                
                             </div>
                             }
-
                         }
                     </div>
                 </div>
@@ -134,25 +125,13 @@
                                     <div class="thumbnail no-border no-padding">
                                         <div class="media">
                                             <a class="media-link" data-gal="prettyPhoto" href="~/assets/img/preview/shop/product-1-big.jpg">
-                                                @*<img src="~/assets/img/preview/shop/product-3.jpg" alt="" />*@
                                                 <img src='@Url.Action( "ShowByEntityEnumKeyId", "File", new { EntityEnumId=EntityEnum.Product , EntityKeyId =item.Id})' alt="عکس مورد نظر یافت نشد" />
-
                                                 <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
                                             </a>
                                         </div>
                                         <div class="caption text-center">
                                             <h4 class="caption-title"><a href="product-details.html">@item.Title</a></h4>
                                             <div class="price"><ins>$۴۰۰.۰۰</ins> <del>$۴۲۵.۰۰</del></div>
-                                            @*<div class="buttons">
-                                        <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
-                                        <a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>
-                                        <!--
-                                        -->
-                                        <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
-                                        <!--
-                                        -->
-                                        <a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>
-                                    </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -164,7 +143,6 @@
         </div>
     </section>
     <!-- PAGE -->
-
     <section class="page-section no-padding-top">
         <div class="container">
             <div class="tabs">
@@ -207,6 +185,5 @@
         </div>
     </section>
     <!-- /PAGE -->
-
 </div>
 <!-- /CONTENT AREA -->

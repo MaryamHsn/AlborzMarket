@@ -5,9 +5,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
         </ul>
     }
 }
@@ -16,8 +16,13 @@ else {
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>*@  
-    <ul class="list-inline">
-        <li class="hidden-xs">@Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li class="hidden-xs">@Html.ActionLink("ورود", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+
+<ul class="list-inline">
+    @*<li class="icon-user"><a href="login.html"><img src="~/assets/img/icon-1.png" alt="" />@Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li class="icon-form"><a href="login.html"><img src="~/assets/img/icon-2.png" alt="" />@Html.ActionLink("ورود", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+   
+    <li class="icon-user"><a href="@Url.Action("Register", "Account", new {  id = "registerLink"  })"><img src="~/assets/img/icon-1.png" alt="" /> <span>ثبت نام</span> </a></li>
+    <li class="icon-user"><a href="@Url.Action("Login", "Account", new {  id = "loginLink"  })"><img src="~/assets/img/icon-2.png" alt="" />  <span>ورود</span></a></li>
+
+</ul>
 }
