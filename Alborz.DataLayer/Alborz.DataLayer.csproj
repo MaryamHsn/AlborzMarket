@@ -118,6 +118,18 @@
     <Compile Include="Migrations\202007081134564_product.Designer.cs">
       <DependentUpon>202007081134564_product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010070525407_editPriceTbl.cs" />
+    <Compile Include="Migrations\202010070525407_editPriceTbl.Designer.cs">
+      <DependentUpon>202010070525407_editPriceTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010070532441_addFieldPriceTbl.cs" />
+    <Compile Include="Migrations\202010070532441_addFieldPriceTbl.Designer.cs">
+      <DependentUpon>202010070532441_addFieldPriceTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010070721183_esitaddFieldPriceTbl.cs" />
+    <Compile Include="Migrations\202010070721183_esitaddFieldPriceTbl.Designer.cs">
+      <DependentUpon>202010070721183_esitaddFieldPriceTbl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
@@ -175,6 +187,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007081134564_product.resx">
       <DependentUpon>202007081134564_product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010070525407_editPriceTbl.resx">
+      <DependentUpon>202010070525407_editPriceTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010070532441_addFieldPriceTbl.resx">
+      <DependentUpon>202010070532441_addFieldPriceTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010070721183_esitaddFieldPriceTbl.resx">
+      <DependentUpon>202010070721183_esitaddFieldPriceTbl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using Alborz.DataLayer.Context;
+using Alborz.DomainLayer.DTO;
 using Alborz.DomainLayer.Entities;
 using Alborz.ServiceLayer.IService;
+using Alborz.ServiceLayer.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,21 +42,21 @@ namespace Alborz.ServiceLayer.Service
             return t;
         }
         ////Async 
-        public async Task AddNewPriceAsync(PriceTbl Price, CancellationToken ct = new CancellationToken())
+        public async Task AddNewPriceAsync(PriceDTO Price, CancellationToken ct = new CancellationToken())
         {
-            await _uow.PriceRepository.AddAsync(Price, ct);
+            await _uow.PriceRepository.AddAsync(BaseMapper<PriceDTO, PriceTbl>.Map(Price), ct);
             _uow.SaveAllChanges();
         }
-        public async Task<IList<PriceTbl>> GetAllPricesAsync(CancellationToken ct = new CancellationToken())
+        public async Task<List<PriceDTO>> GetAllPricesAsync(CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PriceRepository.GetAllAsync(ct);
-            //return obj.Select(PropertyKeyMapper.Map).Where(x => x.IsActive == true).ToList();
-            return obj.ToList();
+            return obj.Where(x => x.IsActive == true).Select(BaseMapper<PriceDTO,PriceTbl>.Map).ToList();
         }
-        public async Task<PriceTbl> GetPriceAsync(int? id, CancellationToken ct = new CancellationToken())
+        public async Task<PriceDTO> GetPriceAsync(int? id, CancellationToken ct = new CancellationToken())
         {
             var obj = await _uow.PriceRepository.GetAllAsync(x => x.Id == id);
-            return obj.FirstOrDefault();
+            var entity = BaseMapper<PriceDTO, PriceTbl>.Map(obj.FirstOrDefault());
+            return entity;
         }
         public async Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken())
         {
@@ -63,5 +65,36 @@ namespace Alborz.ServiceLayer.Service
             _uow.SaveAllChanges();
             return obj;
         }
+        public async Task<List<PriceDTO>> GetAllPricesOfProductDetailAsync(int productDetailId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PriceRepository.GetAllAsync(ct);
+            var elements = obj.Where(x => x.ProductDetailId== productDetailId && x.IsActive).Select(BaseMapper<PriceDTO, PriceTbl>.Map).ToList();
+            return elements;
+        }
+        public async Task<PriceDTO> GetLastPriceProductDetailAsync(int? productDetailId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PriceRepository.GetAllAsync(x => x.ProductDetailId == productDetailId && x.IsActive);
+            var element = obj.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
+            return BaseMapper<PriceDTO, PriceTbl>.Map(element); 
+        }
+          public async Task<IList<PriceDTO>> GetAllPricesOfProductAsync(int productId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PriceRepository.GetAllAsync(ct);
+            var elements = obj.Where(x => x.ProductId== productId && x.IsActive).Select(BaseMapper<PriceDTO, PriceTbl>.Map).ToList();
+            return elements;
+        }
+        public async Task<PriceDTO> GetLastPriceProductAsync(int? productId, CancellationToken ct = new CancellationToken())
+        {
+            var obj = await _uow.PriceRepository.GetAllAsync(x => x.ProductId == productId && x.IsActive);
+            var element = obj.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
+            return BaseMapper<PriceDTO, PriceTbl>.Map(element); 
+        }
+        public PriceDTO GetLastPriceProduct (int productId)
+        {
+            var obj = _uow.PriceRepository.GetAll(x => x.ProductId == productId && x.IsActive);
+            var element = obj.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
+            return BaseMapper<PriceDTO, PriceTbl>.Map(element); 
+        }
+
     }
 }

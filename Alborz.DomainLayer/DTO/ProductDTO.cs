@@ -30,6 +30,7 @@
         [Required(ErrorMessage = "وارد کردن برند اجباری است")]
         public string Brand { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
         public string SortOrder { get; set; }
         public string CurrentFilter { get; set; }
         public string SearchString { get; set; }

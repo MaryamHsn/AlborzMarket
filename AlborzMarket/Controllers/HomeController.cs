@@ -22,13 +22,8 @@ namespace AlborzMarket.Controllers
         public ActionResult Index()
         {
             common = new HomeDTO();
-            //common.Newest = _product.GetAllProducts();
-            //common.MostSale = _product.GetAllProducts();
-            common.Newest = new List<ProductDTO>();
-            common.Newest.Add(_product.GetProduct(10));
-            common.Newest.Add(_product.GetProduct(11));
-            common.Newest.Add(_product.GetProduct(46));
-            common.Newest.Add(_product.GetProduct(50));
+            common.Newest = _product.GetAllRecentProducts();
+            common.MostSale = _product.GetAllRecentProducts(); 
             return View(common);
         }
 

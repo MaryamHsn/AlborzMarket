@@ -8,14 +8,11 @@ namespace Alborz.DomainLayer.DTO
 
     public partial class PriceDTO : BaseDTO<int>
     { 
-        public int ProductId { get; set; }
-        public string ProductTitle { get; set; }
+        public int ProductDetailId { get; set; } 
+        public int ProductId { get; set; } 
         public int? Quantity { get; set; }
         public string Description { get; set; }
-        public string Currency { get; set; }
-        public DateTime? ValidDateFrom { get; set; }
-        public DateTime? ValidDateTo { get; set; }
-        public bool IsVAlid { get; set; }
-        public int Priority { get; set; }
+        public string Currency { get; set; } 
+        public bool IsValid { get; set; } 
     }
 }

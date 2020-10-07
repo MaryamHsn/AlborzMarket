@@ -16,6 +16,7 @@ namespace Alborz.ServiceLayer.IService
         Task<ProductDTO> UpdateProductAsync(ProductDTO entity);
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());
         List<ProductDTO> GetAllProducts();
+        List<ProductDTO> GetAllRecentProducts();
         ProductDTO GetProduct(int? id);
     }
 }
