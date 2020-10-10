@@ -18,5 +18,6 @@ namespace Alborz.ServiceLayer.IService
         List<ProductDTO> GetAllProducts();
         List<ProductDTO> GetAllRecentProducts();
         ProductDTO GetProduct(int? id);
+        List<ProductDTO> GetProductsBySearchItem(string searchItem);
     }
 }

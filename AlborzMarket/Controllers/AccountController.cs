@@ -191,7 +191,7 @@ namespace AlborzMarket.Controllers
             //}
             //else
             //{
-            ViewBag.ReturnUrl = returnUrl;
+                ViewBag.ReturnUrl = returnUrl;
             return View();
             //}
         }
@@ -254,7 +254,7 @@ namespace AlborzMarket.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> LogOff()
-        {
+         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name).ConfigureAwait(false);
             _authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             await _userManager.UpdateSecurityStampAsync(user.Id).ConfigureAwait(false); //signout everywhere

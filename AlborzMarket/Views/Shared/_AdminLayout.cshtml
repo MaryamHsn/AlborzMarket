@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>قالب مدیریت - داشبورد</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-rtl.css" rel="stylesheet" />
-    <link href="/css/datepicker3.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/css/datepicker3.css" rel="stylesheet">
+    <link href="~/css/styles.css" rel="stylesheet">
 
     <!--Icons-->
-    <script src="/js/lumino.glyphs.js"></script>
+    <script src="~/js/lumino.glyphs.js"></script>
     <script>
         // www.moisrex.rozblog.com
         function replace(txt, replacer, withthis) { return txt.replace(new RegExp(replacer, "gim"), withthis); }
@@ -44,23 +44,25 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><span>مدیریت</span>لومینو </a>
-                <ul class="user-menu">
-                    <li class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> کاربران <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> مشخصات</a></li>
-                            <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> تنظیمات</a></li>
-                            <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> خروج</a></li>
-                        </ul>
-                    </li>
+                @*<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span>مدیریت</span>لومینو </a>
+        <ul class="user-menu">
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> کاربران <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> مشخصات</a></li>
+                    <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> تنظیمات</a></li>
+                    <li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> خروج</a></li>
                 </ul>
+            </li>
+        </ul>*@
+                @Html.Partial("_LoginPartial")
+
             </div>
 
         </div><!-- /.container-fluid -->
@@ -73,37 +75,37 @@
             </div>
         </form>
         <ul class="nav menu">
-            <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> داشبورد</a></li>
-            <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> ابزارها</a></li>
-            <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>نمودار</a></li>
-            <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> جدول ها</a></li>
-            <li><a href="forms.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> فرمها</a></li>
-            <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg>پنل ها &amp; هشدارها </a></li>
-            <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> آیکون ها</a></li>
-            <li class="parent ">
-                <a href="#">
-                    <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> منو کشویی
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 1
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 2
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="#">
-                            <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 3
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> ورود کاربران</a></li>
+            <li class="active"><a href="@Url.Action("Create", "Category")"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> اضافه کردن دسته بندی</a></li>
+            <li><a href="@Url.Action("Create", "Product" )"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> اضافه کردن محصول</a></li>
+            <li><a href="@Url.Action("Index", "Product" )"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg>نمایش محصول</a></li>
+            @*<li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> جدول ها</a></li>
+        <li><a href="forms.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> فرمها</a></li>
+        <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg>پنل ها &amp; هشدارها </a></li>
+        <li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> آیکون ها</a></li>
+        <li class="parent ">
+            <a href="#">
+                <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> منو کشویی
+            </a>
+            <ul class="children collapse" id="sub-item-1">
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 1
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 2
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> آیتم 3
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> ورود کاربران</a></li>*@
         </ul>
 
     </div><!--/.sidebar-->
@@ -126,13 +128,13 @@
 
     </div>
 
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/chart.min.js"></script>
-    <script src="/js/chart-data.js"></script>
-    <script src="/js/easypiechart.js"></script>
-    <script src="/js/easypiechart-data.js"></script>
-    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/chart.min.js"></script>
+    <script src="~/js/chart-data.js"></script>
+    <script src="~/js/easypiechart.js"></script>
+    <script src="~/js/easypiechart-data.js"></script>
+    <script src="~/js/bootstrap-datepicker.js"></script>
     <script>
         $('#calendar').datepicker({
         });

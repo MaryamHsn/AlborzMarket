@@ -1,12 +1,12 @@
-﻿@*@model Alborz.DomainLayer.DTO.ProductDTO*@
+﻿
+@*@model Alborz.DomainLayer.DTO.ProductDTO*@
 @*@model PagedList.IPagedList<Alborz.DomainLayer.DTO.ProductDTO>*@
 @*@model  List<Alborz.DomainLayer.DTO.ProductDTO>*@
 @model Alborz.DomainLayer.DTO.ProductDTO
 @using PagedList.Mvc;
 @using Alborz.DomainLayer.Enumration;
 @{
-    ViewBag.Title = "ProductsByCategory";
-    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "ProductsByTitle";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
     var categories = new List<Alborz.DomainLayer.DTO.CategoryDTO>();
     var childrenCategories = new List<Alborz.DomainLayer.DTO.CategoryDTO>();
@@ -19,17 +19,17 @@
 
         <!-- BREADCRUMBS -->
         @*<section class="page-section breadcrumbs">
-            <div class="container">
-                <div class="page-header">
-                    <h1>صفحه دسته بندی</h1>
+                <div class="container">
+                    <div class="page-header">
+                        <h1>صفحه دسته بندی</h1>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li><a href="#">خانه</a></li>
+                        <li><a href="#">فروشگاه</a></li>
+                        <li class="active">صفحه نمایش دسته بندی شبکه ای با نوار کناری چپ</li>
+                    </ul>
                 </div>
-                <ul class="breadcrumb">
-                    <li><a href="#">خانه</a></li>
-                    <li><a href="#">فروشگاه</a></li>
-                    <li class="active">صفحه نمایش دسته بندی شبکه ای با نوار کناری چپ</li>
-                </ul>
-            </div>
-        </section>*@
+            </section>*@
         <!-- /BREADCRUMBS -->
         <!-- PAGE WITH SIDEBAR -->
         <section class="page-section with-sidebar">
@@ -39,16 +39,16 @@
                     <aside class="col-md-3 sidebar" id="sidebar">
                         <!-- widget search -->
                         @*@using (Html.BeginForm("Index", "Product", FormMethod.Get))
-                        {
-                     
-                            <div class="widget">
-                                <div class="widget-search">
-                                    @Html.TextBoxFor(model => model.CurrentFilter, new { placeholder = "جستجو", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CurrentFilter, "", new { @class = "text-danger" })
-                                    <button><i class="fa fa-search"></i></button>
+                            {
+
+                                <div class="widget">
+                                    <div class="widget-search">
+                                        @Html.TextBoxFor(model => model.CurrentFilter, new { placeholder = "جستجو", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CurrentFilter, "", new { @class = "text-danger" })
+                                        <button><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
-                            </div> 
-                        }*@
+                            }*@
 
                         <!-- /widget search -->
                         <!-- widget shop categories -->
@@ -69,7 +69,7 @@
                                                     @for (int j = 0; j < childrenCategories.Count; j++)
                                                     {
                                                         <li>
-                                                            <a >@childrenCategories[j].Title</a>
+                                                            <a>@childrenCategories[j].Title</a>
                                                             @*@Html.DisplayFor(modelItem => modelItem.categories[i])*@
                                                             @*<input type="hidden" name="BankAccountNumbers[@i].RegionId" value=@temp />*@
 
@@ -129,17 +129,17 @@
                                                 <div class="buttons">
                                                     @*<a class="btn btn-theme btn-theme-transparent btn-wish-list" href="#"><i class="fa fa-heart"></i></a>*@
                                                     <!--
-        -->
+                                                    -->
                                                     <a class="btn btn-theme btn-theme-transparent btn-icon-left" href="#"><i class="fa fa-shopping-cart"></i>سبد خرید</a>
                                                     <!--
-        -->
+                                                    -->
                                                     @*<a class="btn btn-theme btn-theme-transparent btn-compare" href="#"><i class="fa fa-exchange"></i></a>*@
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 }
-                            } 
+                            }
                         </div>
                         <!-- /Products grid -->
                         <!-- Pagination -->
@@ -148,7 +148,7 @@
                             صفحه @(Model.ProductsPageList.PageCount < Model.ProductsPageList.PageNumber ? 0 : Model.ProductsPageList.PageNumber) از @Model.ProductsPageList.PageCount
                         </p>
                         @Html.PagedListPager(Model.ProductsPageList, page => Url.Action("ProductsByCategory",
-                            new { page =Model.ProductsPageList.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter,CategoryId=Model.CategoryId }))
+                            new { page = Model.ProductsPageList, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, CategoryId = Model.CategoryId }))
                         <!-- /Pagination -->
                     </div>
                     <!-- /CONTENT -->
@@ -163,3 +163,4 @@
     <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
 
 </div>
+

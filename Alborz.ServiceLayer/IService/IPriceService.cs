@@ -13,6 +13,7 @@ namespace Alborz.ServiceLayer.IService
         bool Delete(int id);
         ////Async 
         Task AddNewPriceAsync(PriceDTO price, CancellationToken ct = new CancellationToken());
+        Task<PriceDTO> UpdatePriceAsync(PriceDTO entity);
         Task<List<PriceDTO>> GetAllPricesAsync(CancellationToken ct = new CancellationToken());
         Task<PriceDTO> GetPriceAsync(int? id, CancellationToken ct = new CancellationToken());
         Task<bool> DeleteAsync(int id, CancellationToken ct = new CancellationToken());

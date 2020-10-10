@@ -57,36 +57,34 @@
             <!--  ==========  -->
         </fieldset>
         <fieldset>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">ثبت رنگ و تعداد</div>
-                        <div class="panel-body">
-                            <div class="col-md-6">
-                                <form role="form">
-                                    <input type="button" value="+"  id="addAnother" onclick="call()">
-                                    <div id="content">
+        
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">ثبت رنگ و تعداد</div>
+                            <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <form role="form">
+                                            <input type="button" value="+" id="addAnother" onclick="call()">
+                                   
+                                            <table id="movieEditor" style="list-style-type: none" >
+                                                    @foreach (var item in Model.ProductDetails)
+                                                    {
+                                                        @Html.Partial("ProductDetailsEntry", item)
+                                                        
+                                                    } 
+                                                </table>
+                                        </form>
                                     </div>
-                                    <table id="showList">
-                                        <tr id="movieEditor" style="list-style-type: none">
-                                            @foreach (var item in Model.ProductDetails)
-                                            {
-                                                @Html.Partial("ProductDetailsEntry", item) 
-                                            } 
-
-                                        </tr>
-                                    </table> 
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!--  ==========  -->
-            <!--  = /for content =  -->
-            <!--  ==========  -->
-        </fieldset>
+                <!--  ==========  -->
+                <!--  = /for content =  -->
+                <!--  ==========  -->
+            </fieldset>
 
         <div class="col-md-6">
             <button type="submit" class="btn btn-primary">دکمه ثبت </button>

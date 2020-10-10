@@ -1,28 +1,50 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated) {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Admin", routeValues: null, htmlAttributes: new { title = "Admin" })
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+                        }
+                    }
+                    else
+                    {
+                        @Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "Home" })
+                    }
+                }
+                @*@Html.ActionLink("خوش آمدید " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Admin" })*@
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
         </ul>
     }
 }
-else {
+else
+{
     @*<ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>*@  
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>*@
 
-<ul class="list-inline">
-    @*<li class="icon-user"><a href="login.html"><img src="~/assets/img/icon-1.png" alt="" />@Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-    <li class="icon-form"><a href="login.html"><img src="~/assets/img/icon-2.png" alt="" />@Html.ActionLink("ورود", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-   
-    <li class="icon-user"><a href="@Url.Action("Register", "Account", new {  id = "registerLink"  })"><img src="~/assets/img/icon-1.png" alt="" /> <span>ثبت نام</span> </a></li>
-    <li class="icon-user"><a href="@Url.Action("Login", "Account", new {  id = "loginLink"  })"><img src="~/assets/img/icon-2.png" alt="" />  <span>ورود</span></a></li>
+    <ul class="list-inline">
+        @*<li class="icon-user"><a href="login.html"><img src="~/assets/img/icon-1.png" alt="" />@Html.ActionLink("ثبت نام", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li class="icon-form"><a href="login.html"><img src="~/assets/img/icon-2.png" alt="" />@Html.ActionLink("ورود", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
-</ul>
+        @*<li class="icon-user"><a href="@Url.Action("Register", "Account", new {  id = "registerLink"  })"><img src="~/assets/img/icon-1.png" alt="" /> <span>ثبت نام</span> </a></li>*@
+        <li class="icon-user"><a href="@Url.Action("Login", "Account", new {  id = "loginLink"  })"><img src="~/assets/img/icon-2.png" alt="" />  <span>ورود</span></a></li>
+
+    </ul>
 }

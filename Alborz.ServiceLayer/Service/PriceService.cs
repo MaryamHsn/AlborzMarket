@@ -51,8 +51,19 @@ namespace Alborz.ServiceLayer.Service
         {
             price.IsActive = true;
             price.IsValid = true;
+            price.Currency = "تومان";
             await _uow.PriceRepository.AddAsync(BaseMapper<PriceDTO, PriceTbl>.Map(price), ct);
             _uow.SaveAllChanges();
+        }
+        public async Task<PriceDTO> UpdatePriceAsync(PriceDTO entity)
+        {
+            var obj = BaseMapper<PriceDTO, PriceTbl>.Map(entity);
+           
+            obj.IsActive = true;
+            obj = await _uow.PriceRepository.UpdateAsync(obj);
+            _uow.SaveAllChanges();
+            var element = BaseMapper<PriceDTO, PriceTbl>.Map(obj);
+            return element;
         }
         public async Task<List<PriceDTO>> GetAllPricesAsync(CancellationToken ct = new CancellationToken())
         {

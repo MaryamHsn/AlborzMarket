@@ -79,8 +79,20 @@ namespace Alborz.ServiceLayer.Service
         }
         public async Task<List<ProductDTO>> GetProductsBySearchItemAsync(string searchItem, CancellationToken ct = new CancellationToken())
         {
-            var product = await GetAllProductsAsync();
-            return product.Where(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.Brand.ToString().Contains(searchItem)|| s.Categories.Select(x=>x.Title.Contains(searchItem)).FirstOrDefault()).ToList();
+            try
+            {
+                var test =_uow.ProductRepository.GetAll(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.Brand.Contains(searchItem)).ToList();
+
+                var product = await _uow.ProductRepository.GetAllAsync();
+                var list = product.Where(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.Brand.Contains(searchItem) ).ToList();
+
+                return list.Select(BaseMapper<ProductDTO, ProductTbl>.Map).ToList();
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
         }
         public async Task<List<ProductDTO>> GetProductsByCategoryIdAsync(int? categoryId, CancellationToken ct = new CancellationToken())
         {
@@ -153,6 +165,20 @@ namespace Alborz.ServiceLayer.Service
             var element = BaseMapper<ProductDTO, ProductTbl>.Map(obj.FirstOrDefault());
             return element;
         }
+        public List<ProductDTO> GetProductsBySearchItem(string searchItem)
+        {
+            try
+            {
+                var list = _uow.ProductRepository.GetAll(s => s.Title.Contains(searchItem) || s.Code.Contains(searchItem) || s.Brand.Contains(searchItem)).ToList();
+                return list.Select(BaseMapper<ProductDTO, ProductTbl>.Map).ToList();
+            }
+            catch (System.Exception e)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

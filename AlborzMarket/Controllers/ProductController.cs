@@ -100,15 +100,15 @@ namespace AlborzMarket.Controllers
             model.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
             return View(model);
         }
-        public async Task<ActionResult> ProductsByCategory(ProductDTO model)
+        public async Task<ActionResult> ProductsByTitle(string searchItem)
         {
             commonList = new List<ProductDTO>();
             common = new ProductDTO();
-            if (model.CategoryId == null)
+            if (string.IsNullOrEmpty(searchItem))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("index","home");
             }
-            var product = await _product.GetProductsByCategoryIdAsync(model.CategoryId);
+            var product = _product.GetProductsBySearchItem(searchItem);
             var prices = _price.GetAllPrices();
             if (prices.Count > 0)
             {
@@ -117,17 +117,17 @@ namespace AlborzMarket.Controllers
                     item.Price = prices.Where(x => x.ProductId == item.Id).Any() ? prices.Where(x => x.ProductId == item.Id).OrderByDescending(x => x.Id).FirstOrDefault().Price : 0;
                 }
             }
-            if (common.SearchString != null)
+            //if (common.SearchString != null)
+            //{
+            //    common.Page = 1;
+            //}
+            //else
+            //{
+            //    common.SearchString = common.CurrentFilter;
+            //}
+            if (!String.IsNullOrEmpty(searchItem))
             {
-                common.Page = 1;
-            }
-            else
-            {
-                common.SearchString = common.CurrentFilter;
-            }
-            if (!String.IsNullOrEmpty(model.SearchString))
-            {
-                product = await _product.GetProductsBySearchItemAsync(model.SearchString);
+                product = _product.GetProductsBySearchItem(searchItem);
             }
             else
             {
@@ -137,6 +137,49 @@ namespace AlborzMarket.Controllers
             int pageNumber = (common.Page ?? 1);
             common.Categories = await _category.GetAllCategoriesAsync();
             common.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
+            return View(common);
+            //return View(product);
+        }
+        
+        public async Task<ActionResult> ProductsByCategory(ProductDTO model)
+        {
+            commonList = new List<ProductDTO>();
+            common = new ProductDTO();
+            if (model.CategoryId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = new List<ProductDTO>();
+            var prices = _price.GetAllPrices();
+   
+            //if (common.SearchString != null)
+            //{
+            //    common.Page = 1;
+            //}
+            //else
+            //{
+            //    common.SearchString = common.CurrentFilter;
+            //}
+            if (!String.IsNullOrEmpty(model.SearchString))
+            {
+                product =  _product.GetProductsBySearchItem(model.SearchString);
+            }
+            else
+            {
+                product =await  _product.GetProductsByCategoryIdAsync(model.CategoryId);
+            }
+            if (prices.Count > 0)
+            {
+                foreach (var item in product)
+                {
+                    item.Price = prices.Where(x => x.ProductId == item.Id).Any() ? prices.Where(x => x.ProductId == item.Id).OrderByDescending(x => x.Id).FirstOrDefault().Price : 0;
+                }
+            }
+            int pageSize = 10;
+            int pageNumber = (common.Page ?? 1);
+            common.Categories = await _category.GetAllCategoriesAsync();
+            common.ProductsPageList = product.ToPagedList(pageNumber, pageSize);
+            common.CategoryId = model.CategoryId;
             return View(common);
             //return View(product);
         }
@@ -190,6 +233,12 @@ namespace AlborzMarket.Controllers
                         if (ModelState.IsValid)
                         {
                             var product = await _product.AddNewProductAsync(model);
+                            var price = new PriceDTO
+                            {
+                                ProductId = model.ProductId,
+                                Price = model.Price
+                            };
+                            await _price.AddNewPriceAsync(price);
                             _uow.SaveAllChanges();
                             return RedirectToAction("create", "ProductDetail", new { id = product.Id });
                         }
@@ -243,6 +292,12 @@ namespace AlborzMarket.Controllers
                     {
                         product.Categories = await _category.GetAllCategoriesAsync();
                         await _product.UpdateProductAsync(product);
+                        var price = new PriceDTO
+                        {
+                            ProductId = product.ProductId,
+                            Price = product.Price
+                        };
+                         await _price.AddNewPriceAsync(price);
                     }
                     if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
                     {

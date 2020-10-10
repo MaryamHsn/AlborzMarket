@@ -1,25 +1,28 @@
 ﻿@using HtmlHelpers.BeginCollectionItem
 @model Alborz.DomainLayer.DTO.ProductDetailDTO
 
+     
+        <tr  >
+            <td>
+                @using (Html.BeginCollectionItem("ProductDetails"))
+                {
 
-<td>
-    @using (Html.BeginCollectionItem("ProductDetails"))
-    {
+                    <p class="control-label col-md-5">رنگ :</p>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(x => Model.ColorId, new SelectList(Model.Colors, "Id", "Title"), "انتخاب کنید", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })
 
-        <p class="control-label col-md-5">رنگ :</p>
-        <div class="col-md-7">
-            @Html.DropDownListFor(x => Model.ColorId, new SelectList(Model.Colors, "Id", "Title"), "انتخاب کنید", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })
+                        @*@Html.EditorFor(model => model.ColorId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })*@
+                    </div>
 
-            @*@Html.EditorFor(model => model.ColorId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })*@
-        </div>
-
-        <p class="control-label col-md-5">تعداد :</p>
-        <div class="col-md-7">
-            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-        </div>
-        <a href="#" onclick="$(this).parent().remove();">Delete</a>
-    }
-</td>
+                    <p class="control-label col-md-5">تعداد :</p>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </div>
+                    <a href="#" onclick="$(this).parent().remove();">حذف</a>
+                }
+            </td> 
+        </tr> 
+ 
