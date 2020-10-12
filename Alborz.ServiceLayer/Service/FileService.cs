@@ -86,7 +86,7 @@ namespace Alborz.ServiceLayer.Service
         {
             var obj = BaseMapper<FileDTO, FileTbl>.Map(entity);
             obj.IsActive = true;
-            obj = await _uow.FileRepository.UpdateAsync(obj);
+             obj = await _uow.FileRepository.UpdateAsync(obj);
             _uow.SaveAllChanges();
             var element = BaseMapper<FileDTO, FileTbl>.Map(obj);
             return element;

@@ -141,7 +141,7 @@ namespace AlborzMarket.Controllers
                     if (User.IsInRole("Admin"))
                     {
                         rout.Categories = await _category.GetAllCategoriesAsync();
-                        if (ModelState.IsValid)
+                         if (ModelState.IsValid)
                         {
                             await _category.AddNewCategoryAsync(rout);
                             _uow.SaveAllChanges();

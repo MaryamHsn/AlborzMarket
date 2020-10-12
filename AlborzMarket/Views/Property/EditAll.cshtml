@@ -1,15 +1,19 @@
 ﻿
-@model List<Alborz.DomainLayer.DTO.PropertyDTO>
+@model  Alborz.DomainLayer.DTO.PropertyDTO
 
 @{
     ViewBag.Title = "EditAll";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    @Styles.Render("~/css/stylesheets/main.css");
+
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProductId)
+    @Html.HiddenFor(model => model.Id)
 
     <div class="form-horizontal">
 
@@ -18,7 +22,36 @@
                 <h1 class="page-header"> محصولات</h1>
             </div>
         </div>
+        <!--  ==========  -->
+        <!--  = Steps =  -->
+        <!--  ==========  -->
+        <div class="checkout-steps">
+            <div class="clearfix">
+                <div class="step done ">
+                    <div class="step-badge"><i class="icon-ok"></i></div>
+                    <a onclick="location.href='@Url.Action("Edit","Product", new {id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت محصول </a>
 
+                </div>
+                <div class="step done">
+                    <div class="step-badge"><i class="icon-ok"></i></div>
+                    <a onclick="location.href='@Url.Action("EditAll","ProductDetail", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت رنگ و تعداد </a>
+
+                </div>
+                <div class="step done">
+                    <div class="step-badge">3</div>
+                    <a onclick="location.href='@Url.Action("EditAll","Property", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت ویژگی </a>
+
+                </div>
+                <div class="step active">
+                    <div class="step-badge">4</div>
+
+                    <a onclick="location.href='@Url.Action("CreateForProduct","File", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت تصویر   </a>
+
+                </div>
+            </div>
+        </div>
+        <!-- /steps -->
+        <!--  ==========  -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -26,41 +59,19 @@
                     <div class="panel-body">
                         <div class="col-md-6">
                             <form role="form">
-                                @for (int i = 0; i < Model.Count; i++)
-                                {
-                                    <div class="form-group">
-                                        <label class="control-label col-md-5">ویژگی @i :</label>
-                                        <div class="col-md-7">
-                                            @Html.EditorFor(model => model[i].Title, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model[i].Title, "", new { @class = "text-danger" })
 
-                                        </div> 
-                                        <label class="control-label col-md-5">مقدار :</label>
-                                        <div class="col-md-7">
-                                            @Html.EditorFor(model => model[i].Value, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model[i].Value, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                }
-                                @*@foreach (var item in Model)
-                                {
-                                    <div class="form-group">
-                                        <p class="control-label col-md-5">رنگ :</p>
-                                        <div class="col-md-7">
-                                            @Html.EditorFor(model => item.Title, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => item.Title, "", new { @class = "text-danger" })
+                                <input type="button" value="+" id="addAnother" onclick="call()">
+                                <table id="showList">
+                                    <tr id="movieEditor" style="list-style-type: none">
+                                        @foreach (var item in Model.Properties)
+                                        {
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <p class="control-label col-md-5">تعداد :</p>
-                                        <div class="col-md-7">
-                                            @Html.EditorFor(model => item.Value, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => item.Value, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                }*@
+                                            @Html.Partial("PropertyEntry", item)
 
+                                        }
+
+                                    </tr>
+                                </table>
                             </form>
                         </div>
                     </div>
@@ -69,7 +80,7 @@
         </div>
 
         <div class="col-md-6">
-            <button type="submit" class="btn btn-primary">دکمه ثبت </button>
+            <button type="submit" class="btn btn-primary">ثبت </button>
         </div>
     </div>
 }
@@ -78,4 +89,10 @@
     @Html.ActionLink("بازگشت به لیست", "Index")
 </div>
 
-
+<script type="text/javascript">
+    function call() {
+        $.get('/Property/PropertyEntry', function (template) {
+            $("#movieEditor").append(template);
+        });
+    }
+</script>

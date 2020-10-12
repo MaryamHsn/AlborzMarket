@@ -118,9 +118,9 @@
                                             <div class="media">
                                                 <a class="media-link" href="#">
                                                     <img src='@Url.Action( "ShowByEntityEnumKeyId", "File", new { EntityEnumId=EntityEnum.Product , EntityKeyId =item.Id})' alt="عکس مورد نظر یافت نشد" />
-                                                    <span class="icon-view">
+                                                    @*<span class="icon-view">
                                                         <strong><i class="fa fa-eye"></i></strong>
-                                                    </span>
+                                                    </span>*@
                                                 </a>
                                             </div>
                                             <div class="caption text-center">
@@ -148,7 +148,7 @@
                             صفحه @(Model.ProductsPageList.PageCount < Model.ProductsPageList.PageNumber ? 0 : Model.ProductsPageList.PageNumber) از @Model.ProductsPageList.PageCount
                         </p>
                         @Html.PagedListPager(Model.ProductsPageList, page => Url.Action("ProductsByCategory",
-                            new { page =Model.ProductsPageList.PageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter,CategoryId=Model.CategoryId }))
+                            new { page , sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter,CategoryId=Model.CategoryId }))
                         <!-- /Pagination -->
                     </div>
                     <!-- /CONTENT -->

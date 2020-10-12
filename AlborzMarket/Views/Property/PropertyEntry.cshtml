@@ -1,26 +1,29 @@
 ﻿@using HtmlHelpers.BeginCollectionItem
 @model Alborz.DomainLayer.DTO.PropertyDTO
 
+    <tr>
+        <td>
+            @using (Html.BeginCollectionItem("Properties"))
+            {
 
-    <td>
-        @using (Html.BeginCollectionItem("Properties"))
-        {
 
-
-            <div class="form-group">
-                <p class="control-label col-md-5">عنوان :</p>
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <p class="control-label col-md-5">عنوان :</p>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        @*@Html.HiddenFor(model => model.ProductId)*@
+                       
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <p class="control-label col-md-5">مقدار :</p>
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <p class="control-label col-md-5">مقدار :</p>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <a href="#" onclick="$(this).parent().remove();">Delete</a>
-        }
-    </td>
+                <a href="#" onclick="$(this).parent().remove();">حذف</a>
+            }
+        </td>
+    </tr>

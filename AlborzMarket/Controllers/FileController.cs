@@ -48,7 +48,7 @@ namespace AlborzMarket.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //model.EntityEnumId
-            var entity = await _file.GetFilesByEntityEnumKeysAsync(1, model.EntityKeyId);
+            var entity = await _file.GetFilesByEntityEnumKeysAsync((int)FileEntityEnum.Product, model.EntityKeyId);
             if (entity == null)
             {
                 return HttpNotFound();
@@ -71,16 +71,28 @@ namespace AlborzMarket.Controllers
                         ProductId =id,
                         Files = new List<HttpPostedFileBase>()
                     };
+                    common.ProductId = id;
                     return View(common);
                 }
             }
             return RedirectToAction("login", "Account");
         }
         [HttpPost]
-        public ActionResult CreateForProduct(FileDTO model)
+        public async  Task<ActionResult> CreateForProduct(FileDTO model)
         {
             if (ModelState.IsValid)
-            {
+            { 
+            var existFile = await _file.GetFilesByEntityEnumKeysAsync((int)FileEntityEnum.Product, model.EntityKeyId);
+
+                if (existFile.Any())
+                {
+                    foreach (var item in existFile)
+                    {
+                        item.IsActive = false;
+                        await _file.DeleteAsync(item.Id);
+
+                    }
+                }
                 foreach (var file in model.Files)
                 {
                     //file.File.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.Title)));

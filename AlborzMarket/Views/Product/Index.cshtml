@@ -37,14 +37,14 @@
             @Html.ActionLink("عنوان", "Index", new { sortOrder = ViewBag.Title, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
-            @Html.ActionLink("کد", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.CurrentFilter })
+            @Html.ActionLink("قیمت", "Index", new { sortOrder = ViewBag.Code, currentFilter = Model.CurrentFilter })
         </th>
         <th class="table-sort-th">
             @Html.ActionLink("برند", "Index", new { sortOrder = ViewBag.Brand, currentFilter = Model.CurrentFilter })
         </th>
-        <th class="table-sort-th">
+        @*<th class="table-sort-th">
             @Html.ActionLink("قابل فروش", "Index", new { sortOrder = ViewBag.IsBuyable, currentFilter = Model.CurrentFilter })
-        </th>
+        </th>*@
         @*<th class="table-sort-th">
             @Html.ActionLink("رنگ", "Index", new { sortOrder = ViewBag.Quantity, currentFilter = Model.CurrentFilter })
         </th>
@@ -69,14 +69,14 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Code)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsBuyable)
-            </td>
+            </td>*@
             @*@foreach (var detail in item.ProductDetails)
             {
                 <td>
@@ -87,9 +87,8 @@
                 </td>
             }*@
             <td>
-                @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) |
-                @*@Html.ActionLink("جزئیات", "Details", new { id = item.Id }) |*@
-                @Html.ActionLink("ویژگی ها", "Index", "Property", null, new { id = item.Id })
+                @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) 
+                @*@Html.ActionLink("جزئیات", "Details", new { id = item.Id }) |*@ 
                 @*@Html.ActionLink("حذف", "Delete", new { id = item.DriverId })*@
             </td>
         </tr>

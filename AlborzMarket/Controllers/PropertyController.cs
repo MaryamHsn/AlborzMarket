@@ -75,6 +75,10 @@ namespace AlborzMarket.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+                    if (model.Properties == null)
+                    {
+                        return RedirectToAction("CreateForProduct", "File", new { id = model.ProductId });
+                    }
                     foreach (var item in model.Properties)
                     {
                         item.ProductId = model.ProductId;
@@ -198,14 +202,20 @@ namespace AlborzMarket.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
+                    common = new PropertyDTO();
                     var property = await _property.GetAllPropertiesByProductIdAsync(id);
                     if (property == null)
                     {
                         return HttpNotFound();
                     }
-                    ViewBag.ReturnController = returnController;
-                    ViewBag.ReturnAction = returnAction;
-                    return View(property);
+                    foreach (var item in property)
+                    { 
+                        item.ProductId = (int)id;
+                        item.Id = (int)id;
+                    }
+                    common.Properties = property;
+                    common.ProductId =(int) id;
+                    return View(common);
                 }
             }
             return RedirectToAction("login", "Account");
@@ -214,28 +224,41 @@ namespace AlborzMarket.Controllers
         //[Authorize(Roles = "admin , SuperViser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAll(List<PropertyDTO> propertys, string returnController, string returnAction)
-        {
+        public async Task<ActionResult> EditAll( PropertyDTO property, string returnController, string returnAction)
+            {
             try
             {
                 if (User.Identity.IsAuthenticated)
                 {
                     if (User.IsInRole("Admin"))
                     {
-                        if (ModelState.IsValid)
+                        if (property.Properties!=null)
                         {
-                            await _property.UpdateAllPropertiesAsync(propertys);
-                            if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
+                            foreach (var item in property.Properties)
                             {
-                                return RedirectToAction(returnAction, returnController, new { id = propertys.FirstOrDefault().ProductId });
+                                item.ProductId = property.ProductId;
                             }
                         }
-                        return RedirectToAction("Index");
+                            var exist = await _property.GetAllPropertiesByProductIdAsync((int)property.Id);
+                            if (exist.Any())
+                            {
+                                foreach (var item in exist)
+                                {
+                                    await _property.DeleteByProductIdAsync((int)item.ProductId);
+                                }
+                            }
+                            if (property.Properties != null)
+                            {
+                                await _property.AddAllPropertiesAsync(property.Properties);
+                            }
+                            _uow.SaveAllChanges();
+                        
+                        return RedirectToAction("Index","product");
                     }
                 }
                 return RedirectToAction("login", "Account");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return View("Index");
             }

@@ -21,6 +21,6 @@ namespace Alborz.ServiceLayer.IService
         Task<PriceDTO> GetLastPriceProductDetailAsync(int? productDetailId, CancellationToken ct = new CancellationToken());
         Task<IList<PriceDTO>> GetAllPricesOfProductAsync(int productId, CancellationToken ct = new CancellationToken());
         Task<PriceDTO> GetLastPriceProductAsync(int? productId, CancellationToken ct = new CancellationToken());
-        PriceDTO GetLastPriceProduct(int productId);
+        PriceDTO GetLastPriceProduct(int? productId);
     }
 }

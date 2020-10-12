@@ -107,11 +107,16 @@ namespace Alborz.ServiceLayer.Service
             var element = obj.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
             return BaseMapper<PriceDTO, PriceTbl>.Map(element);
         }
-        public PriceDTO GetLastPriceProduct(int productId)
+        public PriceDTO GetLastPriceProduct(int? productId)
         {
             var obj = _uow.PriceRepository.GetAll(x => x.ProductId == productId && x.IsActive);
             var element = obj.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
-            return BaseMapper<PriceDTO, PriceTbl>.Map(element);
+            if (element !=null)
+            {
+                return BaseMapper<PriceDTO, PriceTbl>.Map(element);
+
+            }
+            return new PriceDTO();
         }
 
     }

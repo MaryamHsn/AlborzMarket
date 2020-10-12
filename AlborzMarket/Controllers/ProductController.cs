@@ -53,6 +53,12 @@ namespace AlborzMarket.Controllers
                 model.SearchString = model.CurrentFilter;
             }
             var product = await _product.GetAllProductsAsync();
+            foreach (var item in product)
+            {
+                var price = _price.GetLastPriceProduct(item.Id).Price;
+
+                item.Price =  price!= null ? price :0 ;
+            }
             //if (!String.IsNullOrEmpty(model.SearchString))
             //{
             //    product = await _product.GetProductsBySearchItemAsync(model.SearchString);
@@ -235,7 +241,7 @@ namespace AlborzMarket.Controllers
                             var product = await _product.AddNewProductAsync(model);
                             var price = new PriceDTO
                             {
-                                ProductId = model.ProductId,
+                                ProductId = product.Id,
                                 Price = model.Price
                             };
                             await _price.AddNewPriceAsync(price);
@@ -269,10 +275,12 @@ namespace AlborzMarket.Controllers
                     {
                         return HttpNotFound();
                     }
-                    ViewBag.ReturnController = returnController;
-                    ViewBag.ReturnAction = returnAction;
+                    //ViewBag.ReturnController = returnController;
+                    //ViewBag.ReturnAction = returnAction;
                     product.Categories = await _category.GetAllCategoriesAsync();
                     product.CategoryName = product.Categories.Where(x => x.Id == product.CategoryId).FirstOrDefault().Title;
+                    product.Price = _price.GetLastPriceProduct(id).Price;
+                    product.ProductId =(int)id;
                     return View(product);
                 }
             }
@@ -294,10 +302,15 @@ namespace AlborzMarket.Controllers
                         await _product.UpdateProductAsync(product);
                         var price = new PriceDTO
                         {
-                            ProductId = product.ProductId,
+                            ProductId = product.Id,
                             Price = product.Price
                         };
+                        var existPrice = _price.GetLastPriceProduct(product.Id);
+                        if (existPrice.Price != product.Price)
+                        {
+                           await _price.DeleteAsync(existPrice.Id);
                          await _price.AddNewPriceAsync(price);
+                        } 
                     }
                     if (!string.IsNullOrEmpty(returnController) && !string.IsNullOrEmpty(returnAction))
                     {

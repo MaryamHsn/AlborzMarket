@@ -30,17 +30,20 @@
                 <div class="clearfix">
                     <div class="step done ">
                         <div class="step-badge"><i class="icon-ok"></i></div>
-                        <a onclick="location.href='@Url.Action("Edit","Product", new {id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت محصول </a>
+                        @*<a onclick="location.href='@Url.Action("Edit","Product", new {id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت محصول </a>*@
+                        ثبت محصول
 
                     </div>
                     <div class="step done">
                         <div class="step-badge"><i class="icon-ok"></i></div>
-                        <a onclick="location.href='@Url.Action("EditAll","ProductDetail", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت رنگ و تعداد </a>
+                        @*<a onclick="location.href='@Url.Action("EditAll","ProductDetail", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت رنگ و تعداد </a>*@
+                        ثبت رنگ و تعداد
 
                     </div>
                     <div class="step done">
                         <div class="step-badge">3</div>
-                        <a onclick="location.href='@Url.Action("EditAll","Property", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت ویژگی </a>
+                        @*<a onclick="location.href='@Url.Action("EditAll","Property", new { id = Model.ProductId,returnController="File",returnAction="CreateForProduct"})';return false;">ثبت ویژگی </a>*@
+                        ثبت ویژگی
 
                     </div>
                     <div class="step active">

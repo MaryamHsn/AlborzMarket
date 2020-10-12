@@ -16,8 +16,10 @@ namespace Alborz.ServiceLayer.Service
     {
         IUnitOfWork _uow;
         DateTime _now;
-        public PropertyService(IUnitOfWork uow)
+        private readonly IProductService _product;
+        public PropertyService(IProductService product,IUnitOfWork uow)
         {
+            _product = product;
             _now = DateTime.Now;
             _uow = uow;
         }
@@ -35,8 +37,10 @@ namespace Alborz.ServiceLayer.Service
         {
             if (Properties == null)
                 throw new ArgumentNullException();
+            var productDetail = await _product.GetProductAsync(Properties.FirstOrDefault().ProductId);
             foreach (var item in Properties)
             {
+                item.CategoryId = productDetail != null ? productDetail.CategoryId : 0;
                 var entity = BaseMapper<PropertyDTO, PropertyTbl>.Map(item); 
                 await _uow.PropertyRepository.AddAsync(entity, ct);
             }
